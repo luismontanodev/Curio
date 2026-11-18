@@ -5,12 +5,22 @@ Léela completa antes de cambiar algo.
 
 ## Qué es
 
-**Curio** es una app móvil (Android + iOS) de scroll infinito con contenido de **ciencia,
-arte, cultura e historia**, diseñada para no provocar *brain rot*:
+**Curio: un minuto de asombro.** App móvil (Android + iOS) de **momentos** de arte, ciencia e
+historia: uno a la vez, a pantalla completa, con swipe vertical. El enganche es el de
+TikTok/Reels, pero en versión sana:
 
-- Filtra títulos sensacionalistas y clickbait con un scorer de reglas.
+- Cada momento es una imagen o visual, un **gancho** honesto y su **payoff** en la misma pantalla.
+- Los momentos se agrupan en **capítulos de 10 con un cierre** ("Terminar por hoy").
+- Filtra sensacionalismo y clickbait con un scorer de reglas.
 - Solo usa fuentes curadas (museos, enciclopedias), sin métricas de popularidad.
-- Sugiere una pausa cada N tarjetas.
+
+> **Importante (v2):** la primera versión era un feed en lista y la gente lo confundía con
+> una app de noticias. La experiencia principal ahora son los momentos. Lee
+> `docs/PRODUCTO.md` antes de diseñar o implementar cualquier pantalla.
+>
+> **Estado real:** lo implementado hoy es la versión en lista (v1): Inicio con scroll
+> infinito, Destacados, lector dentro de la app, Guardados, Mis datos y Filtros. Los momentos
+> (v2) están diseñados pero aún no implementados; ver "Siguientes pasos".
 
 ## Filosofía (no negociable)
 
@@ -26,6 +36,13 @@ arte, cultura e historia**, diseñada para no provocar *brain rot*:
 4. **Nada de mecánicas de enganche.** Sin likes, contadores, rachas, notificaciones
    push de "vuelve", *most read* ni *breaking news*.
 5. **Transparencia.** Cada tarjeta muestra su fuente, su licencia y un enlace al original.
+   El enlace es atribución (texto seleccionable y compartible): la lectura ocurre dentro de
+   la app y nada abre el navegador.
+6. **Curiosidad sí, clickbait no.** Un gancho puede abrir una duda solo si la cierra en el
+   mismo momento (`payoff`). Todo gancho debe poder sostenerse con las fuentes del propio
+   momento. Si no se puede verificar, no se publica.
+7. **Siempre hay un final.** El contenido puede ser infinito, pero la experiencia tiene
+   puntos de parada (cierre de capítulo) y la app recomienda parar, no seguir.
 
 ## Stack
 
@@ -48,10 +65,13 @@ arte, cultura e historia**, diseñada para no provocar *brain rot*:
 | `src/ingest` — Wikipedia (es/en/fr/pt), The Conversation, Wikidata (arte), Met, NASA; modo "traer más" | ✅ Verificado contra las APIs reales (2026-11-17); fixtures reales en `test/fixtures/` |
 | `src/backup` — exportar/validar/importar JSON | ✅ Hecho y probado |
 | `src/platform` — respaldo, ingesta en cola, feed infinito, lector, imágenes (expo-image), estado compartido | ✅ Typecheckea y empaqueta (Metro); ⚠️ **sin probar en un dispositivo** |
-| `src/ui` — tokens (`theme.ts`) y textos derivados (`format.ts`) | ✅ Hecho; `format.ts` probado |
+| `src/ui` — tokens (`theme.ts`, incluye los de v2) y textos derivados (`format.ts`) | ✅ Hecho; `format.ts` probado |
 | `src/components` — primitivas, tarjeta del feed, tarjeta de pausa, pie del scroll infinito | ✅ Escrito; ⚠️ sin probar en dispositivo |
-| Pantallas `app/` — Inicio, Destacados, Guardados, Mis datos, Filtros, Lector | ✅ Escritas; ⚠️ sin probar en dispositivo |
+| Pantallas `app/` (v1, lista) — Inicio, Destacados, Guardados, Mis datos, Filtros, Lector | ✅ Escritas; ⚠️ sin probar en dispositivo |
 | Proyecto Expo (SDK 58) | ✅ Creado; `npx expo export --platform android` empaqueta sin errores |
+| Diseño v2 (momentos): bienvenida, momento, profundizar, microjuego, línea de tiempo, cierre | ✅ Diseñado: `docs/DESIGN.md` + `docs/design/mockups/v2-*.png` |
+| Modelo `Moment` / `Chapter`, `scoreHook`, generación de capítulos | ❌ Pendiente: propuesta en `docs/PRODUCTO.md` |
+| Pantallas v2 (momento, profundizar, cierre, bienvenida, microjuego, línea de tiempo) | ❌ Pendiente |
 
 `npm test` → 70/70 pasan. `npm run typecheck` → limpio (app con `tsconfig.json`; lógica pura y
 tests con `tsconfig.test.json`, que agrega los tipos de Node).
@@ -63,8 +83,28 @@ tests con `tsconfig.test.json`, que agrega los tipos de Node).
    `docs/design/mockups/*.png`.
 2. **Verificar `src/platform/backup-file.ts`** en dispositivo (API de `File`/`Paths`,
    `Sharing.shareAsync`, `DocumentPicker.getDocumentAsync`).
-3. Cambiar el contacto de `USER_AGENT` en `src/ingest/http.ts` (Wikimedia lo pide).
-4. Fuentes nuevas sin key (candidata principal: Art Institute of Chicago). Ver `docs/APIS.md`.
+3. **Modelo v2 en `src/core`** (puro y probado), según `docs/PRODUCTO.md`:
+   - Tipos `Moment` y `Chapter`, y `scoreHook` en el scorer, con tests de ganchos honestos vs. clickbait.
+   - Conversión `Card → Moment` para lo que ya trae la ingesta (`image-fact`, `text-fact`,
+     `event`), aprovechando las fuentes actuales (Wikipedia, The Conversation, Wikidata, Met, NASA)
+     y los idiomas del usuario.
+   - Ganchos calculados: `timeline`, `which-first` y la edad del artista si el Met trae las
+     fechas (`objectBeginDate`, `artistBeginDate`; hoy `MetObject` no los lee) o Wikidata.
+   - Armado de capítulos de 10 que no repitan más de 2 seguidos del mismo formato o fuente.
+4. **Migración 3** en `src/db/migrations.ts` (la 2 ya existe: columna `body`): tablas
+   `moments` y `chapters`. El historial y la valoración de capítulos entran al respaldo
+   (campos opcionales o `BACKUP_VERSION` 2).
+5. **Pantallas v2** según `docs/DESIGN.md`, en este orden: Momento (swipe vertical + hoja) →
+   Profundizar (su "Leer más" abre el lector que ya existe) → Cierre de capítulo (reemplaza
+   la tarjeta de pausa) → Bienvenida → Microjuego y Línea de tiempo. Filtros, Guardados,
+   Destacados, Mis datos y el Lector ya existen: se reubican, no se rehacen.
+6. Paquetes curados `curio-pack` (JSON estático en un repo público), validados como
+   entrada no confiable. Ver `docs/PRODUCTO.md`.
+7. Cambiar el contacto de `USER_AGENT` en `src/ingest/http.ts` (Wikimedia lo pide).
+8. Fuentes nuevas sin key (candidata principal: Art Institute of Chicago). Ver `docs/APIS.md`.
+
+Ya hechos (de la lista de v2): proyecto Expo creado, APIs verificadas contra respuestas
+reales, `src/platform` compilado y empaquetado.
 
 ### Notas de la interfaz
 
@@ -77,8 +117,10 @@ tests con `tsconfig.test.json`, que agrega los tipos de Node).
   como atribución seleccionable y se puede compartir, pero no se navega.
 - **Scroll infinito** (`src/platform/use-infinite-feed.ts`): primero el teléfono por cursor; al
   acabarse, `runIngest({ more: true })` (página siguiente de The Conversation, efemérides de otro
-  día, más destacados y arte) y se agrega lo nuevo con `excludeIds`. Nunca hay "fin del feed":
-  el pie dice "Buscando más…", "Sin conexión" o "No encontramos más", con botón para reintentar.
+  día, más destacados y arte) y se agrega lo nuevo con `excludeIds`. El *contenido* no se
+  acaba: el pie dice "Buscando más…", "Sin conexión" o "No encontramos más", con botón para
+  reintentar. La *experiencia* sí tiene paradas (filosofía 7): hoy la tarjeta de pausa; en v2,
+  el cierre de capítulo.
 - **Ingesta en cola** (`ingest-queue.ts`): una a la vez, porque expo-sqlite comparte la conexión.
 - **Idiomas:** `FilterPrefs.languages` (es/en/fr/pt). La interfaz siempre en español; el feed
   solo muestra tarjetas en esos idiomas y la ingesta solo pide esos idiomas. Met y NASA solo
@@ -217,7 +259,9 @@ npm run typecheck   # tsc sin emitir
 
 ## Documentos
 
-- `docs/DESIGN.md` — layout, paleta clara/oscura, tipografía, pantallas y componentes.
+- `docs/PRODUCTO.md` — **empieza aquí**: concepto v2 (momentos), mecánicas de enganche sanas,
+  regla de ganchos, formatos, capítulos y modelo de datos propuesto.
+- `docs/DESIGN.md` — layout, paleta clara/oscura, tipografía, pantallas v2 y v1, componentes.
 - `docs/APIS.md` — APIs usadas, campos, candidatas y descartadas.
 - `docs/design/source/` — fuentes `.dc.html` del canvas de diseño original (referencia visual;
   usan un runtime propio, no se ejecutan tal cual).

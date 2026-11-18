@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Microjuego</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#6B4FB8}a:hover{color:#4E3591}
+button{font-family:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 14px 16px 22px; display: flex; flex-direction: column; gap: 16px; background: {{t.bg}}; color: {{t.text}}">
+
+<div role="progressbar" aria-label="Progreso del capítulo" aria-valuemin="0" aria-valuemax="10" aria-valuenow="5" style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px">
+<span style="height: 4px; border-radius: 2px; background: {{t.primary}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.primary}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.primary}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.primary}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.primary}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.track}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.track}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.track}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.track}}"></span>
+<span style="height: 4px; border-radius: 2px; background: {{t.track}}"></span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 4px 0">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: {{t.primaryText}}">MICROJUEGO · HISTORIA</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 28px; line-height: 1.15; font-weight: 700">¿Qué existió primero?</h1>
+</div>
+
+<button aria-pressed="true" style="position: relative; height: 172px; border-radius: 20px; border: 2px solid {{t.primary}}; background: {{t.soft}}; color: {{t.text}}; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 4px; text-align: left">
+<span style="position: absolute; top: 14px; right: 14px; padding: 5px 10px; border-radius: 12px; background: {{t.primary}}; color: {{t.onPrimary}}; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>Primero</span>
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600">La Universidad de Oxford</span>
+<span style="font-size: 14px; color: {{t.muted}}">Ya se enseñaba ahí hacia 1096</span>
+</button>
+
+<button aria-pressed="false" style="height: 172px; border-radius: 20px; border: 1px solid {{t.border}}; background: {{t.card}}; color: {{t.text}}; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 4px; text-align: left">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600">La ciudad de Tenochtitlan</span>
+<span style="font-size: 14px; color: {{t.muted}}">Fundada en 1325</span>
+</button>
+
+<p style="margin: 0; padding: 16px; border-radius: 16px; background: {{t.soft}}; font-size: 15px; line-height: 1.5">Oxford es más de dos siglos más antigua que la capital mexica. Las dos coincidieron en el tiempo: cuando llegaron los españoles, Oxford llevaba más de 400 años enseñando.</p>
+
+<span style="margin-top: auto; align-self: center; font-size: 12px; color: {{t.muted}}">Desliza hacia arriba para el siguiente momento</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+var dark = this.props.dark ?? false;
+var light = { bg: '#FFFFFF', card: '#FFFFFF', soft: '#F3EDFC', border: '#E6DCF7', track: '#D9CFEA', text: '#1F1633', muted: '#5F5675', primary: '#7B5CC6', primaryText: '#6B4FB8', onPrimary: '#FFFFFF' };
+var night = { bg: '#14101E', card: '#1E182D', soft: '#2A2140', border: '#352B4F', track: '#463B60', text: '#F3EEFC', muted: '#B5AACB', primary: '#C3AEF6', primaryText: '#C9B6F8', onPrimary: '#1F1633' };
+return { t: dark ? night : light };
+}
+}
+</script>
+</body>
+</html>

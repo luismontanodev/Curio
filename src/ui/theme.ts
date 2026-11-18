@@ -14,6 +14,8 @@ export interface ColorTokens {
   primaryText: string;
   onPrimary: string;
   trackOff: string;
+  /** Fondo mientras carga una imagen a pantalla completa. */
+  image: string;
 }
 
 export const colors: Record<ThemeName, ColorTokens> = {
@@ -28,6 +30,7 @@ export const colors: Record<ThemeName, ColorTokens> = {
     primaryText: '#6B4FB8',
     onPrimary: '#FFFFFF',
     trackOff: '#D9CFEA',
+    image: '#E9E0FA',
   },
   dark: {
     bg: '#14101E',
@@ -40,6 +43,7 @@ export const colors: Record<ThemeName, ColorTokens> = {
     primaryText: '#C9B6F8',
     onPrimary: '#1F1633',
     trackOff: '#463B60',
+    image: '#2A2140',
   },
 };
 
@@ -50,6 +54,12 @@ export const fonts = {
 
 export const type = {
   logo: { fontFamily: fonts.heading.bold, fontSize: 22, letterSpacing: -0.44 },
+  // v2 — momentos
+  welcome: { fontFamily: fonts.heading.bold, fontSize: 34, lineHeight: 37, letterSpacing: -0.68 },
+  hook: { fontFamily: fonts.heading.semibold, fontSize: 24, lineHeight: 29 },
+  hookLarge: { fontFamily: fonts.heading.bold, fontSize: 30, lineHeight: 35 },
+  payoff: { fontFamily: fonts.body.regular, fontSize: 15, lineHeight: 22 },
+  depthBody: { fontFamily: fonts.body.regular, fontSize: 15, lineHeight: 23 },
   screenTitle: { fontFamily: fonts.heading.bold, fontSize: 22 },
   cardTitleLarge: { fontFamily: fonts.heading.semibold, fontSize: 20, lineHeight: 25 },
   cardTitle: { fontFamily: fonts.heading.semibold, fontSize: 18, lineHeight: 23 },
@@ -80,6 +90,7 @@ export const space = {
 } as const;
 
 export const radius = {
+  sheet: 28,
   card: 20,
   group: 16,
   button: 14,
@@ -98,6 +109,12 @@ export const size = {
   buttonHeight: 50,
   inputHeight: 44,
   cardImageHeight: 168,
+  momentSheet: 300,
+  depthSheet: 640,
+  chapterSegments: 10,
+  progressBar: 4,
+  focusRing: 72,
+  choiceHeight: 172,
   switch: { width: 48, height: 28, knob: 22 },
 } as const;
 
