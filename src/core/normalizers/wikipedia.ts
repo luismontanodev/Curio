@@ -193,6 +193,17 @@ export function normalizeFeaturedArticlePage(page: FeaturedArticlePage, lang: La
   };
 }
 
+/**
+ * Resultado de búsqueda (`generator=search`): misma forma que los destacados, pero con id
+ * `pg:<pageid>` para que no se confunda con ellos (Destacados filtra por `fa:`/`tfa:`).
+ */
+export function normalizeSearchPage(page: FeaturedArticlePage, lang: Lang = 'es'): RawCard | null {
+  const card = normalizeFeaturedArticlePage(page, lang);
+  if (!card) return null;
+  const key = `pg:${page.pageid}`;
+  return { ...card, id: `${card.sourceId}:${key}`, externalId: key };
+}
+
 export function normalizeFeatured(feed: FeaturedFeed, month: number, day: number, lang: Lang = 'es'): RawCard[] {
   const out: (RawCard | null)[] = [
     feed.tfa ? normalizeFeaturedArticle(feed.tfa, lang) : null,

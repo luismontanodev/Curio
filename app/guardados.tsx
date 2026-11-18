@@ -1,22 +1,22 @@
-// Guardados: copias completas, más recientes primero. Sobreviven a la poda del feed.
+// Guardados (desde Mis datos): copias completas, más recientes primero. Sobreviven a la poda del feed.
 
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 
-import type { Card } from '../../src/core/types.ts';
-import { listSaved, type SavedCard } from '../../src/db/cards.ts';
-import { FeedCard } from '../../src/components/feed-card.tsx';
-import { Notice, ScreenTitle } from '../../src/components/primitives.tsx';
-import { useAppState, useTheme } from '../../src/platform/app-state.tsx';
-import { useCardHandlers } from '../../src/platform/card-actions.ts';
+import type { Card } from '../src/core/types.ts';
+import { listSaved, type SavedCard } from '../src/db/cards.ts';
+import { FeedCard } from '../src/components/feed-card.tsx';
+import { BackHeader, Notice } from '../src/components/primitives.tsx';
+import { useAppState, useTheme } from '../src/platform/app-state.tsx';
+import { useCardHandlers } from '../src/platform/card-actions.ts';
 
 export default function SavedScreen() {
   const db = useSQLiteContext();
   const c = useTheme().colors;
-  const { removeSaved, savedVersion } = useAppState();
+  const { removeSaved, savedVersion, savedIds } = useAppState();
   const { onOpen, onShare } = useCardHandlers();
   const [items, setItems] = useState<SavedCard[] | null>(null);
 
@@ -32,6 +32,10 @@ export default function SavedScreen() {
       };
     }, [db, savedVersion]),
   );
+
+  // Lo que se quita desaparece al instante: se filtra con el estado de guardados, sin esperar
+  // a releer la base (esta pantalla sigue enfocada, así que useFocusEffect no se repite).
+  const visible = useMemo(() => (items ? items.filter((s) => savedIds.has(s.card.id)) : null), [items, savedIds]);
 
   // Quitar pide confirmación: un guardado puede ya no existir en el feed.
   const confirmRemove = useCallback(
@@ -58,16 +62,16 @@ export default function SavedScreen() {
   );
 
   return (
-    <SafeAreaView edges={['top']} style={[styles.screen, { backgroundColor: c.bg }]}>
-      <ScreenTitle>Guardados</ScreenTitle>
+    <SafeAreaView edges={['top', 'bottom']} style={[styles.screen, { backgroundColor: c.bg }]}>
+      <BackHeader title="Guardados" onBack={() => router.back()} />
       <FlatList
-        data={items ?? []}
+        data={visible ?? []}
         keyExtractor={(s) => s.card.id}
         renderItem={renderItem}
         ItemSeparatorComponent={Separator}
         contentContainerStyle={{ paddingTop: 4, paddingBottom: 24 }}
         ListEmptyComponent={
-          items === null ? undefined : (
+          visible === null ? undefined : (
             <Notice
               title="Aquí aparecerán las tarjetas que guardes"
               body="Toca el marcador de cualquier tarjeta. Lo guardado se queda en tu teléfono y viaja en tu respaldo."

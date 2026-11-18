@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 import { useTheme } from '../platform/app-state.tsx';
 
@@ -262,4 +263,57 @@ const styles = StyleSheet.create({
   },
   notice: { paddingHorizontal: 32, paddingVertical: 48, alignItems: 'center' },
   screenTitle: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingTop: 16, paddingBottom: 12, minHeight: 60 },
+});
+
+// --- Navegación ----------------------------------------------------------------------
+
+/** Fila que lleva a otra pantalla (Mis datos → Guardados, Filtros). */
+export function NavRow({
+  label,
+  value,
+  onPress,
+  first = false,
+}: {
+  label: string;
+  value?: string;
+  onPress: () => void;
+  first?: boolean;
+}) {
+  const t = useTheme();
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={value ? `${label}, ${value}` : label}
+      style={({ pressed }) => [
+        navStyles.row,
+        !first && { borderTopWidth: 1, borderTopColor: t.colors.border },
+        { opacity: pressed ? 0.6 : 1 },
+      ]}
+    >
+      <Text style={[t.type.rowTitle, { color: t.colors.text, flex: 1 }]}>{label}</Text>
+      {value ? <Text style={[t.type.body, { color: t.colors.muted, marginRight: 6 }]}>{value}</Text> : null}
+      <ChevronRight size={20} color={t.colors.muted} strokeWidth={ICON.stroke} />
+    </Pressable>
+  );
+}
+
+/** Encabezado de pantalla apilada: flecha atrás y título. */
+export function BackHeader({ title, onBack }: { title: string; onBack: () => void }) {
+  const t = useTheme();
+  return (
+    <View style={navStyles.header}>
+      <IconButton label="Volver" onPress={onBack}>
+        <ChevronLeft size={26} color={t.colors.text} strokeWidth={ICON.stroke} />
+      </IconButton>
+      <Text accessibilityRole="header" style={[t.type.screenTitle, { color: t.colors.text, marginLeft: 4 }]}>
+        {title}
+      </Text>
+    </View>
+  );
+}
+
+const navStyles = StyleSheet.create({
+  row: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, minHeight: 52 },
+  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingTop: 8, paddingBottom: 4 },
 });

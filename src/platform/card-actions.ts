@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { Alert, Share } from 'react-native';
 import { router } from 'expo-router';
 
-import type { Card } from '../core/types.ts';
+import type { Card, Moment } from '../core/types.ts';
 import { useAppState } from './app-state.tsx';
 
 /** Manejadores estables para <FeedCard>: leer, compartir y guardar, con errores en español. */
@@ -26,6 +26,13 @@ export function useCardHandlers() {
 
 export function openReader(cardId: string): void {
   router.push({ pathname: '/leer/[id]', params: { id: cardId } });
+}
+
+/** "Enviar a alguien" desde un momento: el gancho, el dato y el original. */
+export async function shareMoment(m: Moment): Promise<void> {
+  const url = m.sources[0]?.url;
+  if (!url || !isWebUrl(url)) return;
+  await Share.share({ title: m.hook, message: `${m.hook}\n${m.payoff}\n${url}`, url });
 }
 
 /** Solo se comparten enlaces http(s): la tarjeta pudo venir de un respaldo importado. */

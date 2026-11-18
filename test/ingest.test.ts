@@ -82,7 +82,7 @@ test('con solo español no se piden fuentes en inglés (Met, NASA)', async () =>
   const fetch = fakeFetch(routes());
   const r = await runIngest(db, fetch, { now: NOW, rng: seededRng() });
 
-  assert.deepEqual(Object.keys(r.sources).sort(), ['art:es', 'articles:es', 'conversation:es', 'featured:es']);
+  assert.deepEqual(Object.keys(r.sources).sort(), ['art:es', 'articles:es', 'conversation:es', 'epic:es', 'featured:es', 'inaturalist:es', 'sinc:es']);
   assert.ok(!fetch.calls.some((u) => u.startsWith(MET_SEARCH) || u.startsWith(NASA_SEARCH)));
   assert.deepEqual(r.sources['featured:es'], { fetched: 3 }); // tfa + imagen + 1 efeméride válida
   assert.deepEqual(r.sources['articles:es'], { fetched: 2 });
@@ -112,7 +112,7 @@ test('con inglés también entran el Met y la NASA, y respeta el intervalo', asy
 
   // Con force sí, y no pide al Met objetos que ya tiene.
   await runIngest(db, fetch, { now: new Date(NOW.getTime() + 60_000), force: true, rng: seededRng(7) });
-  const objectCalls = fetch.calls.slice(calls).filter((u) => u.includes('/objects/'));
+  const objectCalls = fetch.calls.slice(calls).filter((u) => u.startsWith(`${MET_BASE}/objects/`));
   assert.deepEqual(objectCalls.map((u) => u.split('/').pop()).sort(), ['3']);
 });
 

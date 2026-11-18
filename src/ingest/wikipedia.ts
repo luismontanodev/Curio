@@ -61,7 +61,7 @@ export function featuredArticlesUrl(prefix: string, lang: Lang = 'es'): string {
     exsentences: '3',
     exlimit: String(BATCH),
     piprop: 'thumbnail',
-    pithumbsize: '640',
+    pithumbsize: '960', // tamaño estándar de Wikimedia (los no estándar se limitan más)
     inprop: 'url',
   });
   return `${actionApi(lang)}?${params}`;

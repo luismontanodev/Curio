@@ -18,7 +18,7 @@ test('migrate deja la base en la última versión y es idempotente', async () =>
   assert.equal(await migrate(db), MIGRATIONS.at(-1)!.version);
   assert.equal(await migrate(db), MIGRATIONS.at(-1)!.version);
   const tables = await db.getAllAsync<{ name: string }>("select name from sqlite_master where type = 'table' order by name", []);
-  assert.deepEqual(tables.map((t) => t.name), ['card_views', 'cards', 'kv', 'saved_cards']);
+  assert.deepEqual(tables.map((t) => t.name), ['card_views', 'cards', 'chapters', 'kv', 'saved_cards']);
 });
 
 test('migrate rechaza una base de una versión más nueva', async () => {

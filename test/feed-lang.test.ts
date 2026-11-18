@@ -65,7 +65,7 @@ test('el feed no carga el texto completo; getCard sí, y también desde guardado
 });
 
 test('migración 2 agrega `body` sin perder tarjetas', async () => {
-  assert.equal(MIGRATIONS.at(-1)!.version, 2);
+  assert.ok(MIGRATIONS.some((m) => m.version === 2));
   const db = await freshDb();
   const cols = await db.getAllAsync<{ name: string }>("select name from pragma_table_info('cards')", []);
   assert.ok(cols.some((c) => c.name === 'body'));

@@ -1,7 +1,7 @@
 // Tarjetas: inserción, feed paginado, vistos, guardados, poda y recálculo de puntajes.
 
 import { LANGS, type Card, type CardType, type ContentBlock, type FilterPrefs, type Lang, type Signal, type Topic } from '../core/types.ts';
-import { SCORER_VERSION, THRESHOLDS, findBlockedWord, scoreCard } from '../core/scorer.ts';
+import { SCORER_VERSION, THRESHOLDS, findBlockedWord, normalize, scoreCard } from '../core/scorer.ts';
 import { sourceKindOf } from '../core/sources.ts';
 import { parseBlocks } from '../core/blocks.ts';
 import { bool, type SqlDb, type SqlValue } from './sql.ts';
@@ -142,6 +142,8 @@ export interface FeedOptions {
   excludeIds?: string[];
   /** Solo estas fuentes (p. ej. Destacados: `wikipedia-es`, `wikipedia-en`…). */
   sources?: string[];
+  /** Solo ids externos con estos prefijos (Destacados: `fa:` y `tfa:`, no resultados de búsqueda). */
+  externalPrefixes?: string[];
 }
 
 const FEED_SQL = `
@@ -151,6 +153,7 @@ const FEED_SQL = `
     and (? is null or c.type in (select value from json_each(?)))
     and (? is null or c.id not in (select value from json_each(?)))
     and (? is null or c.source_id in (select value from json_each(?)))
+    and (? is null or exists (select 1 from json_each(?) p where substr(c.external_id, 1, length(p.value)) = p.value))
     and (? = 0 or c.score_sensational <= ?)
     and (? = 0 or c.score_clickbait   <= ?)
     and (? = 0 or c.source_kind <> 'news')
@@ -176,6 +179,7 @@ export async function getFeedPage(db: SqlDb, prefs: FilterPrefs, opts: FeedOptio
   const types = opts.types?.length ? JSON.stringify(opts.types) : null;
   const exclude = opts.excludeIds?.length ? JSON.stringify(opts.excludeIds) : null;
   const sources = opts.sources?.length ? JSON.stringify(opts.sources) : null;
+  const prefixes = opts.externalPrefixes?.length ? JSON.stringify(opts.externalPrefixes) : null;
 
   while (out.length < limit) {
     const rows = await db.getAllAsync<CardRow>(FEED_SQL, [
@@ -184,6 +188,7 @@ export async function getFeedPage(db: SqlDb, prefs: FilterPrefs, opts: FeedOptio
       types, types,
       exclude, exclude,
       sources, sources,
+      prefixes, prefixes,
       bool(prefs.hideSensational), max,
       bool(prefs.hideClickbait), max,
       bool(prefs.onlyVerified),
@@ -217,6 +222,30 @@ export async function markSeen(db: SqlDb, cardIds: string[], now = new Date()): 
       );
     }
   });
+}
+
+// --- Búsqueda local ---------------------------------------------------------
+
+/**
+ * Busca en las tarjetas del teléfono (también las ya vistas) con los mismos filtros que el
+ * feed. Cada palabra debe aparecer en el título o el resumen, sin importar acentos ni
+ * mayúsculas. Más recientes primero.
+ */
+export async function searchCards(db: SqlDb, prefs: FilterPrefs, query: string, limit = 30): Promise<Card[]> {
+  const terms = normalize(query).split(' ').filter(Boolean);
+  if (terms.length === 0) return [];
+  const out: Card[] = [];
+  let cursor: FeedCursor | null = null;
+  do {
+    const page = await getFeedPage(db, prefs, { cursor, limit: 100, hideSeen: false });
+    for (const card of page.cards) {
+      const haystack = normalize(`${card.title} ${card.summary ?? ''}`);
+      if (terms.every((t) => haystack.includes(t))) out.push(card);
+      if (out.length === limit) return out;
+    }
+    cursor = page.nextCursor;
+  } while (cursor);
+  return out;
 }
 
 // --- Guardados -------------------------------------------------------------

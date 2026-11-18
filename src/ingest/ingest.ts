@@ -10,6 +10,11 @@ import { wikipediaSource } from '../core/normalizers/wikipedia.ts';
 import { CONVERSATION_SOURCE } from '../core/normalizers/conversation.ts';
 import { WIKIDATA_ART_SOURCE } from '../core/normalizers/wikidata.ts';
 import { NASA_SOURCE } from '../core/normalizers/nasa.ts';
+import { SINC_SOURCE } from '../core/normalizers/sinc.ts';
+import { CLEVELAND_SOURCE, VAM_SOURCE } from '../core/normalizers/museums.ts';
+import { INATURALIST_SOURCE } from '../core/normalizers/inaturalist.ts';
+import { EPIC_SOURCE } from '../core/normalizers/epic.ts';
+import { EUROPEPMC_SOURCE } from '../core/normalizers/europepmc.ts';
 import { existingExternalIds, insertCards, pruneCards, rescoreOutdated } from '../db/cards.ts';
 import { getKv, getPrefs, setKv } from '../db/prefs.ts';
 import type { SqlDb } from '../db/sql.ts';
@@ -19,6 +24,9 @@ import { fetchFeaturedArticles, fetchWikipediaCards } from './wikipedia.ts';
 import { CONVERSATION_FEEDS, fetchConversationCards } from './conversation.ts';
 import { fetchArtCards } from './wikidata.ts';
 import { fetchNasaCards } from './nasa.ts';
+import {
+  fetchClevelandCards, fetchEpicCards, fetchInaturalistCards, fetchPmcCards, fetchSincCards, fetchVamCards,
+} from './more-sources.ts';
 
 const LAST_INGEST_KEY = 'lastIngestAt';
 const conversationPageKey = (lang: Lang) => `conversationPage:${lang}`;
@@ -26,7 +34,9 @@ const HOUR = 60 * 60 * 1000;
 const DAY = 24 * HOUR;
 
 /** Clases de trabajo. Cada una corre una vez por idioma que la soporte. */
-export type JobKind = 'featured' | 'articles' | 'conversation' | 'art' | 'met' | 'nasa';
+export type JobKind =
+  | 'featured' | 'articles' | 'conversation' | 'art' | 'met' | 'nasa'
+  | 'sinc' | 'cleveland' | 'vam' | 'inaturalist' | 'epic' | 'pmc';
 
 export interface IngestOptions {
   now?: Date;
@@ -133,6 +143,33 @@ export async function runIngest(db: SqlDb, fetch: FetchLike, opts: IngestOptions
     if (lang === 'en' && wants('nasa')) {
       jobs['nasa:en'] = async () =>
         fetchNasaCards(fetch, { existing: await existing(NASA_SOURCE.id), count: opts.nasaCount ?? 4, rng });
+    }
+    // Museos con API abierta (inglés).
+    // Art Institute of Chicago: APAGADO. Su API responde, pero su servidor de imágenes (IIIF)
+    // da 403 a clientes que no son navegador (verificado el 2026-11-18): sus obras saldrían
+    // sin imagen. No se disfraza el User-Agent. Para activarlo: `fetchAicCards` (ya probado)
+    // con `AIC_SOURCE`, cuando el AIC permita la descarga de imágenes desde apps.
+    if (lang === 'en' && wants('cleveland')) {
+      jobs['cleveland:en'] = async () => fetchClevelandCards(fetch, { existing: await existing(CLEVELAND_SOURCE.id), rng });
+    }
+    if (lang === 'en' && wants('vam')) {
+      jobs['vam:en'] = async () => fetchVamCards(fetch, { existing: await existing(VAM_SOURCE.id), rng });
+    }
+    if (lang === 'en' && wants('pmc')) {
+      jobs['pmc:en'] = async () => fetchPmcCards(fetch, { existing: await existing(EUROPEPMC_SOURCE.id), rng });
+    }
+    // Agencia SINC: divulgación en español.
+    if (lang === 'es' && wants('sinc')) {
+      jobs['sinc:es'] = async () => fetchSincCards(fetch, { existing: await existing(SINC_SOURCE.id), rng });
+    }
+    // Naturaleza: nombres comunes en el idioma pedido, así que corre en todos.
+    if (wants('inaturalist')) {
+      jobs[`inaturalist:${lang}`] = async () =>
+        fetchInaturalistCards(fetch, { lang, existing: await existing(INATURALIST_SOURCE.id), rng });
+    }
+    // La Tierra desde el espacio: texto calculado, en español o inglés.
+    if ((lang === 'es' || lang === 'en') && wants('epic')) {
+      jobs[`epic:${lang}`] = async () => fetchEpicCards(fetch, { lang, existing: await existing(EPIC_SOURCE.id) });
     }
   }
 
