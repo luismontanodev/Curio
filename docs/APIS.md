@@ -101,6 +101,22 @@ destacados (calidad, no popularidad).
 - `GET https://images-api.nasa.gov/search?q=<tema>&media_type=image&page_size=40&page=1..3`. Sin key.
 - Solo en inglés: entra al feed si el usuario eligió inglés. Imagen `~medium`.
 
+### Fuentes agregadas el 2026-11-18 (`src/ingest/more-sources.ts`, fixtures reales en `test/fixtures/`)
+
+| Fuente | id / kind | Idiomas | Licencia | Notas |
+|---|---|---|---|---|
+| **Agencia SINC** — `https://www.agenciasinc.es/feed/{Ciencia|Innova|Salud|Reportajes}` | `sinc` / magazine | es | **CC BY 4.0** (textos; citar a SINC y enlazar). Fotos: la licencia de su autor | RSS con el artículo completo en `content:encoded` → se lee en la app. Cada feed pesa ~3 MB (150 artículos): se pide **una sección por ingesta** y se toman los 40 más recientes. Restricción: no publicar obras hechas mayormente de contenido de SINC (Curio mezcla muchas fuentes) |
+| **Cleveland Museum of Art** — `openaccess-api.clevelandart.org/api/artworks/?q=&has_image=1&cc0=1` | `cleveland` / museum | en | CC0 | Imagen `images.web`; textos de sala, `fun_fact` y descripción como cuerpo |
+| **V&A** — `api.vam.ac.uk/v2/objects/search?q=&images_exist=1` | `vam` / museum | en | Imágenes para uso no comercial | Imagen IIIF `…/full/!800,800/0/default.jpg`. La búsqueda no trae descripción |
+| **iNaturalist** — `api.inaturalist.org/v1/observations?quality_grade=research&photo_license=cc-by,cc0&iconic_taxa=&locale=` | `inaturalist` / encyclopedia | es, en, fr, pt (nombre común según `locale`) | CC BY 4.0 / CC0 por foto, con atribución a quien la tomó | Foto `…/large.jpg` (1024 px; `square` es de 75). Una observación por especie. Alimenta la pestaña **Naturaleza** |
+| **NASA EPIC** — `epic.gsfc.nasa.gov/api/natural` | `nasa-epic` / journal | es, en | Dominio público | La Tierra completa del día. Título y resumen **calculados** (fecha, distancia del satélite, centro de la foto). Imagen `…/jpg/{image}.jpg` |
+| **Europe PMC** — `ebi.ac.uk/europepmc/webservices/rest/search?resultType=core` | `europepmc` / journal | en | Solo CC (`cc by`, `cc0`, `cc by-sa`) | Artículos de investigación de acceso abierto, tipo `paper`; el resumen es el cuerpo. Título y resumen suelen estar en inglés aunque el artículo no lo esté |
+| **Art Institute of Chicago** — `api.artic.edu` | `aic` / museum | en | CC0 | ⚠️ **Apagado.** La API responde (con la cabecera `AIC-User-Agent`), pero el servidor de imágenes IIIF da **403** a clientes que no son navegador. No se disfraza el User-Agent. El normalizador y el fetcher están probados, listos para activarse |
+
+**Probadas y descartadas (2026-11-18):** Science Museum Group y Library of Congress (403 a
+clientes que no son navegador), Openverse (504), Gutendex (sin respuesta). Siguen fuera por
+pedir key: Smithsonian, Europeana, Harvard Art Museums y la API clásica del Rijksmuseum.
+
 ## Candidatas sin key (siguiente en agregar)
 
 | Fuente | Por qué | Nota |

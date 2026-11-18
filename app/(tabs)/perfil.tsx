@@ -1,18 +1,19 @@
 // Mis datos: la filosofía de la app hecha pantalla. Exportar, importar y saber qué hay en el teléfono.
 
-import { useCallback, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useRef, useState } from 'react';
+import { Alert, ScrollView, StyleSheet, Text, View, type ScrollViewInstance } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 
 import { BackupError, type ImportMode } from '../../src/backup/backup.ts';
 import type { ThemePref } from '../../src/core/types.ts';
 import { countCards } from '../../src/db/cards.ts';
 import { getLastIngestAt } from '../../src/ingest/ingest.ts';
-import { Button, ScreenTitle, SectionLabel, Segmented } from '../../src/components/primitives.tsx';
+import { Button, NavRow, ScreenTitle, SectionLabel, Segmented } from '../../src/components/primitives.tsx';
 import { useAppState, useTheme } from '../../src/platform/app-state.tsx';
 import { pickAndImportBackup, shareBackup } from '../../src/platform/backup-file.ts';
+import { useTabReselect } from '../../src/platform/use-tab-reselect.ts';
 import { formatDateTime, importSummary } from '../../src/ui/format.ts';
 
 const THEME_OPTIONS: readonly { value: ThemePref; label: string }[] = [
@@ -45,6 +46,13 @@ export default function MyDataScreen() {
       loadInfo().catch((e) => console.warn('No se pudo leer la información', e));
     }, [loadInfo]),
   );
+
+  // Tocar "Mis datos" estando aquí: sube al inicio y actualiza la información.
+  const scroll = useRef<ScrollViewInstance>(null);
+  useTabReselect(() => {
+    scroll.current?.scrollTo({ y: 0, animated: true });
+    void loadInfo();
+  });
 
   const onExport = async () => {
     setBusy('export');
@@ -91,13 +99,18 @@ export default function MyDataScreen() {
   return (
     <SafeAreaView edges={['top']} style={[styles.screen, { backgroundColor: c.bg }]}>
       <ScreenTitle>Mis datos</ScreenTitle>
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView ref={scroll} contentContainerStyle={styles.content}>
         <Text style={[t.type.cardTitle, { color: c.text }]}>
           Tus datos viven en este teléfono. Puedes llevártelos cuando quieras.
         </Text>
         <Text style={[t.type.body, { color: c.muted, marginTop: 8 }]}>
           No hay cuentas ni servidores. El respaldo es un archivo JSON legible con tus guardados y preferencias.
         </Text>
+
+        <View style={[styles.group, { borderColor: c.border, borderRadius: t.radius.group, marginTop: 20 }]}>
+          <NavRow first label="Guardados" value={String(savedIds.size)} onPress={() => router.push('/guardados')} />
+          <NavRow label="Filtros" value={prefs.level} onPress={() => router.push('/filtros')} />
+        </View>
 
         <SectionLabel style={styles.section}>Respaldo</SectionLabel>
         <Button

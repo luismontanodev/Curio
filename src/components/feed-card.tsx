@@ -1,14 +1,15 @@
-// Tarjeta del feed en sus tres variantes: con imagen, de texto y efeméride.
-// Fuente y licencia siempre visibles; tocarla abre el lector dentro de la app.
+// Tarjeta del feed, compacta y visual: imagen primero cuando la hay, título corto y una línea
+// con fuente y licencia. El resumen y los detalles aparecen con "Más" (si el usuario quiere).
+// Tocarla abre el lector dentro de la app.
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Bookmark, ImageIcon, Share } from 'lucide-react-native';
 
 import type { Card } from '../core/types.ts';
 import { useAppState, useTheme } from '../platform/app-state.tsx';
 import { RemoteImage } from '../platform/remote-image.tsx';
-import { cardKicker, cardMeta, cardVariant } from '../ui/format.ts';
+import { cardMeta, cardSource, cardTopicLabel, cardVariant } from '../ui/format.ts';
 import { ICON, IconButton } from './primitives.tsx';
 
 interface Props {
@@ -18,71 +19,86 @@ interface Props {
   onToggleSave: (card: Card) => void;
   onShare: (card: Card) => void;
   onLongPress?: (card: Card) => void;
+  /** Línea pequeña sobre la etiqueta, p. ej. por qué se recomienda ("Porque guardaste arte"). */
+  note?: string;
+  /** Líneas de resumen bajo el título cuando hay imagen (por defecto 0: la imagen ya da contexto). */
+  teaserLines?: number;
 }
 
-function FeedCardBase({ card, saved, onOpen, onToggleSave, onShare, onLongPress }: Props) {
+function FeedCardBase({ card, saved, onOpen, onToggleSave, onShare, onLongPress, note, teaserLines = 0 }: Props) {
   const t = useTheme();
   const c = t.colors;
   const showLang = useAppState().prefs.languages.length > 1;
+  const [expanded, setExpanded] = useState(false);
   const variant = cardVariant(card);
-  const meta = cardMeta(card, { showLang });
-
   const isEvent = variant === 'event';
-  const titleStyle = variant === 'image' ? t.type.cardTitleLarge : t.type.cardTitle;
-  // Artículos con miniatura: una imagen pequeña a la derecha, sin robarle espacio al texto.
-  const thumb = variant === 'text' && card.imageUrl ? card.imageUrl : null;
+  const withImage = variant === 'image' && !!card.imageUrl;
+  const tone = t.topics[card.topic] ?? { fg: c.primaryText, bg: c.soft };
+
+  // Sin imagen, dos líneas de resumen dan contexto; con imagen, la imagen ya lo da.
+  const summaryLines = expanded ? undefined : withImage ? teaserLines : 2;
+  const hasMore = !!card.summary || !!card.readMinutes || showLang || !!card.license;
 
   return (
     <Pressable
       onPress={() => onOpen(card)}
       onLongPress={onLongPress ? () => onLongPress(card) : undefined}
       accessibilityRole="button"
-      accessibilityLabel={`${card.title}. ${meta}`}
+      accessibilityLabel={`${card.title}. ${cardSource(card)}`}
       accessibilityHint="Abre la lectura dentro de Curio"
       style={({ pressed }) => [
         styles.card,
         {
           borderRadius: t.radius.card,
-          backgroundColor: isEvent ? c.soft : c.card,
-          borderColor: isEvent ? c.soft : c.border,
+          backgroundColor: isEvent ? tone.bg : c.card,
+          borderColor: isEvent ? tone.bg : c.border,
           opacity: pressed ? 0.85 : 1,
         },
       ]}
     >
-      {variant === 'image' && card.imageUrl ? (
-        <View style={[styles.image, { height: t.size.cardImageHeight, backgroundColor: c.soft }]}>
-          <ImageIcon size={28} color={c.primaryText} strokeWidth={ICON.stroke} />
-          <RemoteImage uri={card.imageUrl} recyclingKey={card.id} />
+      {withImage ? (
+        <View style={[styles.image, { height: t.size.cardImageHeight, backgroundColor: tone.bg }]}>
+          <ImageIcon size={28} color={tone.fg} strokeWidth={ICON.stroke} />
+          <RemoteImage uri={card.imageUrl!} fit="contain" recyclingKey={card.id} />
         </View>
       ) : null}
 
       <View style={styles.body}>
-        <Text style={[t.type.topicLabel, { color: c.primaryText }]} numberOfLines={1}>
-          {cardKicker(card)}
+        {note ? (
+          <Text style={[t.type.meta, { color: c.primaryText, marginBottom: 4 }]} numberOfLines={1}>
+            {note}
+          </Text>
+        ) : null}
+        <Text style={[t.type.topicLabel, { color: tone.fg }]} numberOfLines={1}>
+          {cardTopicLabel(card)}
         </Text>
-        <View style={styles.titleRow}>
-          <View style={{ flex: 1 }}>
-            <Text style={[titleStyle, { color: c.text, marginTop: 6 }]} numberOfLines={4}>
-              {card.title}
-            </Text>
-            {card.summary ? (
-              <Text style={[t.type.body, { color: c.muted, marginTop: 6 }]} numberOfLines={thumb ? 3 : 4}>
-                {card.summary}
-              </Text>
-            ) : null}
-          </View>
-          {thumb ? (
-            <View style={[styles.thumb, { backgroundColor: c.soft, borderRadius: t.radius.iconButton }]}>
-              <ImageIcon size={20} color={c.primaryText} strokeWidth={ICON.stroke} />
-              <RemoteImage uri={thumb} recyclingKey={`${card.id}:thumb`} />
-            </View>
-          ) : null}
-        </View>
+        <Text style={[withImage ? t.type.cardTitleLarge : t.type.cardTitle, { color: c.text, marginTop: 4 }]} numberOfLines={expanded ? undefined : withImage ? 2 : 3}>
+          {card.title}
+        </Text>
+        {card.summary && summaryLines !== 0 ? (
+          <Text style={[t.type.body, { color: c.muted, marginTop: 6 }]} numberOfLines={summaryLines}>
+            {card.summary}
+          </Text>
+        ) : null}
+        {expanded ? (
+          <Text style={[t.type.meta, { color: c.muted, marginTop: 8 }]}>{cardMeta(card, { showLang })}</Text>
+        ) : null}
 
         <View style={styles.footer}>
-          <Text style={[t.type.meta, { color: c.muted, flex: 1 }]} numberOfLines={2}>
-            {meta}
+          <Text style={[t.type.meta, { color: c.muted, flex: 1 }]} numberOfLines={1}>
+            {cardSource(card)}
           </Text>
+          {hasMore ? (
+            <Pressable
+              onPress={() => setExpanded((v) => !v)}
+              accessibilityRole="button"
+              accessibilityLabel={expanded ? 'Ver menos' : 'Ver más'}
+              hitSlop={6}
+              style={styles.more}
+            >
+              <Text style={[t.type.chipActive, { fontSize: 13, color: c.primaryText }]}>{expanded ? 'Menos' : 'Más'}</Text>
+            </Pressable>
+          ) : null}
           <IconButton label={saved ? 'Quitar de guardados' : 'Guardar'} onPress={() => onToggleSave(card)}>
             <Bookmark
               size={ICON.size}
@@ -105,8 +121,7 @@ export const FeedCard = memo(FeedCardBase);
 const styles = StyleSheet.create({
   card: { marginHorizontal: 16, borderWidth: 1, overflow: 'hidden' },
   image: { alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-  body: { paddingHorizontal: 16, paddingTop: 16, paddingBottom: 8 },
-  titleRow: { flexDirection: 'row', gap: 12 },
-  thumb: { width: 76, height: 76, marginTop: 8, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' },
-  footer: { flexDirection: 'row', alignItems: 'center', marginTop: 4, marginRight: -8 },
+  body: { paddingHorizontal: 16, paddingTop: 14, paddingBottom: 6 },
+  footer: { flexDirection: 'row', alignItems: 'center', marginTop: 2, marginRight: -8 },
+  more: { height: 44, paddingHorizontal: 10, justifyContent: 'center' },
 });

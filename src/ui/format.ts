@@ -1,6 +1,7 @@
 // Textos que la interfaz deriva de los datos. Puro (sin React Native) para probarlo en Node.
 
 import type { ImportReport } from '../backup/backup.ts';
+import type { Reason } from '../core/recommend.ts';
 import { sourceNameOf } from '../core/sources.ts';
 import type { Card, CardType, FilterLevel, Lang, Topic } from '../core/types.ts';
 
@@ -45,7 +46,9 @@ function typeLabel(card: Card): string {
   if (card.type === 'image' && card.sourceId === 'wikimedia-commons') return 'Imagen del día';
   if (card.type === 'image' && card.sourceId === 'nasa') return 'Imagen de la NASA';
   if (card.type === 'article' && card.sourceId === 'theconversation') return 'Divulgación';
-  if (card.type === 'article' && card.sourceId.startsWith('wikipedia-')) return 'Artículo destacado';
+  if (card.type === 'article' && card.sourceId.startsWith('wikipedia-')) {
+    return /^t?fa:/.test(card.externalId) ? 'Artículo destacado' : 'Artículo';
+  }
   return TYPE_LABELS[card.type] ?? card.type;
 }
 
@@ -56,8 +59,27 @@ export type CardVariant = 'image' | 'text' | 'event';
 
 export function cardVariant(card: Card): CardVariant {
   if (card.type === 'event') return 'event';
-  if ((card.type === 'artwork' || card.type === 'image') && card.imageUrl) return 'image';
+  // Imagen primero siempre que haya una: más familiar y menos texto que leer.
+  if (card.imageUrl) return 'image';
   return 'text';
+}
+
+/** Licencia en pocas palabras para la línea de la tarjeta; la completa va en "Más" y en el lector. */
+export function shortLicense(license?: string): string | undefined {
+  if (!license) return undefined;
+  if (/dominio p[uú]blico|public domain|CC0/i.test(license)) return 'Dominio público';
+  const cc = /CC BY(-[A-Z]{2})*/i.exec(license);
+  return cc ? cc[0].toUpperCase() : license;
+}
+
+/** Línea corta de transparencia: "The Met · Dominio público". */
+export function cardSource(card: Card): string {
+  return [sourceNameOf(card.sourceId), shortLicense(card.license)].filter(Boolean).join(' · ');
+}
+
+/** Etiqueta corta sobre el título: solo el tema ("Arte"), o la fecha si es efeméride. */
+export function cardTopicLabel(card: Card, now = new Date()): string {
+  return card.type === 'event' ? cardKicker(card, now) : TOPIC_LABELS[card.topic] ?? card.topic;
 }
 
 /**
@@ -97,6 +119,13 @@ export function cardMeta(card: Card, opts: { showLang?: boolean } = {}): string 
   return parts.join(' · ');
 }
 
+/** Por qué aparece una recomendación en Explorar (transparencia). */
+export function reasonLabel(reason: Reason): string {
+  if (reason.kind === 'topic') return `Porque guardaste ${(TOPIC_LABELS[reason.topic] ?? reason.topic).toLocaleLowerCase('es')}`;
+  if (reason.kind === 'source') return `Porque guardaste de ${sourceNameOf(reason.sourceId)}`;
+  return 'Nuevo para ti';
+}
+
 /** "17 nov 2026, 18:05" en la hora local del teléfono. */
 export function formatDateTime(iso: string): string {
   const d = new Date(iso);
@@ -120,26 +149,4 @@ export function importSummary(report: ImportReport, rejected: number): string {
     parts.push(`${rejected} se ${rejected === 1 ? 'descartó' : 'descartaron'} por venir incompleto${rejected === 1 ? '' : 's'}`);
   }
   return parts.join(' · ');
-}
-
-// --- Filas del feed con pausas --------------------------------------------
-
-export type FeedRow =
-  | { kind: 'card'; key: string; card: Card }
-  | { kind: 'pause'; key: string };
-
-/**
- * Intercala una tarjeta de pausa cada `every` tarjetas. Las pausas se identifican por
- * su posición (`pause-1`, `pause-2`…) para que "Seguir" quite solo la que se tocó.
- */
-export function withPauses(cards: Card[], every: number | null, dismissed: ReadonlySet<string> = new Set()): FeedRow[] {
-  const rows: FeedRow[] = [];
-  cards.forEach((card, i) => {
-    rows.push({ kind: 'card', key: card.id, card });
-    if (every && (i + 1) % every === 0) {
-      const key = `pause-${(i + 1) / every}`;
-      if (!dismissed.has(key)) rows.push({ kind: 'pause', key });
-    }
-  });
-  return rows;
 }

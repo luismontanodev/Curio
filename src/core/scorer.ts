@@ -146,7 +146,22 @@ export function detectSignals(title: string): Signal[] {
 
 /** Score base que se guarda con la tarjeta al ingerirla. */
 export function scoreCard(card: Pick<RawCard, 'title'>, sourceKind: SourceKind): QualityScore {
-  const signals = detectSignals(card.title);
+  return aggregate(detectSignals(card.title), sourceKind);
+}
+
+/**
+ * Score de un gancho de momento (v2). Igual que `scoreCard`, salvo que la **pregunta** y el
+ * **inicio vago** se permiten si el momento cierra la duda ahí mismo (`payoff` no vacío):
+ * curiosidad sí, clickbait no. Sensacionalismo y frases gancho se castigan siempre.
+ * No cambia las reglas de las tarjetas, así que no sube `SCORER_VERSION`.
+ */
+export function scoreHook(hook: string, payoff: string, sourceKind: SourceKind): QualityScore {
+  const closes = payoff.trim().length > 0;
+  const signals = detectSignals(hook).filter((s) => !(closes && (s.id === 'question' || s.id === 'vague-opener')));
+  return aggregate(signals, sourceKind);
+}
+
+function aggregate(signals: Signal[], sourceKind: SourceKind): QualityScore {
   const trust = SOURCE_TRUST[sourceKind];
   const sum = (cat: Signal['category']) =>
     signals.filter((s) => s.category === cat).reduce((acc, s) => acc + s.points, 0);

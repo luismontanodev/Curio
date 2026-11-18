@@ -49,7 +49,9 @@ export function normalizeArtBinding(b: ArtBinding, lang: Lang): RawCard | null {
 
   const creator = b.creatorLabel?.value?.trim();
   const year = yearOf(b.inception?.value);
-  const desc = b.description?.value?.trim();
+  // "cuadro de Vincent van Gogh" repite al autor que ya va en el resumen: se omite.
+  const rawDesc = b.description?.value?.trim();
+  const desc = rawDesc && !(creator && rawDesc.toLowerCase().includes(creator.toLowerCase())) ? rawDesc : undefined;
   const summary = [creator && !/^Q\d+$/.test(creator) ? creator : undefined, year, desc]
     .filter(Boolean)
     .join(' · ');

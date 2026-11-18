@@ -25,12 +25,13 @@ export interface InfiniteFeedOptions {
   prefs: FilterPrefs;
   types?: CardType[];
   sources?: string[];
+  externalPrefixes?: string[];
   hideSeen?: boolean;
   /** Qué fuentes pedir al traer más (por defecto, todas). */
   only?: JobKind[];
 }
 
-export function useInfiniteFeed({ prefs, types, sources, hideSeen = true, only }: InfiniteFeedOptions) {
+export function useInfiniteFeed({ prefs, types, sources, externalPrefixes, hideSeen = true, only }: InfiniteFeedOptions) {
   const db = useSQLiteContext();
   const [cards, setCards] = useState<Card[]>([]);
   const [cursor, setCursor] = useState<FeedCursor | null>(null);
@@ -47,13 +48,15 @@ export function useInfiniteFeed({ prefs, types, sources, hideSeen = true, only }
   const typesKey = types?.join(',') ?? '';
   const sourcesKey = sources?.join(',') ?? '';
   const onlyKey = only?.join(',') ?? '';
+  const prefixesKey = externalPrefixes?.join(',') ?? '';
   const options = useMemo(
     () => ({
       types: typesKey ? (typesKey.split(',') as CardType[]) : undefined,
       sources: sourcesKey ? sourcesKey.split(',') : undefined,
       only: onlyKey ? (onlyKey.split(',') as JobKind[]) : undefined,
+      externalPrefixes: prefixesKey ? prefixesKey.split(',') : undefined,
     }),
-    [typesKey, sourcesKey, onlyKey],
+    [typesKey, sourcesKey, onlyKey, prefixesKey],
   );
 
   const page = useCallback(
@@ -64,6 +67,7 @@ export function useInfiniteFeed({ prefs, types, sources, hideSeen = true, only }
         hideSeen,
         types: options.types,
         sources: options.sources,
+        externalPrefixes: options.externalPrefixes,
         excludeIds: exclude.map((c) => c.id),
       }),
     [db, prefs, hideSeen, options],

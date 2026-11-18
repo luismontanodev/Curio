@@ -111,7 +111,7 @@ function Hero({ card }: { card: Card }) {
   return (
     <View style={[styles.hero, { height: whole ? 320 : 220, backgroundColor: t.colors.soft }]}>
       <ImageIcon size={32} color={t.colors.primaryText} strokeWidth={ICON.stroke} />
-      <RemoteImage uri={card.imageUrl!} contentFit={whole ? 'contain' : 'cover'} accessibilityLabel={card.title} />
+      <RemoteImage uri={card.imageUrl!} fit={whole ? 'contain' : 'cover'} accessibilityLabel={card.title} />
     </View>
   );
 }
@@ -139,7 +139,7 @@ function Block({ block }: { block: ContentBlock }) {
         <View style={{ marginTop: 20 }}>
           <View style={[styles.inlineImage, { backgroundColor: c.soft, borderRadius: t.radius.group }]}>
             <ImageIcon size={24} color={c.primaryText} strokeWidth={ICON.stroke} />
-            <RemoteImage uri={block.src} contentFit="contain" accessibilityLabel={block.caption} />
+            <RemoteImage uri={block.src} fit="contain" accessibilityLabel={block.caption} />
           </View>
           {block.caption ? <Text style={[t.type.meta, { color: c.muted, marginTop: 6 }]}>{block.caption}</Text> : null}
         </View>

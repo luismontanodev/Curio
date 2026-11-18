@@ -7,7 +7,7 @@ import {
 import type { SqlDb } from './sql.ts';
 
 export const DEFAULT_PREFS: AppPrefs = {
-  topics: ['ciencia', 'tecnologia', 'arte', 'cultura', 'historia'],
+  topics: ['ciencia', 'tecnologia', 'arte', 'cultura', 'historia', 'naturaleza'],
   level: 'estricto',
   hideSensational: true,
   hideClickbait: true,

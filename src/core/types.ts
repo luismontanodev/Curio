@@ -103,3 +103,44 @@ export const LANGS: readonly Lang[] = ['es', 'en', 'fr', 'pt'];
 export const CARD_TYPES: readonly CardType[] = ['artwork', 'article', 'event', 'image', 'paper'];
 export const FILTER_LEVELS: readonly FilterLevel[] = ['suave', 'moderado', 'estricto'];
 export const THEME_PREFS: readonly ThemePref[] = ['system', 'light', 'dark'];
+
+// --- v2: momentos (docs/PRODUCTO.md) -------------------------------------------
+
+export type MomentFormat = 'image-fact' | 'detail-zoom' | 'which-first' | 'timeline' | 'text-fact' | 'sound' | 'event';
+export const MOMENT_FORMATS: readonly MomentFormat[] = [
+  'image-fact', 'detail-zoom', 'which-first', 'timeline', 'text-fact', 'sound', 'event',
+];
+
+/** De dónde sale el gancho: calculado de los datos, curado a mano o el título de la fuente. */
+export type HookOrigin = 'computed' | 'curated' | 'source';
+export const HOOK_ORIGINS: readonly HookOrigin[] = ['computed', 'curated', 'source'];
+
+export interface MomentSource {
+  sourceId: string;
+  url: string;
+  license?: string;
+}
+
+/**
+ * Un momento: un visual, un gancho honesto y su payoff en la misma pantalla.
+ * Todo gancho debe sostenerse con `sources` (filosofía 6).
+ */
+export interface Moment {
+  id: string;
+  format: MomentFormat;
+  topic: Topic;
+  lang: Lang;
+  hook: string; // ≤ ~90 caracteres
+  payoff: string; // cierra la duda del gancho; nunca vacío
+  hookOrigin: HookOrigin;
+  /** Etiqueta corta sobre el gancho ("La gran ola de Kanagawa"). */
+  label?: string;
+  depth?: { short?: string };
+  media?: { imageUrl?: string; focus?: { x: number; y: number; r: number } };
+  choices?: { label: string; detail: string; correct: boolean }[]; // which-first
+  timeline?: { label: string; year: number; note?: string }[]; // años negativos = a. C.
+  sources: MomentSource[]; // al menos una
+  /** Tarjeta de origen: guardar, leer más y "visto" se resuelven con ella. */
+  cardId?: string;
+  quality: QualityScore;
+}

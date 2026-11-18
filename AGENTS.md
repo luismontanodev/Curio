@@ -10,7 +10,7 @@ historia: uno a la vez, a pantalla completa, con swipe vertical. El enganche es 
 TikTok/Reels, pero en versión sana:
 
 - Cada momento es una imagen o visual, un **gancho** honesto y su **payoff** en la misma pantalla.
-- Los momentos se agrupan en **capítulos de 10 con un cierre** ("Terminar por hoy").
+- Los momentos corren en un **scroll infinito** con una **pausa sugerida** cada N (configurable).
 - Filtra sensacionalismo y clickbait con un scorer de reglas.
 - Solo usa fuentes curadas (museos, enciclopedias), sin métricas de popularidad.
 
@@ -18,9 +18,10 @@ TikTok/Reels, pero en versión sana:
 > una app de noticias. La experiencia principal ahora son los momentos. Lee
 > `docs/PRODUCTO.md` antes de diseñar o implementar cualquier pantalla.
 >
-> **Estado real:** lo implementado hoy es la versión en lista (v1): Inicio con scroll
-> infinito, Destacados, lector dentro de la app, Guardados, Mis datos y Filtros. Los momentos
-> (v2) están diseñados pero aún no implementados; ver "Siguientes pasos".
+> **Navegación (decisión del 2026-11-17, al estilo Instagram):** cuatro pestañas —
+> **Destacados** (inicio: "lo que sigues"), **Explorar** (recomendaciones + búsqueda),
+> **Momentos** (reels infinitos) y **Mis datos** (con Guardados y Filtros). Reemplaza a los
+> capítulos de 10 con Cierre que proponía `docs/PRODUCTO.md`.
 
 ## Filosofía (no negociable)
 
@@ -41,8 +42,10 @@ TikTok/Reels, pero en versión sana:
 6. **Curiosidad sí, clickbait no.** Un gancho puede abrir una duda solo si la cierra en el
    mismo momento (`payoff`). Todo gancho debe poder sostenerse con las fuentes del propio
    momento. Si no se puede verificar, no se publica.
-7. **Siempre hay un final.** El contenido puede ser infinito, pero la experiencia tiene
-   puntos de parada (cierre de capítulo) y la app recomienda parar, no seguir.
+7. **Siempre hay una pausa.** El contenido es infinito, pero la app sugiere parar cada N
+   momentos (Pausa sugerida, en Filtros) con "Terminar por hoy" como botón principal, y
+   nunca empuja a seguir. *(Antes: "siempre hay un final", con capítulos de 10 y cierre;
+   cambió por decisión de producto el 2026-11-17.)*
 
 ## Stack
 
@@ -62,18 +65,19 @@ TikTok/Reels, pero en versión sana:
 |---|---|
 | `src/core` — tipos, scorer, clasificador de temas, bloques de lectura, fuentes, normalizadores | ✅ Hecho y probado |
 | `src/db` — migraciones (v2), feed con cursor por idioma/tipo/fuente, vistos, guardados con texto completo, prefs | ✅ Hecho y probado con SQLite real |
-| `src/ingest` — Wikipedia (es/en/fr/pt), The Conversation, Wikidata (arte), Met, NASA; modo "traer más" | ✅ Verificado contra las APIs reales (2026-11-17); fixtures reales en `test/fixtures/` |
+| `src/ingest` — Wikipedia (es/en/fr/pt), The Conversation, Wikidata (arte), Met, NASA, Agencia SINC, Cleveland, V&A, iNaturalist, NASA EPIC, Europe PMC (Art Institute listo pero apagado); modo "traer más" | ✅ Verificado contra las APIs reales (2026-11-17); fixtures reales en `test/fixtures/` |
 | `src/backup` — exportar/validar/importar JSON | ✅ Hecho y probado |
 | `src/platform` — respaldo, ingesta en cola, feed infinito, lector, imágenes (expo-image), estado compartido | ✅ Typecheckea y empaqueta (Metro); ⚠️ **sin probar en un dispositivo** |
 | `src/ui` — tokens (`theme.ts`, incluye los de v2) y textos derivados (`format.ts`) | ✅ Hecho; `format.ts` probado |
-| `src/components` — primitivas, tarjeta del feed, tarjeta de pausa, pie del scroll infinito | ✅ Escrito; ⚠️ sin probar en dispositivo |
-| Pantallas `app/` (v1, lista) — Inicio, Destacados, Guardados, Mis datos, Filtros, Lector | ✅ Escritas; ⚠️ sin probar en dispositivo |
+| `src/components` — primitivas, tarjeta del feed, página de momento, pie del scroll infinito | ✅ Escrito; ⚠️ sin probar en dispositivo |
+| Pantallas `app/` — Destacados, Explorar, Momentos, Mis datos (+ Guardados, Filtros, Lector) | ✅ Escritas; ⚠️ sin probar en dispositivo |
 | Proyecto Expo (SDK 58) | ✅ Creado; `npx expo export --platform android` empaqueta sin errores |
 | Diseño v2 (momentos): bienvenida, momento, profundizar, microjuego, línea de tiempo, cierre | ✅ Diseñado: `docs/DESIGN.md` + `docs/design/mockups/v2-*.png` |
-| Modelo `Moment` / `Chapter`, `scoreHook`, generación de capítulos | ❌ Pendiente: propuesta en `docs/PRODUCTO.md` |
-| Pantallas v2 (momento, profundizar, cierre, bienvenida, microjuego, línea de tiempo) | ❌ Pendiente |
+| Modelo `Moment`, `scoreHook`, mezcla con variedad (`src/core/moments.ts`, `src/db/moments.ts`) | ✅ Hecho y probado |
+| Recomendación de Explorar (`src/core/recommend.ts`) y búsqueda (teléfono + Wikipedia, `src/ingest/search.ts`) | ✅ Hecho y probado |
+| Pantallas v2: Profundizar (hoja), Bienvenida, Microjuego, Línea de tiempo | ❌ Pendiente |
 
-`npm test` → 70/70 pasan. `npm run typecheck` → limpio (app con `tsconfig.json`; lógica pura y
+`npm test` → 102/102 pasan. `npm run typecheck` → limpio (app con `tsconfig.json`; lógica pura y
 tests con `tsconfig.test.json`, que agrega los tipos de Node).
 
 ## Siguientes pasos (en orden)
@@ -83,21 +87,17 @@ tests con `tsconfig.test.json`, que agrega los tipos de Node).
    `docs/design/mockups/*.png`.
 2. **Verificar `src/platform/backup-file.ts`** en dispositivo (API de `File`/`Paths`,
    `Sharing.shareAsync`, `DocumentPicker.getDocumentAsync`).
-3. **Modelo v2 en `src/core`** (puro y probado), según `docs/PRODUCTO.md`:
-   - Tipos `Moment` y `Chapter`, y `scoreHook` en el scorer, con tests de ganchos honestos vs. clickbait.
-   - Conversión `Card → Moment` para lo que ya trae la ingesta (`image-fact`, `text-fact`,
-     `event`), aprovechando las fuentes actuales (Wikipedia, The Conversation, Wikidata, Met, NASA)
-     y los idiomas del usuario.
-   - Ganchos calculados: `timeline`, `which-first` y la edad del artista si el Met trae las
-     fechas (`objectBeginDate`, `artistBeginDate`; hoy `MetObject` no los lee) o Wikidata.
-   - Armado de capítulos de 10 que no repitan más de 2 seguidos del mismo formato o fuente.
-4. **Migración 3** en `src/db/migrations.ts` (la 2 ya existe: columna `body`): tablas
-   `moments` y `chapters`. El historial y la valoración de capítulos entran al respaldo
-   (campos opcionales o `BACKUP_VERSION` 2).
-5. **Pantallas v2** según `docs/DESIGN.md`, en este orden: Momento (swipe vertical + hoja) →
-   Profundizar (su "Leer más" abre el lector que ya existe) → Cierre de capítulo (reemplaza
-   la tarjeta de pausa) → Bienvenida → Microjuego y Línea de tiempo. Filtros, Guardados,
-   Destacados, Mis datos y el Lector ya existen: se reubican, no se rehacen.
+3. ✅ **Modelo v2 en `src/core`** (puro y probado): `Moment`, `scoreHook` (pregunta e inicio vago
+   solo con payoff), `Card → Moment` (`image-fact`, `text-fact`, `event`), ganchos calculados
+   (`which-first`, `timeline`) y `mixMoments` (lotes sin más de 2 seguidos del mismo formato o
+   fuente). Pendiente: la edad del artista (el Met trae `objectBeginDate`/`artistBeginDate`;
+   hoy `MetObject` no los lee).
+4. ✅ **Navegación v2 al estilo Instagram** (ver "Notas de la interfaz"). Los capítulos de 10
+   se descartaron: la migración 3 (tabla `chapters`) queda en desuso pero no se quita
+   porque ya se aplicó en dispositivos.
+5. **Pantallas v2 pendientes**, en este orden: Profundizar (hoy el botón abre directo el lector;
+   falta la hoja de 30 s con ficha) → Microjuego y Línea de tiempo (el modelo ya los calcula;
+   al pintarlos, agrégalos a `RENDERED_FORMATS`) → Bienvenida.
 6. Paquetes curados `curio-pack` (JSON estático en un repo público), validados como
    entrada no confiable. Ver `docs/PRODUCTO.md`.
 7. Cambiar el contacto de `USER_AGENT` en `src/ingest/http.ts` (Wikimedia lo pide).
@@ -108,9 +108,23 @@ reales, `src/platform` compilado y empaquetado.
 
 ### Notas de la interfaz
 
-- **Rutas:** `app/_layout.tsx` (fuentes, SQLite, `AppStateProvider`) → `app/(tabs)/` con
-  `index` (Inicio), `destacados`, `guardados`, `perfil` (Mis datos); encima, `app/filtros.tsx`
-  y `app/leer/[id].tsx` (lector).
+- **Rutas:** `app/_layout.tsx` (fuentes, SQLite, `AppStateProvider`, `IngestProvider`) →
+  `app/(tabs)/`: `index` (**Destacados**, inicio), `explorar`, `momentos`, `perfil` (Mis datos);
+  apiladas encima: `app/guardados.tsx` y `app/filtros.tsx` (se abren desde Mis datos, Explorar y
+  Destacados) y `app/leer/[id].tsx` (lector).
+- **Destacados:** solo artículos realmente destacados (`externalPrefixes: ['fa:', 'tfa:']`); los
+  resultados de búsqueda de Wikipedia usan ids `pg:` y no se cuelan.
+- **Explorar:** `recommend` ordena lo no visto por afinidad con **lo guardado** (intención, no
+  tiempo de visualización), frescura, imagen y calidad, sin más de 2 seguidas del mismo tema;
+  cada tarjeta dice por qué aparece ("Porque guardaste arte", "Nuevo para ti"). La búsqueda
+  muestra primero lo del teléfono y luego "Relacionado en Wikipedia" en los idiomas del
+  usuario; esos resultados se guardan como tarjetas para leerlos en el lector.
+- **Momentos:** `useMomentStream` arma lotes de 12 (`mixMoments`) de lo no visto y, al
+  acercarse al final, trae más de la red (`more`). Cada `pauseEvery` momentos entra una
+  página de pausa ("Terminar por hoy" / "Seguir"). Un momento mostrado marca su tarjeta como
+  vista. Los ganchos de fuente usan el título (hasta 120 caracteres) y el payoff es el resumen
+  si cabe (220) o su primera oración; las efemérides en español calculan el payoff con la fecha.
+  Los ganchos calculados usan el texto del propio hecho como etiqueta, nunca el título de la página.
 - **Todo se lee dentro de la app. Nunca abras el navegador** (`expo-web-browser`, `Linking`).
   El lector usa `card.body` si la fuente dio el texto completo (The Conversation, CC BY-ND) o
   pide el artículo a Wikipedia al abrir (`fetchWikipediaArticle`). El enlace original se muestra
@@ -119,8 +133,15 @@ reales, `src/platform` compilado y empaquetado.
   acabarse, `runIngest({ more: true })` (página siguiente de The Conversation, efemérides de otro
   día, más destacados y arte) y se agrega lo nuevo con `excludeIds`. El *contenido* no se
   acaba: el pie dice "Buscando más…", "Sin conexión" o "No encontramos más", con botón para
-  reintentar. La *experiencia* sí tiene paradas (filosofía 7): hoy la tarjeta de pausa; en v2,
-  el cierre de capítulo.
+  reintentar. La *experiencia* sí tiene paradas (filosofía 7): la pausa sugerida en Momentos.
+- **Tarjeta compacta y pestañas:** ver "Navegación vigente" en `docs/DESIGN.md`
+  (`cardSource`/`shortLicense` mantienen fuente y licencia a la vista en una línea; "Más"
+  despliega el resto). `useTabReselect` hace que tocar la pestaña activa suba y actualice.
+  Guardados filtra con `savedIds`, así que quitar un guardado se ve al instante.
+- **Imágenes y Wikimedia:** `sharperImageUrl` pide 960 px (tamaño estándar) con vuelta a la
+  original si falla. **Usa solo tamaños estándar de Wikimedia** (120, 250, 330, 500, 960, 1280…):
+  el 2026-11-18 respondió 429 (*Too many requests*) a toda la IP tras muchas pruebas; los
+  tamaños no estándar y un User-Agent sin contacto real se limitan más.
 - **Ingesta en cola** (`ingest-queue.ts`): una a la vez, porque expo-sqlite comparte la conexión.
 - **Idiomas:** `FilterPrefs.languages` (es/en/fr/pt). La interfaz siempre en español; el feed
   solo muestra tarjetas en esos idiomas y la ingesta solo pide esos idiomas. Met y NASA solo

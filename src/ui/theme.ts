@@ -1,6 +1,8 @@
 // Tokens de diseño de Curio. Fuente única de verdad para colores, tipografía y forma.
 // Explicación y uso por pantalla: docs/DESIGN.md. Contraste verificado ≥ 4.5:1 en todos los pares de texto.
 
+import type { Topic } from '../core/types.ts';
+
 export type ThemeName = 'light' | 'dark';
 
 export interface ColorTokens {
@@ -44,6 +46,39 @@ export const colors: Record<ThemeName, ColorTokens> = {
     onPrimary: '#1F1633',
     trackOff: '#463B60',
     image: '#2A2140',
+  },
+};
+
+/**
+ * Color por tema: da identidad visual sin competir con el lila (que sigue marcando selección
+ * y acción). `fg` es para texto y etiquetas (contraste ≥ 4.5:1 sobre `card` y sobre `bg` del
+ * propio tema); `bg` es un tinte suave para fondos (placeholder de imagen, mosaicos sin foto).
+ */
+export interface TopicColor {
+  fg: string;
+  bg: string;
+}
+
+export const topicColors: Record<ThemeName, Record<Topic, TopicColor>> = {
+  light: {
+    ciencia: { fg: '#0F766E', bg: '#E3F4F1' },
+    tecnologia: { fg: '#1D4ED8', bg: '#E6EDFC' },
+    arte: { fg: '#B23A0B', bg: '#FDEBE1' },
+    cultura: { fg: '#9A5B06', bg: '#FBF0D9' },
+    historia: { fg: '#8B5A34', bg: '#F4EAE1' },
+    naturaleza: { fg: '#166534', bg: '#E4F4E8' },
+    espacio: { fg: '#4338CA', bg: '#EAE9FB' },
+    musica: { fg: '#BE185D', bg: '#FCE7F0' },
+  },
+  dark: {
+    ciencia: { fg: '#5EEAD4', bg: '#12302D' },
+    tecnologia: { fg: '#93C5FD', bg: '#172345' },
+    arte: { fg: '#FDBA74', bg: '#3A2216' },
+    cultura: { fg: '#FCD34D', bg: '#382C12' },
+    historia: { fg: '#E2BC94', bg: '#33261C' },
+    naturaleza: { fg: '#86EFAC', bg: '#14301D' },
+    espacio: { fg: '#A5B4FC', bg: '#1F1C48' },
+    musica: { fg: '#F9A8D4', bg: '#3A1228' },
   },
 };
 
@@ -108,7 +143,7 @@ export const size = {
   wordChipHeight: 32,
   buttonHeight: 50,
   inputHeight: 44,
-  cardImageHeight: 168,
+  cardImageHeight: 200,
   momentSheet: 300,
   depthSheet: 640,
   chapterSegments: 10,
@@ -119,7 +154,7 @@ export const size = {
 } as const;
 
 export function theme(name: ThemeName) {
-  return { name, colors: colors[name], fonts, type, space, radius, size };
+  return { name, colors: colors[name], topics: topicColors[name], fonts, type, space, radius, size };
 }
 
 export type Theme = ReturnType<typeof theme>;

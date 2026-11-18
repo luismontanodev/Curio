@@ -1,0 +1,125 @@
+{
+  "_nota": "Respuesta real recortada",
+  "hitCount": 5730,
+  "resultList": {
+    "result": [
+      {
+        "id": "42784885",
+        "source": "MED",
+        "pmcid": "PMC13634439",
+        "doi": "10.1016/j.aprim.2026.103619",
+        "title": "[Rethinking exercise prescription in primary care: from physiological dose to health asset].",
+        "authorString": "Ferrer-Peña R, León-Hernández JV.",
+        "journalTitle": "Atencion primaria",
+        "pubYear": "2026",
+        "language": "spa",
+        "license": "cc by-nc-nd",
+        "isOpenAccess": "Y",
+        "abstractText": "Population-level evidence on the benefits of physical activity is robust, but its translation into individual clinical practice is not automatic. When exercise prescription in primary care is reduced to a physiological dose without proper assessment of biographical context, motivation, opportunity cost and adequate progression, it ceases to function as an effective preventive intervention and may generate psychological burden, dropout and, in extreme cases, compulsive behaviour. This article proposes a reformulation: prescription should be understood as a complex and individualised behavioural intervention aimed at generating health resources, not as an imposition of minutes. Six minimum components are proposed: biographical context assessment, shared negotiation, tailored progression, sustained behavioural support, cost monitoring and autonomous motivation, applicable across the primary care team, and it is argued that load-based reductionism may constitute an avoidable form of iatrogenesis.",
+        "fullTextUrlList": {
+          "fullTextUrl": [
+            {
+              "availability": "Subscription required",
+              "availabilityCode": "S",
+              "documentStyle": "doi",
+              "site": "DOI",
+              "url": "https://doi.org/10.1016/j.aprim.2026.103619"
+            },
+            {
+              "availability": "Open access",
+              "availabilityCode": "OA",
+              "documentStyle": "html",
+              "site": "Europe_PMC",
+              "url": "https://europepmc.org/articles/PMC13634439"
+            },
+            {
+              "availability": "Open access",
+              "availabilityCode": "OA",
+              "documentStyle": "pdf",
+              "site": "Europe_PMC",
+              "url": "https://europepmc.org/articles/PMC13634439?pdf=render"
+            }
+          ]
+        }
+      },
+      {
+        "id": "42777291",
+        "source": "MED",
+        "pmcid": "PMC13634570",
+        "doi": "10.1016/j.aprim.2026.103617",
+        "title": "[Social determinants and COVID-19 mortality: Systematic review of the role of primary care].",
+        "authorString": "de Sousa Praxedes CE, Alves de Sousa Santinha G, de Araújo Soares Nuto S, Junior Freire RW, Gomes Ribeiro K, Monteiro de Andrade LO.",
+        "journalTitle": "Atencion primaria",
+        "pubYear": "2026",
+        "language": "spa",
+        "license": "cc by",
+        "isOpenAccess": "Y",
+        "abstractText": "<h4>Objectives</h4>To synthesize associations between social determinants and COVID-19 mortality and examine the role of primary care.<h4>Design</h4>Systematic review registered in PROSPERO (CRD42024502678) and reported according to PRISMA 2020.<h4>Data sources</h4>PubMed/MEDLINE, EMBASE, Web of Science and Scopus, in English, Portuguese, or Spanish.<h4>Study selection</h4>Observational studies addressing social determinants, COVID-19 mortality, and primary care.<h4>Data extraction</h4>Country, design, determinants, role of primary care, outcome, and association measures.<h4>Results</h4>Of 259 records, 24 studies were included; 14 were conducted in the US and 13 had an ecological design. In a Spanish cohort, income<€18,000 was associated with higher mortality (aOR 3.29; 95% CI 2.16-5.03), consistent with other studies of deprivation. Across 3141 US counties, the highest social-vulnerability quintile had higher mortality (RR 2.42; 95% CI 2.22-2.64), with a similar direction in other territorial analyses. In Georgia, primary care professional shortage was associated with higher mortality (RR 1.74; 95% CI 1.00-3.00), whereas in Texas greater primary care physician density was associated with lower odds of recording a death (OR 0.93; 95% CI 0.89-0.99). Race/ethnicity-related effects varied by context. Methodological heterogeneity, predominance of ecological designs, and concentration of US studies limit generalizability.<h4>Conclusions</h4>COVID-19 mortality was socially stratifi",
+        "fullTextUrlList": {
+          "fullTextUrl": [
+            {
+              "availability": "Subscription required",
+              "availabilityCode": "S",
+              "documentStyle": "doi",
+              "site": "DOI",
+              "url": "https://doi.org/10.1016/j.aprim.2026.103617"
+            },
+            {
+              "availability": "Open access",
+              "availabilityCode": "OA",
+              "documentStyle": "html",
+              "site": "Europe_PMC",
+              "url": "https://europepmc.org/articles/PMC13634570"
+            },
+            {
+              "availability": "Open access",
+              "availabilityCode": "OA",
+              "documentStyle": "pdf",
+              "site": "Europe_PMC",
+              "url": "https://europepmc.org/articles/PMC13634570?pdf=render"
+            }
+          ]
+        }
+      },
+      {
+        "id": "42531864",
+        "source": "MED",
+        "pmcid": "PMC13452188",
+        "doi": "10.1016/j.aprim.2026.103530",
+        "title": "[Development and validation of Cefalytics: an artificial intelligence-based application for the rapid diagnosis of primary headaches].",
+        "authorString": "Martínez Simón J, Arjona Ruiz P, Martín Alcalá J, García-Torrecillas JM, Fernández Recio M, Arjona-Padillo A.",
+        "journalTitle": "Atencion primaria",
+        "pubYear": "2026",
+        "language": "spa",
+        "license": "cc by",
+        "isOpenAccess": "Y",
+        "abstractText": "<h4>Objective</h4>To design and validate a Spanish-language artificial intelligence-based application to support the diagnosis of primary headaches by non-expert physicians.<h4>Design</h4>Retrospective observational study for diagnostic development and validation based on clinical records.<h4>Setting</h4>Neurology outpatient clinics receiving patients referred from primary care (level 2 headache care).<h4>Participants</h4>A total of 1,029 adult patients with a diagnosis of 17 types of primary headache confirmed by an expert neurologist according to the criteria of the International Classification of Headache Disorders, 3rd edition (ICHD-3), treated at two hospital centers between 2022 and 2024 were included.<h4>Main outcome measures</h4>Sensitivity, specificity, F1-score and accuracy of the rule-based diagnostic algorithm and the supervised learning model.<h4>Results</h4>The application integrates a structured clinical questionnaire that includes most primary headache diagnoses defined in the ICHD-3. The rule-based algorithm achieved a sensitivity of 89.8% (95% CI: 87.9-91.5), specificity of 99.4% (95% CI: 99.2-99.5), F1-score of 91.8% (95% CI: 90.3-93.1), and accuracy of 93.3% (95% CI: 91.5-94.8). The supervised learning model showed a sensitivity of 88.1% (95% CI: 84.0-91.8), specificity of 99.1% (95% CI: 98.6-99.5), F1-score of 88.5% (95% CI: 84.6-92.0), and accuracy of 85.5% (95% CI: 79.3-91.4).<h4>Conclusions</h4>Cefalytics (https://cefalytics.com/) shows high diagnostic",
+        "fullTextUrlList": {
+          "fullTextUrl": [
+            {
+              "availability": "Subscription required",
+              "availabilityCode": "S",
+              "documentStyle": "doi",
+              "site": "DOI",
+              "url": "https://doi.org/10.1016/j.aprim.2026.103530"
+            },
+            {
+              "availability": "Open access",
+              "availabilityCode": "OA",
+              "documentStyle": "html",
+              "site": "Europe_PMC",
+              "url": "https://europepmc.org/articles/PMC13452188"
+            },
+            {
+              "availability": "Open access",
+              "availabilityCode": "OA",
+              "documentStyle": "pdf",
+              "site": "Europe_PMC",
+              "url": "https://europepmc.org/articles/PMC13452188?pdf=render"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

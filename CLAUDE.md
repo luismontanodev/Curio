@@ -8,8 +8,9 @@ Contexto completo del proyecto (filosofía, stack, arquitectura, estado y siguie
 
 - **Producto y diseño:** lee `docs/PRODUCTO.md` y la sección "Pantallas v2" de
   `docs/DESIGN.md`, y mira las capturas `docs/design/mockups/v2-*.png` antes de implementar
-  cualquier pantalla. La lista de tarjetas (v1) ya **no** es la pantalla principal en el
-  diseño, aunque hoy sigue siendo lo implementado en Inicio.
+  cualquier pantalla. **La navegación vigente** (4 pestañas al estilo Instagram: Destacados,
+  Explorar, Momentos infinitos, Mis datos) reemplaza a los capítulos de 10 con Cierre; está
+  en "Notas de la interfaz" de `AGENTS.md` y manda sobre `PRODUCTO.md` en ese punto.
 - **APIs:** `docs/APIS.md`. Todas se verificaron contra las APIs reales (2026-11-17) y tienen
   fixtures en `test/fixtures/`. Si una cambia, regraba su fixture.
 
@@ -32,11 +33,13 @@ Contexto completo del proyecto (filosofía, stack, arquitectura, estado y siguie
 - Pregunta antes de:
   - Agregar una dependencia a la lógica pura.
   - Agregar una fuente que pida API key.
-  - Agregar cualquier mecánica de enganche que no esté en `docs/PRODUCTO.md` (rachas,
-    notificaciones, contadores, autoplay infinito sin cierre).
+  - Agregar cualquier mecánica de enganche que no esté en `docs/PRODUCTO.md` o `AGENTS.md`
+    (rachas, notificaciones, contadores, autoplay, quitar la pausa sugerida de Momentos).
+  - Recomendar con señales implícitas (tiempo de visualización, scroll): Explorar solo usa
+    lo que el usuario eligió a propósito (lo que guarda).
 
 ## Primera tarea sugerida
 
 El proyecto Expo ya está integrado (los tests de Node usan `tsconfig.test.json`). Sigue con
 los pasos 1–2 de "Siguientes pasos" en `AGENTS.md` (probar en un dispositivo) y después el
-paso 3 (modelo v2 en `src/core`).
+paso 5 (pantallas v2 pendientes: Profundizar, Microjuego, Línea de tiempo).

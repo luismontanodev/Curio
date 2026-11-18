@@ -109,6 +109,66 @@ Todos ≥ 4.5:1. Si agregas un color, verifica que siga cumpliéndolo.
   editor; solo como referencia).
 - El concepto, las reglas y el modelo de datos de v2 están en `docs/PRODUCTO.md`. Léelo antes de esta sección.
 
+## Navegación vigente (2026-11-17)
+
+Cuatro pestañas al estilo Instagram (reemplaza "Bienvenida → Momento ⇅ … (10) → Cierre"):
+
+| Pestaña | Qué es | Archivo |
+|---|---|---|
+| **Destacados** (inicio) | Artículos destacados de Wikipedia en los idiomas del usuario ("lo que sigues"). Encabezado con logo, tema y filtros | `app/(tabs)/index.tsx` |
+| **Explorar** | Buscador ("Buscar temas, obras, personas…") + chips "Para ti" y temas + recomendaciones con su porqué. Al buscar: "En tu teléfono" y "Relacionado en Wikipedia" | `app/(tabs)/explorar.tsx` |
+| **Momentos** | Los momentos a pantalla completa con swipe vertical, **infinitos**, sin barra de progreso ni ×. Píldora "Momentos" arriba a la izquierda. Cada N, página de pausa: "¿Una pausa?", "Terminar por hoy" (primario) y "Seguir" | `app/(tabs)/momentos.tsx` |
+| **Mis datos** | Filas "Guardados (N)" y "Filtros", respaldo, tema e información | `app/(tabs)/perfil.tsx` |
+
+Guardados (`app/guardados.tsx`), Filtros y el Lector se abren encima, con flecha atrás.
+
+- **Barra inferior:** la pestaña activa lleva una píldora `soft` (56 × 30, radio 15) detrás
+  del ícono, con trazo más grueso. **Tocar la pestaña activa** sube al inicio y actualiza
+  (Destacados y Explorar actualizan; Explorar con búsqueda la borra; Momentos trae un lote nuevo).
+- **Tarjeta compacta (menos texto a la vista):** imagen arriba (200 de alto) siempre que la
+  haya; etiqueta solo con el tema; título en 2 líneas (con imagen) o 3 (sin imagen); resumen
+  oculto con imagen y en 2 líneas sin ella; abajo, una sola línea "Fuente · licencia corta"
+  ("The Met · Dominio público") y "Más" para ver el resumen completo y los detalles (licencia
+  completa, idioma, tiempo de lectura). En Explorar, el porqué va en `primaryText` sobre la etiqueta.
+- **Momento (inmersivo, estilo Reels):** la imagen ocupa toda la pantalla (completa, sobre su
+  copia desenfocada) y el texto va encima, abajo a la izquierda, en blanco con sombra suave
+  sobre un velo negro de abajo hacia arriba (55 % del alto, 0 → 0.78). Arriba del gancho, una
+  píldora con el tema en sus colores. Gancho en 3 líneas; payoff en 2 (al tocarlo se ve
+  completo). Acciones en columna a la derecha: Guardar, Enviar, Leer (íconos de 26 con su
+  etiqueta). **Doble toque** sobre la imagen guarda (nunca quita) con un marcador grande que
+  aparece y se desvanece (~650 ms). Sin imagen: fondo del color del tema y texto en `text`.
+- **Destacados:** 2 líneas de resumen bajo el título (`teaserLines`), aunque haya imagen.
+- **Temas como chips en Explorar:** todos (Ciencia, Tecnología, Arte, Cultura, Historia,
+  Naturaleza, Espacio, Música), estén o no encendidos en Filtros.
+- **Barra inferior:** fondo `card`, altura 64 + área segura (queda por encima de los botones
+  de Android, nunca detrás).
+- **Explorar en cuadrícula** de 2 columnas (margen 16, separación 12): mosaico con imagen
+  (proporción 4:5, `cover`), etiqueta del tema en su color y título en 2 líneas; sin imagen,
+  el mosaico es del color del tema con el título grande. Guardar y compartir quedan en el lector.
+- **Imágenes:** se pide 960 px a Wikimedia (tamaño estándar; los no estándar se limitan) y,
+  si falla, la original. Obras, imágenes del Momento y de la tarjeta se muestran **completas**
+  (`contain`) sobre la misma imagen desenfocada, para no recortarlas ni deformarlas.
+
+### Colores por tema
+
+Dan identidad sin competir con el lila, que sigue marcando selección y acción. `fg` para
+etiquetas y texto (≥ 4.79:1 sobre `card`, `bg` y su propio tinte); `bg` para fondos
+(placeholder de imagen, efemérides, mosaicos sin foto). Tokens en `topicColors` (`src/ui/theme.ts`).
+
+| Tema | Claro fg / bg | Oscuro fg / bg |
+|---|---|---|
+| Ciencia | `#0F766E` / `#E3F4F1` | `#5EEAD4` / `#12302D` |
+| Tecnología | `#1D4ED8` / `#E6EDFC` | `#93C5FD` / `#172345` |
+| Arte | `#B23A0B` / `#FDEBE1` | `#FDBA74` / `#3A2216` |
+| Cultura | `#9A5B06` / `#FBF0D9` | `#FCD34D` / `#382C12` |
+| Historia | `#8B5A34` / `#F4EAE1` | `#E2BC94` / `#33261C` |
+| Naturaleza | `#166534` / `#E4F4E8` | `#86EFAC` / `#14301D` |
+| Espacio | `#4338CA` / `#EAE9FB` | `#A5B4FC` / `#1F1C48` |
+| Música | `#BE185D` / `#FCE7F0` | `#F9A8D4` / `#3A1228` |
+Las secciones de abajo siguen valiendo para el **contenido** de cada pantalla (hoja del momento,
+profundizar, microjuego, línea de tiempo); la Bienvenida y el Cierre de capítulo quedan como
+referencia de diseño, sin implementar.
+
 ## Pantallas v2 — momentos (experiencia principal)
 
 Navegación:

@@ -72,6 +72,27 @@ export const MIGRATIONS: Migration[] = [
       create index cards_lang_idx on cards (lang, ingested_at desc);
     `,
   },
+  {
+    version: 3,
+    name: 'capítulos de momentos (v2, en desuso)',
+    sql: `
+      -- EN DESUSO: los capítulos de 10 se reemplazaron por el scroll infinito de Momentos.
+      -- La migración se conserva porque ya se aplicó en dispositivos (nunca edites ni quites
+      -- una publicada). La tabla queda vacía; una migración futura puede borrarla.
+      create table chapters (
+        id           text primary key,
+        number       integer not null,
+        title        text not null,
+        created_at   text not null,
+        completed_at text,
+        position     integer not null default 0,
+        seen         integer,
+        rating       text check (rating in ('yes', 'no')),
+        moments_json text not null
+      );
+      create index chapters_created_idx on chapters (created_at desc);
+    `,
+  },
 ];
 
 /**

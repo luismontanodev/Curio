@@ -17,6 +17,7 @@ import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
 
 import { migrate } from '../src/db/migrations.ts';
 import { AppStateProvider, useTheme } from '../src/platform/app-state.tsx';
+import { IngestProvider } from '../src/platform/ingest-context.tsx';
 import { colors } from '../src/ui/theme.ts';
 
 void SplashScreen.preventAutoHideAsync();
@@ -49,7 +50,9 @@ export default function RootLayout() {
       onError={setDbError}
     >
       <AppStateProvider>
-        <RootStack />
+        <IngestProvider>
+          <RootStack />
+        </IngestProvider>
       </AppStateProvider>
     </SQLiteProvider>
   );
@@ -63,6 +66,7 @@ function RootStack() {
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: t.colors.bg } }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="filtros" />
+        <Stack.Screen name="guardados" />
         <Stack.Screen name="leer/[id]" />
       </Stack>
     </>
