@@ -1,0 +1,113 @@
+{
+  "_nota": "Respuesta real recortada a 5 páginas",
+  "batchcomplete": true,
+  "query": {
+    "pages": [
+      {
+        "pageid": 1791,
+        "ns": 0,
+        "title": "Madrid",
+        "extract": "Madrid es un municipio y una ciudad de España. La localidad, con categoría histórica de villa,​ es la capital del Estado​ y de la Comunidad de Madrid. En su término municipal, el más poblado de España, su población es de 3 506 730  habitantes (INE 2025), constituyéndose como la segunda ciudad más poblada de la Unión Europea, así como su área metropolitana, con 6 779 888 habitantes empadronados.​​​​​​\nComo capital de España, alberga las sedes del Gobierno de la Nación y sus departamentos ministeriales, de las Cortes Generales (Congreso de los Diputados y Senado), del Tribunal Supremo y del Tribunal Constitucional, así como la residencia oficial de los reyes de España​ y del presidente del Gobierno.",
+        "thumbnail": {
+          "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Bandera_de_la_ciudad_de_Madrid.svg/960px-Bandera_de_la_ciudad_de_Madrid.svg.png?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "width": 640,
+          "height": 427
+        },
+        "contentmodel": "wikitext",
+        "pagelanguage": "es",
+        "pagelanguagehtmlcode": "es",
+        "pagelanguagedir": "ltr",
+        "touched": "2026-11-17T18:43:25Z",
+        "lastrevid": 176248865,
+        "length": 290689,
+        "fullurl": "https://es.wikipedia.org/wiki/Madrid",
+        "editurl": "https://es.wikipedia.org/w/index.php?title=Madrid&action=edit",
+        "canonicalurl": "https://es.wikipedia.org/wiki/Madrid"
+      },
+      {
+        "pageid": 9496,
+        "ns": 0,
+        "title": "Diego Maradona",
+        "extract": "Diego Armando Maradona​ (Lanús, Buenos Aires, 30 de octubre de 1960-Dique Luján, Buenos Aires, 25 de noviembre de 2020) fue un futbolista y entrenador argentino.​​ Como jugador, se desempeñó en la posición de mediocampista ofensivo o delantero, siendo considerado por numerosos especialistas,​​ exfutbolistas y personalidades internacionales​ como «uno de los mejores futbolistas en la historia».​ \nMaradona ha sido catalogado por diferentes medios, como el «mejor jugador en la historia de la Copa Mundial», de la cual fue designado como el mejor jugador en su edición de 1986.​ En los premios a Jugador del Siglo de la FIFA fue seleccionado como el «mejor futbolista del siglo xx» en la votación popular, obtuvo la tercera posición en la votación de los expertos seleccionados por la FIFA,​ y logró la quinta ubicación en la votación realizada por la IFFHS.​ En la edición de los Premios Globe Soccer 2012 fue distinguido como el mejor «Jugador del Siglo xx».​​ Maradona es considerado una de las figuras más históricas de la República Argentina, y uno de sus mayores representantes en el resto del mundo.​​​​ Asimismo, su persona ha sido motivo de las más variadas referencias en la cultura popular argentina y napolitana.​​\nCriado en el barrio bonaerense de Villa Fiorito, fue fichado para las divisiones juveniles de Argentinos Juniors, donde pasó cinco temporadas obteniendo el récord de ser el máximo goleador del campeonato argentino cinco veces consecutivas. En 1981, fue traspasado a Boca Juniors,​ donde obtuvo el Campeonato Metropolitano, su único título en Argentina. Tras el Mundial de España de 1982, Maradona se convirtió en el primer futbolista en lograr el récord de ser el traspaso más caro del mundo dos veces, al ser transferido al Barcelona por 7,30 millones de euros y luego al Napoli de Italia por 12 millones de euros.​ En España obtendría tres títulos nacionales antes de acabar en Italia en 1984, donde se convirtió en una de las figuras públicas más importantes de Nápoles,​ al llevar al equipo a lograr el scudetto en dos oportunidades (1987, 1990) y la Copa de la UEFA, el único título internacional de la institución.",
+        "thumbnail": {
+          "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Maradona-Mundial_86_con_la_copa.JPG/960px-Maradona-Mundial_86_con_la_copa.JPG?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "width": 640,
+          "height": 938
+        },
+        "contentmodel": "wikitext",
+        "pagelanguage": "es",
+        "pagelanguagehtmlcode": "es",
+        "pagelanguagedir": "ltr",
+        "touched": "2026-11-17T09:09:12Z",
+        "lastrevid": 176337210,
+        "length": 357429,
+        "fullurl": "https://es.wikipedia.org/wiki/Diego_Maradona",
+        "editurl": "https://es.wikipedia.org/w/index.php?title=Diego_Maradona&action=edit",
+        "canonicalurl": "https://es.wikipedia.org/wiki/Diego_Maradona"
+      },
+      {
+        "pageid": 11442,
+        "ns": 0,
+        "title": "Mar Caribe",
+        "extract": "El mar Caribe es una porción marginal del océano Atlántico, ubicado en América. Está limitado al norte y al este por las Antillas, al sur por el norte de América del Sur y al oeste por Centroamérica. Se extiende aproximadamente entre las latitudes 9° y 22° N y las longitudes 61° y 88° O, abarcando una de las mayores superficies marinas del planeta.",
+        "thumbnail": {
+          "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Amerikanisches_Mittelmeer_NASA_World_Wind_Globe.jpg/960px-Amerikanisches_Mittelmeer_NASA_World_Wind_Globe.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "width": 640,
+          "height": 420
+        },
+        "contentmodel": "wikitext",
+        "pagelanguage": "es",
+        "pagelanguagehtmlcode": "es",
+        "pagelanguagedir": "ltr",
+        "touched": "2026-10-14T19:58:46Z",
+        "lastrevid": 174674566,
+        "length": 63927,
+        "fullurl": "https://es.wikipedia.org/wiki/Mar_Caribe",
+        "editurl": "https://es.wikipedia.org/w/index.php?title=Mar_Caribe&action=edit",
+        "canonicalurl": "https://es.wikipedia.org/wiki/Mar_Caribe"
+      },
+      {
+        "pageid": 12974,
+        "ns": 0,
+        "title": "Machu Picchu",
+        "extract": "Machu Picchu (en quechua cuzqueño, Machu Pikchu 'pico anciano', pronunciado [ˈmɐt͡ʃʊ ˈpɪxt͡ʃʊ]) es el nombre contemporáneo que se da a una llacta (antiguo poblado incaico) construida antes del siglo XV, en la cordillera Oriental del sur del Perú, en la cadena montañosa de los Andes a 2.430 metros sobre el nivel del mar.​​ Está en el departamento del Cusco (provincia de Urubamba, distrito de Machupicchu) sobre el Valle Sagrado de los Incas,​​​ a 80 kilómetros al noroeste del Cusco, ciudad del Perú y por donde fluye el río Urubamba,​​ río que atraviesa la cordillera y origina un cañón con clima de montaña tropical. Forma parte de un área de conservación arqueológica y ecológica del mismo nombre.​​ Según muchos estudios, su nombre original habría sido Llaqta Pata​ o Pata Llaqta.​\nSegún documentos de mediados del siglo XVI, tenía carácter privado.​ Sin embargo, algunas de sus mejores construcciones y el evidente carácter ceremonial de la principal vía de acceso a la llaqta dan cuenta de su origen anterior a Pachacútec y a su presumible utilización como santuario religioso y residencia del descanso.​ Ambos usos, el de palacio y el de santuario, no habrían sido incompatibles. Aun cuando se discute su supuesto carácter militar, por lo que los populares calificativos de «fortaleza» o «ciudadela» podrían haber sido superados.​\nMachu Picchu es considerada, al mismo tiempo, obra maestra de la arquitectura y la ingeniería civil.​ Sus peculiares características arquitectónicas y paisajísticas, y el velo de misterio que ha tejido a su alrededor buena parte de la literatura publicada sobre el sitio, lo han convertido en uno de los destinos turísticos más famosos del planeta.​\nMachu Picchu fue construido en el estilo Inca clásico, con paredes de piedra seca pulida.",
+        "thumbnail": {
+          "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Machu_Picchu%2C_Peru_%282018%29.jpg/960px-Machu_Picchu%2C_Peru_%282018%29.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "width": 640,
+          "height": 480
+        },
+        "contentmodel": "wikitext",
+        "pagelanguage": "es",
+        "pagelanguagehtmlcode": "es",
+        "pagelanguagedir": "ltr",
+        "touched": "2026-11-11T08:27:34Z",
+        "lastrevid": 176248565,
+        "length": 92858,
+        "fullurl": "https://es.wikipedia.org/wiki/Machu_Picchu",
+        "editurl": "https://es.wikipedia.org/w/index.php?title=Machu_Picchu&action=edit",
+        "canonicalurl": "https://es.wikipedia.org/wiki/Machu_Picchu"
+      },
+      {
+        "pageid": 23757,
+        "ns": 0,
+        "title": "Málaga",
+        "extract": "Málaga es una ciudad y municipio español, capital de la provincia homónima, situada en la comunidad autónoma de Andalucía. Cuenta con una población de 599 063  habitantes (INE 2025),​ es la segunda ciudad más poblada de Andalucía y la sexta de España, así como la mayor de entre las que no son capitales autonómicas.​ Además, es la zona urbana más densamente poblada de la conurbación formada por el conjunto de localidades que se sitúan a lo largo de 160 km de la Costa del Sol​​ y el centro de un área metropolitana que abarca otros 12 municipios que suman 987 813 habitantes censados. Se estima que conforma la quinta área metropolitana de España.​​\nEstá situada en el oeste del mar Mediterráneo y el sur de la península ibérica, a unos 100 km al este del estrecho de Gibraltar.",
+        "thumbnail": {
+          "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Flag_of_M%C3%A1laga%2C_Spain.svg/960px-Flag_of_M%C3%A1laga%2C_Spain.svg.png?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "width": 640,
+          "height": 427
+        },
+        "contentmodel": "wikitext",
+        "pagelanguage": "es",
+        "pagelanguagehtmlcode": "es",
+        "pagelanguagedir": "ltr",
+        "touched": "2026-11-17T04:37:41Z",
+        "lastrevid": 176320762,
+        "length": 224465,
+        "fullurl": "https://es.wikipedia.org/wiki/M%C3%A1laga",
+        "editurl": "https://es.wikipedia.org/w/index.php?title=M%C3%A1laga&action=edit",
+        "canonicalurl": "https://es.wikipedia.org/wiki/M%C3%A1laga"
+      }
+    ]
+  }
+}

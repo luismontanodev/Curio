@@ -1,0 +1,217 @@
+{
+  "_nota": "Respuesta real (OFFSET 100) recortada a 6",
+  "head": {
+    "vars": [
+      "item",
+      "label",
+      "image",
+      "article",
+      "creatorLabel",
+      "inception",
+      "description"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q536203"
+        },
+        "image": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Jan%20van%20Eyck%20-%20Saint%20Jerome%20in%20His%20Study%20DIA.jpg"
+        },
+        "article": {
+          "type": "uri",
+          "value": "https://es.wikipedia.org/wiki/San_Jer%C3%B3nimo_en_su_estudio_(Jan_van_Eyck)"
+        },
+        "label": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "San Jerónimo en su estudio"
+        },
+        "creatorLabel": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Jan van Eyck"
+        },
+        "inception": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "1435-01-01T00:00:00Z"
+        },
+        "description": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "cuadro de Jan van Eyck"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q536395"
+        },
+        "image": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Jean-L%C3%A9on%20G%C3%A9r%C3%B4me%20-%20Vente%20d%27esclaves%20%C3%A0%20Rome%2C%201884.jpg"
+        },
+        "article": {
+          "type": "uri",
+          "value": "https://es.wikipedia.org/wiki/Venta_de_esclavos_en_Roma"
+        },
+        "label": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Venta de esclavos en Roma"
+        },
+        "creatorLabel": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Jean-Léon Gérôme"
+        },
+        "inception": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "1884-01-01T00:00:00Z"
+        },
+        "description": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "cuadro de Jean-Léon Gérôme"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q537192"
+        },
+        "image": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Dierick%20Bouts%20%281410%20-%206.5.1475%29%20-%20Christ%20in%20the%20House%20of%20the%20Pharisee%20Simon%20-%20533A%20-%20Gem%C3%A4ldegalerie.jpg"
+        },
+        "article": {
+          "type": "uri",
+          "value": "https://es.wikipedia.org/wiki/Cristo_en_casa_de_Sim%C3%B3n_el_fariseo"
+        },
+        "label": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Cristo en casa de Simón el fariseo"
+        },
+        "creatorLabel": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Dirk Bouts"
+        },
+        "inception": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "1460-01-01T00:00:00Z"
+        },
+        "description": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "cuadro de Dirk Bouts"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q537192"
+        },
+        "image": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Dierick%20Bouts%20%281410%20-%206.5.1475%29%20-%20Christ%20in%20the%20House%20of%20the%20Pharisee%20Simon%20-%20533A%20-%20Gem%C3%A4ldegalerie.jpg"
+        },
+        "article": {
+          "type": "uri",
+          "value": "https://es.wikipedia.org/wiki/Cristo_en_casa_de_Sim%C3%B3n_el_fariseo"
+        },
+        "label": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Cristo en casa de Simón el fariseo"
+        },
+        "creatorLabel": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Dirk Bouts"
+        },
+        "inception": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "1462-01-01T00:00:00Z"
+        },
+        "description": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "cuadro de Dirk Bouts"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q537640"
+        },
+        "image": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Angelus%20Novus%2C%201920%20-%20Paul%20Klee.jpg"
+        },
+        "article": {
+          "type": "uri",
+          "value": "https://es.wikipedia.org/wiki/Angelus_Novus"
+        },
+        "label": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Angelus Novus"
+        },
+        "inception": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "1920-01-01T00:00:00Z"
+        },
+        "description": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "cuadro de Paul Klee"
+        }
+      },
+      {
+        "item": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q732821"
+        },
+        "image": {
+          "type": "uri",
+          "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Jacopo%20de%27%20Barbari%20%28attributed%20to%29%20Portrait%20of%20Luca%20Pacioli%20%281445%201517%29%20with%20a%20student%20%28Guidobaldo%20da%20Montefeltro%29%20%282%29.jpg"
+        },
+        "article": {
+          "type": "uri",
+          "value": "https://es.wikipedia.org/wiki/Retrato_de_Luca_Pacioli"
+        },
+        "label": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Retrato de Luca Pacioli"
+        },
+        "creatorLabel": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "Jacopo de'Barbari"
+        },
+        "inception": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "1497-01-01T00:00:00Z"
+        },
+        "description": {
+          "xml:lang": "es",
+          "type": "literal",
+          "value": "cuadro de Jacopo de'Barbari"
+        }
+      }
+    ]
+  }
+}

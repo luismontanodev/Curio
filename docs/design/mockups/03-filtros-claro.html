@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Filtros</title>
+</head>
+<body>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#6B4FB8}a:hover{color:#4E3591}
+button{font-family:inherit;cursor:pointer}
+</style>
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background: #FFFFFF; color: #1F1633; overflow: hidden">
+
+<header style="display: flex; align-items: center; gap: 4px; padding: 16px 16px 8px 8px">
+<a href="Main.html" aria-label="Volver al feed" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F1633" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</a>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em">Filtros</h1>
+</header>
+
+<div style="flex: 1; overflow: hidden; padding: 4px 20px 0; display: flex; flex-direction: column; gap: 22px">
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: #5F5675">TEMAS</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: #7B5CC6; color: #FFFFFF; font-size: 14px; font-weight: 600">Ciencia</button>
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: #7B5CC6; color: #FFFFFF; font-size: 14px; font-weight: 600">Arte</button>
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: #7B5CC6; color: #FFFFFF; font-size: 14px; font-weight: 600">Cultura</button>
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: #7B5CC6; color: #FFFFFF; font-size: 14px; font-weight: 600">Historia</button>
+<button aria-pressed="false" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid #E6DCF7; background: transparent; color: #1F1633; font-size: 14px">Naturaleza</button>
+<button aria-pressed="false" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid #E6DCF7; background: transparent; color: #1F1633; font-size: 14px">Espacio</button>
+<button aria-pressed="false" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid #E6DCF7; background: transparent; color: #1F1633; font-size: 14px">Música</button>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: #5F5675">NIVEL DE FILTRO</h2>
+<div role="group" aria-label="Nivel de filtro" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; background: #F3EDFC">
+<button aria-pressed="false" style="height: 40px; border: none; border-radius: 10px; background: transparent; color: #5F5675; font-size: 14px">Suave</button>
+<button aria-pressed="false" style="height: 40px; border: none; border-radius: 10px; background: transparent; color: #5F5675; font-size: 14px">Moderado</button>
+<button aria-pressed="true" style="height: 40px; border: none; border-radius: 10px; background: #FFFFFF; color: #1F1633; font-size: 14px; font-weight: 600; box-shadow: 0 1px 2px rgba(31,22,51,0.12)">Estricto</button>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.45; color: #5F5675">Oculta títulos con mayúsculas excesivas, signos de exclamación, preguntas gancho y listas tipo «10 cosas que…».</p>
+</section>
+
+<section style="display: flex; flex-direction: column; border-radius: 16px; border: 1px solid #E6DCF7; background: #FFFFFF">
+
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #E6DCF7">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 500">Ocultar títulos sensacionalistas</span>
+<span style="font-size: 12px; color: #5F5675">Análisis del tono del título</span>
+</div>
+<button aria-pressed="true" aria-label="Ocultar títulos sensacionalistas" style="width: 48px; height: 28px; border: none; border-radius: 14px; padding: 3px; background: #7B5CC6; display: flex; justify-content: flex-end">
+<span style="width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; display: block"></span>
+</button>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #E6DCF7">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 500">Ocultar clickbait</span>
+<span style="font-size: 12px; color: #5F5675">Preguntas gancho, «no creerás…»</span>
+</div>
+<button aria-pressed="true" aria-label="Ocultar clickbait" style="width: 48px; height: 28px; border: none; border-radius: 14px; padding: 3px; background: #7B5CC6; display: flex; justify-content: flex-end">
+<span style="width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; display: block"></span>
+</button>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #E6DCF7">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 500">Solo fuentes verificadas</span>
+<span style="font-size: 12px; color: #5F5675">Museos, enciclopedias, revistas</span>
+</div>
+<button aria-pressed="true" aria-label="Solo fuentes verificadas" style="width: 48px; height: 28px; border: none; border-radius: 14px; padding: 3px; background: #7B5CC6; display: flex; justify-content: flex-end">
+<span style="width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; display: block"></span>
+</button>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: none">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 500">Pausa sugerida</span>
+<span style="font-size: 12px; color: #5F5675">Aviso cada 20 tarjetas</span>
+</div>
+<button aria-pressed="true" aria-label="Pausa sugerida" style="width: 48px; height: 28px; border: none; border-radius: 14px; padding: 3px; background: #7B5CC6; display: flex; justify-content: flex-end">
+<span style="width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; display: block"></span>
+</button>
+</div>
+
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: #5F5675">PALABRAS BLOQUEADAS</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+
+<span style="height: 32px; padding: 0 6px 0 12px; border-radius: 16px; background: #F3EDFC; color: #1F1633; font-size: 13px; display: inline-flex; align-items: center; gap: 2px">IMPACTANTE<button aria-label="Quitar palabra" style="width: 28px; height: 28px; border: none; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5F5675" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+
+<span style="height: 32px; padding: 0 6px 0 12px; border-radius: 16px; background: #F3EDFC; color: #1F1633; font-size: 13px; display: inline-flex; align-items: center; gap: 2px">no creerás<button aria-label="Quitar palabra" style="width: 28px; height: 28px; border: none; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5F5675" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+
+<span style="height: 32px; padding: 0 6px 0 12px; border-radius: 16px; background: #F3EDFC; color: #1F1633; font-size: 13px; display: inline-flex; align-items: center; gap: 2px">escándalo<button aria-label="Quitar palabra" style="width: 28px; height: 28px; border: none; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5F5675" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+
+<span style="height: 32px; padding: 0 6px 0 12px; border-radius: 16px; background: #F3EDFC; color: #1F1633; font-size: 13px; display: inline-flex; align-items: center; gap: 2px">urgente<button aria-label="Quitar palabra" style="width: 28px; height: 28px; border: none; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5F5675" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+
+</div>
+<label for="nueva-palabra" style="position: absolute; width: 1px; height: 1px; overflow: hidden">Añadir palabra bloqueada</label>
+<input id="nueva-palabra" placeholder="Añadir palabra o frase…" style="height: 44px; box-sizing: border-box; border-radius: 12px; border: 1px solid #E6DCF7; background: #FFFFFF; color: #1F1633; padding: 0 14px; font-size: 14px; font-family: inherit">
+</section>
+
+</div>
+
+<div style="padding: 12px 20px 28px; border-top: 1px solid #E6DCF7">
+<button style="width: 100%; height: 50px; border: none; border-radius: 14px; background: #7B5CC6; color: #FFFFFF; font-size: 16px; font-weight: 600">Aplicar filtros</button>
+</div>
+
+</div>
+
+
+</body>
+</html>

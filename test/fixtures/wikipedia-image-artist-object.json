@@ -1,0 +1,41 @@
+{
+  "title": "File:Verdun – Cathédrale Notre-Dame – Crypte 2025 08 16.jpg",
+  "thumbnail": {
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Verdun_%E2%80%93_Cath%C3%A9drale_Notre-Dame_%E2%80%93_Crypte_2025_08_16.jpg/960px-Verdun_%E2%80%93_Cath%C3%A9drale_Notre-Dame_%E2%80%93_Crypte_2025_08_16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 640,
+    "height": 427
+  },
+  "image": {
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/56/Verdun_%E2%80%93_Cath%C3%A9drale_Notre-Dame_%E2%80%93_Crypte_2025_08_16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "width": 6231,
+    "height": 4154
+  },
+  "file_page": "https://commons.wikimedia.org/wiki/File:Verdun_%E2%80%93_Cath%C3%A9drale_Notre-Dame_%E2%80%93_Crypte_2025_08_16.jpg",
+  "artist": {
+    "html": "<a href=\"//commons.wikimedia.org/wiki/User:AFBorchert\" title=\"User:AFBorchert\">Andreas F. Borchert</a>",
+    "text": "Andreas F. Borchert"
+  },
+  "credit": {
+    "html": "<span class=\"int-own-work\">Self-photographed</span>",
+    "text": "Self-photographed"
+  },
+  "license": {
+    "type": "CC BY-SA 4.0",
+    "code": "cc-by-sa-4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "description": {
+    "html": "Cripta de la <a rel=\"mw:WikiLink/Interwiki\" href=\"https://es.wikipedia.org/wiki/Catedral%20de%20Nuestra%20Señora%20(Verdún)\" title=\"es:Catedral de Nuestra Señora (Verdún)\" class=\"extiw\">catedral de Nuestra Señora</a> de <a rel=\"mw:WikiLink/Interwiki\" href=\"https://es.wikipedia.org/wiki/Verdún\" title=\"es:Verdún\" class=\"extiw\">Verdún</a> Francia. La cripta, que data del siglo XII, fue redescubierta tras la <a rel=\"mw:WikiLink/Interwiki\" href=\"https://es.wikipedia.org/wiki/Primera%20Guerra%20Mundial\" title=\"es:Primera Guerra Mundial\" class=\"extiw\">Primera Guerra Mundial</a>, durante las obras de restauración. Una vez finalizada la restauración, la catedral fue nuevamente consagrada el 10 de noviembre de 1935.",
+    "text": "Cripta de la catedral de Nuestra Señora de Verdún Francia. La cripta, que data del siglo XII, fue redescubierta tras la Primera Guerra Mundial, durante las obras de restauración. Una vez finalizada la restauración, la catedral fue nuevamente consagrada el 10 de noviembre de 1935.",
+    "lang": "es"
+  },
+  "wb_entity_id": "M175999783",
+  "structured": {
+    "captions": {
+      "zh-hant": "法國凡爾登主教座堂的地下室，始建於12世紀。",
+      "en": "12th-century Romanesque crypt below the choir, looking east towards the altar. The crypt was rediscovered during restoration works after the Great War and restored in the 1930s.",
+      "de": "Romanische Krypta, ursprünglich 12. Jahrhundert, während der Restaurierungen nach dem ersten Weltkrieg entdeckt und danach restauriert und rekonstruiert",
+      "fr": "Crypte (XIIe) restaurée de la cathédrale Notre-Dame de Verdun (France)."
+    }
+  }
+}

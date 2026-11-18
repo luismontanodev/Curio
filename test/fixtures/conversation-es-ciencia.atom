@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <id>tag:theconversation.com,2011:/es/ciencia/articles</id>
+  <link rel="alternate" type="text/html" href="https://theconversation.com"/>
+  <link rel="self" type="application/atom+xml" href="https://theconversation.com/es/ciencia/articles.atom"/>
+  <title>Ciencia + Tecnología – The Conversation</title>
+  <updated>2026-11-17T16:17:55Z</updated>
+  <entry>
+    <id>tag:theconversation.com,2011:article/296321</id>
+    <published>2026-11-17T16:17:55Z</published>
+    <updated>2026-11-17T16:17:55Z</updated>
+    <link rel="alternate" type="text/html" href="https://theconversation.com/asi-hemos-descubierto-un-cambio-evolutivo-de-hace-115-millones-de-anos-en-las-algas-del-algarve-296321"/>
+    <title>Así hemos descubierto un cambio evolutivo de hace 115 millones de años en las algas del Algarve</title>
+    <content type="html">&lt;figure&gt;&lt;img src="https://images.theconversation.com/files/771540/original/file-20261112-64-32jd0t.jpg?ixlib=rb-4.1.1&amp;amp;rect=270%2C0%2C1230%2C820&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=1050&amp;amp;h=700&amp;amp;fit=crop" /&gt;&lt;figcaption&gt;&lt;span class="caption"&gt;Acantilados de Praia da Luz, lugar donde se ha realizado el estudio. Cabe mencionar como curiosidad que las mareas condicionan el tiempo y el momento de trabajo, ya que parte de los niveles estudiados quedan bajo el agua durante la marea alta.&lt;/span&gt; &lt;span class="attribution"&gt;&lt;span class="source"&gt;Jordi Perez Cano&lt;/span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;No son pocos los descubrimientos científicos que se hacen por casualidad. Al buscar una cosa, a veces, se encuentra algo diferente e inesperado. En &lt;a href="https://es.wikipedia.org/wiki/Micropaleontolog%C3%ADa"&gt;micropaleontología&lt;/a&gt;, esto suele ser habitual. Uno no sabe qué va a encontrar antes de empezar a estudiar las muestras bajo el microscopio.  &lt;/p&gt;
+
+&lt;p&gt;Esta historia comenzó en la primavera de 2024, cuando recorríamos el Algarve (Portugal) con el objetivo de determinar la edad de las rocas mediante el estudio de fósiles de &lt;a href="https://es.wikipedia.org/wiki/Charophyta"&gt;carofitas&lt;/a&gt;, un grupo de algas verdes que habitan lagos e incluyen a los parientes más próximos de las plantas terrestres. En eso consiste la &lt;a href="https://es.wikipedia.org/wiki/Bioestratigraf%C3%ADa"&gt;biostratigrafía&lt;/a&gt;, una rama de la geología que permite determinar la edad de las rocas a partir de los fósiles que contienen.&lt;/p&gt;
+
+&lt;figure class="align-left zoomable"&gt;
+            &lt;a aria-label="Zoomable image" href="https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=1000&amp;amp;fit=clip"&gt;&lt;img alt="Mapa de la Península Iberica con el Algarve resaltado" src="https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=237&amp;amp;fit=clip" srcset="https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=500&amp;amp;fit=crop&amp;amp;dpr=1 600w, https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=30&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=500&amp;amp;fit=crop&amp;amp;dpr=2 1200w, https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=15&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=500&amp;amp;fit=crop&amp;amp;dpr=3 1800w, https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=628&amp;amp;fit=crop&amp;amp;dpr=1 754w, https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=30&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=628&amp;amp;fit=crop&amp;amp;dpr=2 1508w, https://images.theconversation.com/files/771544/original/file-20261112-64-gnb9rq.jpg?ixlib=rb-4.1.1&amp;amp;q=15&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=628&amp;amp;fit=crop&amp;amp;dpr=3 2262w" sizes="(min-width: 1466px) 754px, (max-width: 599px) 100vw, (min-width: 600px) 600px, 237px"&gt;&lt;/a&gt;
+            &lt;figcaption&gt;
+              &lt;span class="caption"&gt;Mapa de la península ibérica con el Algarve resaltado en verde. La estrella indica Praia da Luz, y también se localiza Loulé, mencionado en el texto.&lt;/span&gt;
+              &lt;span class="attribution"&gt;&lt;span class="source"&gt;Jordi Perez Cano&lt;/span&gt;&lt;/span&gt;
+            &lt;/figcaption&gt;
+          &lt;/figure&gt;
+
+&lt;p&gt;Visitamos varias localidades que habían sido estudiadas entre las décadas de 1960 y 1980. Entre ellas estaba Praia da Luz, que nos daría las mayores sorpresas. Recogimos 120 kilos de roca, arcillas en su mayoría, y las enviamos a Barcelona –ante la incredulidad del trabajador de la oficina correos de Loulé (Algarve), cuando le dijimos que el contenido del paquete eran “piedras”–.&lt;/p&gt;
+
+&lt;h2&gt;La rebelión de las algas&lt;/h2&gt;
+
+&lt;p&gt;Una vez en Barcelona, las muestras se pusieron en agua para disgregarse y se tamizaron. Los microfósiles se seleccionaron usando pinceles finos.&lt;/p&gt;
+
+&lt;p&gt;Al principio, todo parecía encajar… hasta que dejó de hacerlo. Durante el &lt;a href="https://es.wikipedia.org/wiki/Cret%C3%A1cico_Inferior"&gt;Cretácico Temprano o Inferior&lt;/a&gt; (145–100 millones de años), dominaba una familia de algas verdes carofitas, las &lt;a href="https://hr.wikipedia.org/wiki/Clavatoraceae"&gt;&lt;em&gt;Clavatoraceae&lt;/em&gt;&lt;/a&gt;, cuya diversidad disminuyó hace alrededor de 110 millones de años hasta extinguirse hace 66. Hoy solo sobreviven las &lt;a href="https://en.wikipedia.org/wiki/Characeae"&gt;&lt;em&gt;Characeae&lt;/em&gt;&lt;/a&gt;, que aparecieron hace unos 200 millones de años, aunque la mayoría de los géneros actuales surgieron hace unos 80 millones de años. &lt;a href="https://www.schweizerbart.de/papers/palb/detail/prepub/109683/Oldest_records_of_crown_group_Characeae_co_occurring_with_diverse_Clavatoraceae_Charophyta_in_the_late_Aptian_Early_Cretaceous_of_the_Algarve_Basin_Portugal"&gt;O eso se creía…&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;La primera sorpresa fue una &lt;a href="https://diposit.ub.edu/items/65097543-d90a-4c98-8a1f-598daf3f1e65"&gt;&lt;em&gt;Echinochara&lt;/em&gt;&lt;/a&gt;, un género de &lt;em&gt;Clavatoraceae&lt;/em&gt; que conocía bien porque ya había descrito dos especies. Sus características rompían con lo esperado para esa edad geológica. Al contárselo a mi amiga Nídia, que no es paleontóloga y no tiene nada que ver con esta investigación, me dijo “¡Qué rebelde!”. Así fue cómo surgió su nombre: &lt;em&gt;Echinochara rebellis&lt;/em&gt;. A veces, los comentarios más espontáneos en una conversación corriente dan esa chispa que humaniza la investigación. &lt;/p&gt;
+
+&lt;figure class="align-center zoomable"&gt;
+            &lt;a aria-label="Zoomable image" href="https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=1000&amp;amp;fit=clip"&gt;&lt;img alt="" src="https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=754&amp;amp;fit=clip" srcset="https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=257&amp;amp;fit=crop&amp;amp;dpr=1 600w, https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=30&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=257&amp;amp;fit=crop&amp;amp;dpr=2 1200w, https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=15&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=257&amp;amp;fit=crop&amp;amp;dpr=3 1800w, https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=323&amp;amp;fit=crop&amp;amp;dpr=1 754w, https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=30&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=323&amp;amp;fit=crop&amp;amp;dpr=2 1508w, https://images.theconversation.com/files/771851/original/file-20261113-64-vd1ehw.jpg?ixlib=rb-4.1.1&amp;amp;q=15&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=323&amp;amp;fit=crop&amp;amp;dpr=3 2262w" sizes="(min-width: 1466px) 754px, (max-width: 599px) 100vw, (min-width: 600px) 600px, 237px"&gt;&lt;/a&gt;
+            &lt;figcaption&gt;
+              &lt;span class="caption"&gt;Imágenes de &lt;em&gt;Echinochara rebellis&lt;/em&gt;. Izquierda y centro: Imágenes de microscopio electrónico de &lt;em&gt;Echinochara rebellis&lt;/em&gt;. Derecha: reconstrucción de la especie (reproducido del artículo original).&lt;/span&gt;
+              &lt;span class="attribution"&gt;&lt;span class="source"&gt;Jordi Perez Cano&lt;/span&gt;, &lt;a class="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"&gt;CC BY-NC-ND&lt;/a&gt;&lt;/span&gt;
+            &lt;/figcaption&gt;
+          &lt;/figure&gt;
+
+&lt;h2&gt;Fósiles más viejos de lo que esperábamos&lt;/h2&gt;
+
+&lt;p&gt;Además, nos topamos con dos géneros actuales de &lt;em&gt;Characeae&lt;/em&gt; en un lugar donde no los esperábamos. &lt;em&gt;Lychnothamnus&lt;/em&gt; era conocido en Europa, Asia y América, en rocas de hace unos 80 millones de años. Pero lo hallamos en Portugal en rocas de hace 115 millones de años. &lt;/p&gt;
+
+&lt;p&gt;Era una especie nueva, peculiar, que parecía llevar sombrero. Así que la nombré &lt;em&gt;Lychnothamnus pileatus&lt;/em&gt;. El &lt;em&gt;pileus&lt;/em&gt; –o &lt;a href="https://es.wikipedia.org/wiki/P%C3%ADleo"&gt;pileo&lt;/a&gt;, en castellano– era el sombrero que distinguía a los esclavos liberados en Roma. &lt;/p&gt;
+
+&lt;p&gt;También fue inesperado el hallazgo de fósiles del género &lt;em&gt;Nitellopsis&lt;/em&gt;, cuyo registro más antiguo era en rocas de 67 millones de años en el Pirineo de Lleida. Las especies conocidas eran entre 1,5 y 2 veces más grandes que la teníamos entre manos, así que la bauticé como &lt;em&gt;Nitellopsis lilliputiensis&lt;/em&gt;, en homenaje a los diminutos habitantes de la isla de Lilliput en &lt;em&gt;Los viajes de Gulliver&lt;/em&gt;, de Jonathan Swift, y lo clasificamos dentro del subgénero &lt;em&gt;Campaniella&lt;/em&gt;. &lt;/p&gt;
+
+&lt;figure class="align-center "&gt;
+            &lt;img alt="Imágenes de microscopio electrónico de Characeae" src="https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=754&amp;amp;fit=clip" srcset="https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=516&amp;amp;fit=crop&amp;amp;dpr=1 600w, https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=30&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=516&amp;amp;fit=crop&amp;amp;dpr=2 1200w, https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=15&amp;amp;auto=format&amp;amp;w=600&amp;amp;h=516&amp;amp;fit=crop&amp;amp;dpr=3 1800w, https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=648&amp;amp;fit=crop&amp;amp;dpr=1 754w, https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=30&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=648&amp;amp;fit=crop&amp;amp;dpr=2 1508w, https://images.theconversation.com/files/771852/original/file-20261113-64-dnukbr.jpg?ixlib=rb-4.1.1&amp;amp;q=15&amp;amp;auto=format&amp;amp;w=754&amp;amp;h=648&amp;amp;fit=crop&amp;amp;dpr=3 2262w" sizes="(min-width: 1466px) 754px, (max-width: 599px) 100vw, (min-width: 600px) 600px, 237px"&gt;
+            &lt;figcaption&gt;
+              &lt;span class="caption"&gt;Imágenes de microscopio electrónico de las nuevas especies de &lt;em&gt;Characeae&lt;/em&gt;. De izquierda a derecha. &lt;em&gt;Lychnothamnus pileatus&lt;/em&gt; (arriba: lateral; abajo: apical), &lt;em&gt;Nitellopsis&lt;/em&gt; (&lt;em&gt;Campaniella&lt;/em&gt;) &lt;em&gt;lilliputiensis&lt;/em&gt; (arriba: lateral; abajo: apical), &lt;em&gt;Acroleptochara&lt;/em&gt; &lt;em&gt;cynetica&lt;/em&gt; (arriba: lateral; abajo: apical).&lt;/span&gt;
+              &lt;span class="attribution"&gt;&lt;span class="source"&gt;Jordi Perez Cano&lt;/span&gt;, &lt;a class="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"&gt;CC BY-NC-ND&lt;/a&gt;&lt;/span&gt;
+            &lt;/figcaption&gt;
+          &lt;/figure&gt;
+
+&lt;p&gt;Otro descubrimiento fue una &lt;em&gt;Characeae&lt;/em&gt; que tenía las &lt;a href="https://www.plantasyhongos.es/algas/Phaeophyceae_crecimiento.htm"&gt;células apicales&lt;/a&gt; –tejidos responsables del crecimiento en longitud de la planta– más finas. Consulté con especialistas de Barcelona, Montpellier, Argentina y China. Nadie había visto algo similar. Era un nuevo género, al que puse el nombre de &lt;em&gt;Acroleptochara&lt;/em&gt;, que significa “&lt;em&gt;Characeae&lt;/em&gt; con la parte superior adelgazada”. Y a esa especie concreta la llamé &lt;em&gt;Acroleptochara cynetica&lt;/em&gt;, en homenaje a los &lt;a href="https://es.wikipedia.org/wiki/Conios"&gt;&lt;em&gt;cynetes&lt;/em&gt; o conios&lt;/a&gt;, los primeros habitantes del Algarve. &lt;/p&gt;
+
+&lt;h2&gt;¿Un enfriamiento que lo cambia todo?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://zenodo.org/records/23688909"&gt;Del total de 18 especies que encontramos&lt;/a&gt;, algunas ya se conocían previamente, pero tenían en las capas de Praia da Luz su registro más antiguo, en rocas de unos 115 millones de años. ¿Qué estaba pasando? &lt;/p&gt;
+
+&lt;p&gt;El Cretácico (145–66 millones de años) suele considerarse como un periodo cálido, con un gran efecto invernadero. En estos periodos, el nivel del mar es más alto –lo que se conoce como &lt;a href="https://es.wikipedia.org/wiki/Transgresi%C3%B3n_marina"&gt;transgresión marina&lt;/a&gt;–, como estamos viviendo en la actualidad con el deshielo de los polos. Sin embargo, el clima no fue homogéneo durante todo el Cretácico. &lt;/p&gt;
+
+&lt;p&gt;También hubo periodos fríos, durante los cuales el nivel del mar fue más bajo –&lt;a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_marina"&gt;regresión marina&lt;/a&gt;–. Cuando esto sucede, los continentes ocupan más espacio y se favorece la creación de lagos, donde prosperan las carofitas. ¿Podría estar relacionada la diversidad de estas algas con un evento de enfriamiento? &lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.schweizerbart.de/papers/palb/detail/prepub/109683/Oldest_records_of_crown_group_Characeae_co_occurring_with_diverse_Clavatoraceae_Charophyta_in_the_late_Aptian_Early_Cretaceous_of_the_Algarve_Basin_Portugal"&gt;Nuestra hipótesis&lt;/a&gt; es que, probablemente, hace alrededor de 115 millones de años, un corto periodo frío –“corto” en geología son 2 millones de años– favoreció una regresión. En el Algarve, no hay evidencias de ese enfriamiento. Sin embargo, las rocas describen ambientes continentales con carofitas, como lagos, que se asocian a esa regresión. Mientras que en otras zonas de Europa predominan los registros marinos, el Algarve es una ventana única a los continentes del pasado.&lt;/p&gt;
+
+&lt;h2&gt;Surgen nuevas preguntas&lt;/h2&gt;
+
+&lt;p&gt;Las piezas del rompecabezas sugerían que las &lt;em&gt;Characeae&lt;/em&gt;, incluyendo los géneros actuales, comenzaron a expandirse unos 30 millones de años antes de lo que creíamos, en un momento de enfriamiento terrestre. Y no hubo una sustitución de unas por otras: comenzaron a diversificarse mientras las &lt;em&gt;Clavatoraceae&lt;/em&gt; aún dominaban y evolucionaban. &lt;/p&gt;
+
+&lt;p&gt;Aunque surgen nuevas preguntas que guiarán la investigación futura: ¿qué pasó en esos ambientes continentales? ¿Cambió la química del agua? ¿Estaban mejor preparadas las &lt;em&gt;Characeae&lt;/em&gt; para soportar cambios? ¿Eran ambientes más inestables? &lt;/p&gt;
+
+&lt;p&gt;A veces, los grandes hallazgos y los nuevos interrogantes vienen de lo más pequeño y de la forma más inesperada. Las personas que &lt;a href="https://www.google.com/maps/place/Rocha+Negra/@37.0862559,-8.7247971,3a,75y,111.9h,76.94t/data=!3m8!1e1!3m6!1sCIABIhDIXvy3LjAZHJHPYYdcWZ-X!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FAM4Q-U_uc7IVvj5SmhJCCmOPDUsTL8CWRiac81ZLNWddDUqLY1Tj4ELsG4cn4Bgs0AhLpVcfGlob-yOLzOyMBWSpeyL7Lh418FWoCweJSXBfYTBDDloQjb_FcSzChcx0lFjH9OO2dN46v3RVZS0%3Dw900-h600-k-no-pi13.061172614115819-ya79.67355957720615-ro0-fo100!7i8192!8i4096!4m15!1m8!3m7!1s0xd1b313e06bb3e13:0xef7864d9c488d609!2sPraia+da+Luz,+Portugal!3b1!8m2!3d37.0995398!4d-8.7366791!16zL20vMGNudDZ3!3m5!1s0xd1b3768c98b837f:0xb7ee3b49cb8fcba6!8m2!3d37.085072!4d-8.7161262!16s%2Fg%2F11gxs28xh8?entry=ttu&amp;amp;g_ep=EgoyMDI2MTEwOS4wIKXMDSoASAFQAw%3D%3D"&gt;se bañan cada año frente a los acantilados de Praia da Luz&lt;/a&gt; quizá observan las rocas sin ser conscientes de que en ellas está escrito un capítulo de esa novela que es la historia de la Tierra. Cada descubrimiento científico es una invitación a recordarnos esa curiosidad que nos hace humanos.&lt;/p&gt;
+
+&lt;p&gt;_Los investigadores Hélder Pereira, Pedro Callapez (Universidad de Coimbra), Paulo Fernandes (Universidad del Algarve) y Ulrich Heimhofer (Universidad de Hannover) han colaborado en el &lt;a href="https://www.schweizerbart.de/papers/palb/detail/prepub/109683/Oldest_records_of_crown_group_Characeae_co_occurring_with_diverse_Clavatoraceae_Charophyta_in_the_late_Aptian_Early_Cretaceous_of_the_Algarve_Basin_Portugal"&gt;estudio&lt;/a&gt; que se menciona en este artículo. _&lt;/p&gt;&lt;img src="https://counter.theconversation.com/content/296321/count.gif" alt="The Conversation" width="1" height="1" /&gt;
+&lt;p class="fine-print"&gt;&lt;em&gt;&lt;span&gt;La investigación se realizó mediante la financiación de los proyectos IBERINSULA (PID2020-113912GB-100) and IBER-
+CAFO (PID2024-159218NB-I00), ambos financiados por el MCIN/AEI/10.13039/501100011033 y el Fondo Europeo de Desarrollo Regiona (FEDER) en los que participa Jordi Perez Cano. &lt;/span&gt;&lt;/em&gt;&lt;/p&gt;</content>
+    <summary>Una crónica en primera persona de cómo un muestreo de rocas en el Algarve ha dado con especies desconocidas y aporta nuevos datos sobre la evolución de las algas y su relación con el clima.</summary>
+    <author>
+      <name>Jordi Perez Cano, Investigador colaborador, Universitat de Barcelona</name>
+      <foaf:homepage rdf:resource="https://theconversation.com/profiles/jordi-perez-cano-2776608"/>
+    </author>
+    <rights>Licensed as Creative Commons – attribution, no derivatives.</rights>
+  </entry>
+  <entry>
+    <id>tag:theconversation.com,2011:article/294996</id>
+    <published>2026-11-17T16:17:29Z</published>
+    <updated>2026-11-17T16:17:29Z</updated>
+    <link rel="alternate" type="text/html" href="https://theconversation.com/de-objeto-de-la-mirada-a-objeto-del-algoritmo-el-cuerpo-femenino-ante-los-deepfakes-294996"/>
+    <title>De objeto de la mirada a objeto del algoritmo: el cuerpo femenino ante los ‘deepfakes’</title>
+    <content type="html">&lt;figure&gt;&lt;img src="https://images.theconversation.com/files/771594/original/file-20261112-64-3stnqr.jpg?ixlib=rb-4.1.1&amp;amp;rect=1%2C0%2C2999%2C1999&amp;amp;q=45&amp;amp;auto=format&amp;amp;w=1050&amp;amp;h=700&amp;amp;fit=crop" /&gt;&lt;figcaption&gt;&lt;span class="caption"&gt;&lt;/span&gt; &lt;span class="attribution"&gt;&lt;a class="source" href="https://www.shutterstock.com/es/image-photo/sexy-woman-artificial-intelligence-connections-bite-612753758"&gt;sakkmesterke/Shutterstock&lt;/a&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;La &lt;a href="https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/Un-juez-dicta-la-primera-sentencia-condenatoria-en-Sevilla-por-el-uso-de-inteligencia-artificial-para-manipular-imagenes-de-varias-jovenes-y-simular-que-estaban-desnudas"&gt;condena dictada el pasado mes de octubre en Sevilla&lt;/a&gt; contra tres hombres por manipular, mediante inteligencia artificial, fotografías de varias jóvenes para crear falsos desnudos ha vuelto a situar en el centro del debate una cuestión incómoda: ¿qué ocurre cuando una tecnología permite fabricar imágenes sexuales de una persona?&lt;/p&gt;
+
+&lt;p&gt;La pregunta no es solo jurídica ni tecnológica. &lt;a href="https://theconversation.com/mi-cuerpo-mi-imagen-mi-eleccion-como-identificar-y-actuar-ante-un-deepfake-sexual-258778"&gt;También es ética, educativa y sociocultural&lt;/a&gt;. Además, afecta a la forma en que entendemos la imagen, el consentimiento y el cuerpo en la era digital.&lt;/p&gt;
+
+&lt;h2&gt;El cuerpo ya no necesita existir para ser expuesto&lt;/h2&gt;
+
+&lt;p&gt;Durante años, la preocupación en internet se centró en la difusión no autorizada de fotografías íntimas. Actualmente, ya no es necesario disponer de esas imágenes para causar daño. Es suficiente con una fotografía copiada o descargada de una red social, un programa de inteligencia artificial y unos pocos segundos para generar una representación hiperrealista y no autorizada de una persona desnuda.&lt;/p&gt;
+
+&lt;p&gt;Las imágenes sintéticas pueden inventar un cuerpo femenino inexistente, una escena que nunca ocurrió o una situación que jamás tuvo lugar. Lo que vemos deja de ser necesariamente el reflejo de una realidad para convertirse en una representación visual generada por un algoritmo.&lt;/p&gt;
+
+&lt;p&gt;Esta transformación tiene consecuencias profundas. No solo porque dificulta distinguir entre lo auténtico y lo falso, sino porque altera nuestra relación con la identidad y la imagen personal, que deja de depender de nosotros para ser creada o manipulada por otros.&lt;/p&gt;
+
+&lt;p&gt;Hoy alguien puede producir una versión digital de nuestro cuerpo sin nuestro conocimiento ni consentimiento, incluso, sin que exista una fotografía original.&lt;/p&gt;
+
+&lt;h2&gt;Tecnología nueva para una práctica muy antigua&lt;/h2&gt;
+
+&lt;p&gt;La &lt;a href="https://dialnet.unirioja.es/servlet/articulo?codigo=10817903"&gt;inteligencia artificial no ha inventado la cosificación de las mujeres&lt;/a&gt;. La cultura visual occidental está llena de ejemplos que muestran cómo la imagen femenina ha sido creada, durante siglos, como objeto de contemplación, producto de deseo o consumo. Desde las representaciones clásicas de Venus hasta determinados modelos publicitarios contemporáneos, su cuerpo ha ocupado un lugar central en la construcción de ideales de belleza y feminidad, conceptos tradicionalmente asociados a la sexualización y la cosificación femenina.&lt;/p&gt;
+
+&lt;p&gt;Lo que cambia ahora es la escala. La inteligencia artificial permite automatizar procesos que antes requerían tiempo, conocimientos técnicos o recursos. La producción de imágenes ya no está limitada a fotógrafos, diseñadores o editores profesionales. Cualquier usuario puede generar cientos de ellas en pocos minutos.&lt;/p&gt;
+
+&lt;p&gt;La novedad, por tanto, no es la existencia de determinados imaginarios sobre las mujeres, sino la capacidad de algunos usuarios malintencionados de reproducirlos y divulgarlos masivamente.&lt;/p&gt;
+
+&lt;h2&gt;¿Por qué las principales víctimas son mujeres?&lt;/h2&gt;
+
+&lt;p&gt;Las investigaciones sobre los &lt;em&gt;deepfakes&lt;/em&gt; muestran que &lt;a href="https://revistas.usc.gal/index.php/epc/article/view/10259/14673"&gt;la inmensa mayoría de los contenidos manipulados de carácter sexual tienen a las mujeres como objetivo&lt;/a&gt;. No se trata de una casualidad ni de una consecuencia inevitable de la tecnología.&lt;/p&gt;
+
+&lt;p&gt;Los sistemas de inteligencia artificial no producen imaginarios desde el vacío. Aprenden a partir de enormes volúmenes de imágenes que reflejan valores, prejuicios, estereotipos de género y jerarquías de poder presentes en la sociedad y creadas a lo largo de la historia. Por esta razón, tienden a reproducir patrones socioculturales preexistentes.&lt;/p&gt;
+
+&lt;h2&gt;El derecho a la propia imagen en la era de la IA&lt;/h2&gt;
+
+&lt;p&gt;La posibilidad de crear desnudos falsos plantea, además, un desafío para conceptos que parecían consolidados.&lt;/p&gt;
+
+&lt;p&gt;¿Qué significa el derecho a la propia imagen, cuando una representación puede generarse sin que la persona retratada haya participado en ella? ¿Cómo se protege la reputación de alguien frente a imágenes que nunca existieron pero que resultan verosímiles? ¿Quién controla un cuerpo digital que otros pueden fabricar artificialmente?&lt;/p&gt;
+
+&lt;p&gt;Estas cuestiones son especialmente importantes para adolescentes y jóvenes, que desarrollan una parte significativa de su vida social en entornos digitales. Una imagen manipulada puede difundirse con enorme rapidez y permanecer accesible durante años, incluso después de haber sido desmentida.&lt;/p&gt;
+
+&lt;p&gt;El impacto, además, no es únicamente psicológico. También puede afectar a relaciones personales, oportunidades profesionales y formas de participación social.&lt;/p&gt;
+
+&lt;h2&gt;Aprender a mirar de nuevo&lt;/h2&gt;
+
+&lt;p&gt;Frente a este escenario, las respuestas legales son necesarias, pero no suficientes.&lt;/p&gt;
+
+&lt;p&gt;La sociedad necesita desarrollar nuevas formas de alfabetización visual. Durante décadas, aprendimos a interpretar la publicidad, la fotografía y los medios audiovisuales. Ahora debemos comprender que ver ya no equivale necesariamente a creer. Esto implica conocer cómo funcionan los algoritmos y entender que las imágenes digitales pueden ser construcciones artificiales capaces de influir en nuestras emociones, opiniones y comportamientos.&lt;/p&gt;
+
+&lt;p&gt;Pero supone también algo más importante: promover una cultura basada en el respeto al consentimiento y a la dignidad de las personas. Porque el problema de los desnudos falsos creados mediante inteligencia artificial es que facilitan una forma de violencia visual y violencia de género que resulta más rápida, más barata y más difícil de controlar.&lt;/p&gt;
+
+&lt;p&gt;La tecnología ha conseguido crear cuerpos que nunca existieron. El reto que tenemos por delante es evitar que los daños que generan esas imágenes se conviertan en una nueva normalidad. Para lograrlo, quizá debamos empezar por reconocer que este debate no debe centrarse solo en la inteligencia artificial. Trata, sobre todo, de poder, de representación, de derechos y de igualdad en la sociedad digital del siglo XXI.&lt;/p&gt;&lt;img src="https://counter.theconversation.com/content/294996/count.gif" alt="The Conversation" width="1" height="1" /&gt;
+&lt;p class="fine-print"&gt;&lt;em&gt;&lt;span&gt;M. Mar Martínez-Oña  no recibe salario, ni ejerce labores de consultoría, ni posee acciones, ni recibe financiación de ninguna compañía u organización que pueda obtener beneficio de este artículo, y ha declarado carecer de vínculos relevantes más allá del cargo académico citado.&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;</content>
+    <summary>Una fotografía de una red social es suficiente para que la inteligencia artificial genere imágenes íntimas falsas. Estamos ante nuevas formas de violencia digital, contra las mujeres…  y el riesgo que acabemos normalizándolas.</summary>
+    <author>
+      <name>M. Mar Martínez-Oña, Investigadora y profesora, UDIT - Universidad de Diseño, Innovación y Tecnología</name>
+      <foaf:homepage rdf:resource="https://theconversation.com/profiles/m-mar-martinez-ona-1536704"/>
+    </author>
+    <rights>Licensed as Creative Commons – attribution, no derivatives.</rights>
+  </entry>
+</feed>

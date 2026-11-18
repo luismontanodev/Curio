@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Filtros oscuro</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#C9B6F8}a:hover{color:#E2D6FC}
+button{font-family:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background: {{t.bg}}; color: {{t.text}}; overflow: hidden">
+
+<header style="display: flex; align-items: center; gap: 4px; padding: 16px 16px 8px 8px">
+<a href="{{backHref}}" aria-label="Volver al feed" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{t.text}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</a>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em">Filtros</h1>
+</header>
+
+<div style="flex: 1; overflow: hidden; padding: 4px 20px 0; display: flex; flex-direction: column; gap: 22px">
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: {{t.muted}}">TEMAS</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: {{t.primary}}; color: {{t.onPrimary}}; font-size: 14px; font-weight: 600">Ciencia</button>
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: {{t.primary}}; color: {{t.onPrimary}}; font-size: 14px; font-weight: 600">Arte</button>
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: {{t.primary}}; color: {{t.onPrimary}}; font-size: 14px; font-weight: 600">Cultura</button>
+<button aria-pressed="true" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: {{t.primary}}; color: {{t.onPrimary}}; font-size: 14px; font-weight: 600">Historia</button>
+<button aria-pressed="false" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid {{t.border}}; background: transparent; color: {{t.text}}; font-size: 14px">Naturaleza</button>
+<button aria-pressed="false" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid {{t.border}}; background: transparent; color: {{t.text}}; font-size: 14px">Espacio</button>
+<button aria-pressed="false" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid {{t.border}}; background: transparent; color: {{t.text}}; font-size: 14px">Música</button>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: {{t.muted}}">NIVEL DE FILTRO</h2>
+<div role="group" aria-label="Nivel de filtro" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; background: {{t.soft}}">
+<button aria-pressed="false" style="height: 40px; border: none; border-radius: 10px; background: transparent; color: {{t.muted}}; font-size: 14px">Suave</button>
+<button aria-pressed="false" style="height: 40px; border: none; border-radius: 10px; background: transparent; color: {{t.muted}}; font-size: 14px">Moderado</button>
+<button aria-pressed="true" style="height: 40px; border: none; border-radius: 10px; background: {{t.card}}; color: {{t.text}}; font-size: 14px; font-weight: 600; box-shadow: 0 1px 2px rgba(31,22,51,0.12)">Estricto</button>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.45; color: {{t.muted}}">Oculta títulos con mayúsculas excesivas, signos de exclamación, preguntas gancho y listas tipo «10 cosas que…».</p>
+</section>
+
+<section style="display: flex; flex-direction: column; border-radius: 16px; border: 1px solid {{t.border}}; background: {{t.card}}">
+<sc-for list="{{rows}}" as="row" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: {{row.divider}}">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 500">{{row.label}}</span>
+<span style="font-size: 12px; color: {{t.muted}}">{{row.hint}}</span>
+</div>
+<button aria-pressed="{{row.on}}" aria-label="{{row.label}}" style="width: 48px; height: 28px; border: none; border-radius: 14px; padding: 3px; background: {{row.track}}; display: flex; justify-content: {{row.align}}">
+<span style="width: 22px; height: 22px; border-radius: 11px; background: {{row.knob}}; display: block"></span>
+</button>
+</div>
+</sc-for>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: {{t.muted}}">PALABRAS BLOQUEADAS</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{words}}" as="w" hint-placeholder-count="4">
+<span style="height: 32px; padding: 0 6px 0 12px; border-radius: 16px; background: {{t.soft}}; color: {{t.text}}; font-size: 13px; display: inline-flex; align-items: center; gap: 2px">{{w.text}}<button aria-label="Quitar palabra" style="width: 28px; height: 28px; border: none; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{t.muted}}" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+</sc-for>
+</div>
+<label for="nueva-palabra" style="position: absolute; width: 1px; height: 1px; overflow: hidden">Añadir palabra bloqueada</label>
+<input id="nueva-palabra" placeholder="Añadir palabra o frase…" style="height: 44px; box-sizing: border-box; border-radius: 12px; border: 1px solid {{t.border}}; background: {{t.card}}; color: {{t.text}}; padding: 0 14px; font-size: 14px; font-family: inherit">
+</section>
+
+</div>
+
+<div style="padding: 12px 20px 28px; border-top: 1px solid {{t.border}}">
+<button style="width: 100%; height: 50px; border: none; border-radius: 14px; background: {{t.primary}}; color: {{t.onPrimary}}; font-size: 16px; font-weight: 600">Aplicar filtros</button>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":true},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+var dark = this.props.dark ?? true;
+var light = { bg: '#FFFFFF', card: '#FFFFFF', soft: '#F3EDFC', border: '#E6DCF7', text: '#1F1633', muted: '#5F5675', primary: '#7B5CC6', primaryText: '#6B4FB8', onPrimary: '#FFFFFF', trackOff: '#D9CFEA' };
+var night = { bg: '#14101E', card: '#1E182D', soft: '#2A2140', border: '#352B4F', text: '#F3EEFC', muted: '#B5AACB', primary: '#C3AEF6', primaryText: '#C9B6F8', onPrimary: '#1F1633', trackOff: '#463B60' };
+var t = dark ? night : light;
+var src = [
+{ label: 'Ocultar títulos sensacionalistas', hint: 'Análisis del tono del título', on: true },
+{ label: 'Ocultar clickbait', hint: 'Preguntas gancho, «no creerás…»', on: true },
+{ label: 'Solo fuentes verificadas', hint: 'Museos, enciclopedias, revistas', on: true },
+{ label: 'Pausa sugerida', hint: 'Aviso cada 20 tarjetas', on: true }
+];
+var rows = src.map(function (r, i) {
+return {
+label: r.label, hint: r.hint, on: r.on ? 'true' : 'false',
+track: r.on ? t.primary : t.trackOff,
+knob: r.on ? t.onPrimary : '#FFFFFF',
+align: r.on ? 'flex-end' : 'flex-start',
+divider: i < src.length - 1 ? '1px solid ' + t.border : 'none'
+};
+});
+var words = [{ text: 'IMPACTANTE' }, { text: 'no creerás' }, { text: 'escándalo' }, { text: 'urgente' }];
+return { t: t, rows: rows, words: words, backHref: dark ? 'FeedOscuro.dc.html' : 'Main.dc.html' };
+}
+}
+</script>
+</body>
+</html>

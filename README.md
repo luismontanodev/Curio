@@ -1,56 +1,121 @@
-# Welcome to your Expo app 👋
+# Curio — núcleo local-first
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Feed de ciencia, arte y cultura **sin servidor**: el teléfono consulta APIs públicas,
+filtra el sensacionalismo y guarda todo en una base SQLite propia. El usuario es dueño
+de sus datos y puede llevárselos en un archivo JSON legible.
 
-## Get started
+## Cómo fluye la información
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+APIs públicas sin key           Teléfono del usuario
+─────────────────────           ─────────────────────────────────────────────
+The Met (búsqueda + objeto) ─┐
+                             ├─► ingest/  →  core/scorer  →  SQLite (curio.db)
+Wikipedia ES "featured"     ─┘   (al abrir      (puntaje        │
+  · artículo destacado            la app,        anti-          ├─► feed (cursor, filtros)
+  · imagen del día                cada ≥3 h)     sensacionalismo)├─► guardados
+  · efemérides                                                   └─► respaldo .json ⇄ usuario
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Se ignoran a propósito *most read* y *news* del feed de Wikipedia: premian lo popular y lo urgente.
 
-### Other setup steps
+## Estructura
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+| Carpeta | Qué hay | ¿Depende de Expo? |
+|---|---|---|
+| `src/core/` | Tipos, scorer, fuentes y normalizadores | No |
+| `src/db/` | Migraciones, tarjetas, guardados, vistos, preferencias | No (usa la interfaz `SqlDb`) |
+| `src/ingest/` | Fetchers del Met y Wikipedia, orquestador | No (recibe `fetch`) |
+| `src/backup/` | Exportar, validar e importar el respaldo JSON | No |
+| `src/platform/` | Pegamento con Expo: archivo de respaldo, hook de ingesta | Sí |
+| `app/_layout.tsx` | Abre la base y migra antes de renderizar | Sí |
+| `test/` | 70 tests con SQLite real (`node:sqlite`) | No |
 
-## Learn more
+`SqlDb` (`src/db/sql.ts`) es el mismo subconjunto de métodos que `SQLiteDatabase` de
+expo-sqlite (`execAsync`, `runAsync`, `getFirstAsync`, `getAllAsync`, `withTransactionAsync`).
+En la app se pasa la conexión de Expo tal cual; en los tests, un adaptador sobre `node:sqlite`.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Montarlo en Expo
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```sh
+npx create-expo-app@latest curio
+cd curio
+npx expo install expo-sqlite expo-file-system expo-sharing expo-document-picker
+```
 
-## Join the community
+Copia `src/` y `app/_layout.tsx` al proyecto. En el `tsconfig.json` de Expo agrega
+`"allowImportingTsExtensions": true` (los imports usan extensión `.ts` para que el mismo
+código corra en Node sin compilar). Si Metro se queja de esos imports, quita la extensión
+`.ts` de los imports en `src/` y `app/`.
 
-Join our community of developers creating universal apps.
+Antes de publicar, cambia el contacto en `USER_AGENT` (`src/ingest/http.ts`):
+Wikimedia pide que los clientes se identifiquen.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Uso típico en pantallas:
+
+```ts
+const db = useSQLiteContext();
+const { refresh } = useIngestOnOpen();          // ingesta al abrir / volver a primer plano
+const prefs = await getPrefs(db);
+const page = await getFeedPage(db, prefs, { cursor, limit: 20 });
+await markSeen(db, visibles.map((c) => c.id));  // al pasar tarjetas
+await shareBackup(db);                          // "Exportar mis datos"
+await pickAndImportBackup(db, 'merge');         // "Importar respaldo"
+```
+
+## Probar la lógica sin teléfono
+
+```sh
+npm test         # Node 22.18+ (corre .ts directo y trae SQLite integrado)
+npm run typecheck
+```
+
+## Base local
+
+`PRAGMA user_version` guarda la versión del esquema. Para cambiarlo, **agrega** una
+migración al final de `MIGRATIONS`; no edites una ya publicada.
+
+- `cards`: el feed. Se podan las de más de 30 días que no estén guardadas.
+- `card_views`: lo visto, para no repetir (se borra en cascada con la poda).
+- `saved_cards`: copia completa de cada guardado; sobrevive a la poda.
+- `kv`: preferencias (JSON) y estado (`lastIngestAt`).
+
+Si cambias reglas del scorer, sube `SCORER_VERSION`: la siguiente ingesta recalcula
+las tarjetas viejas.
+
+## Formato del respaldo (`curio-respaldo-AAAA-MM-DD.json`)
+
+```json
+{
+  "format": "curio-backup",
+  "version": 1,
+  "exportedAt": "2026-11-17T18:00:00.000Z",
+  "scorerVersion": 1,
+  "prefs": {
+    "topics": ["ciencia", "tecnologia", "arte", "cultura", "historia"],
+    "level": "estricto",
+    "hideSensational": true,
+    "hideClickbait": true,
+    "onlyVerified": true,
+    "blockedWords": ["urgente"],
+    "languages": ["es"],
+    "pauseEvery": 20,
+    "theme": "system"
+  },
+  "saved": [
+    { "savedAt": "2026-11-10T00:00:00.000Z", "card": { "id": "met:45434", "title": "…", "url": "https://…", "…": "…" } }
+  ]
+}
+```
+
+Al importar, el archivo se trata como no confiable: se valida campo por campo, solo se
+aceptan URLs `http(s)`, los puntajes se recalculan y lo inválido se descarta (y se cuenta).
+
+- **merge**: agrega guardados nuevos, adopta las preferencias del archivo y suma las palabras bloqueadas.
+- **replace**: el teléfono queda exactamente como el respaldo.
+
+## Límites conocidos
+
+- iOS restringe el trabajo en segundo plano: la ingesta ocurre al abrir la app, no con la app cerrada.
+- Las tarjetas del Met y las descripciones de Commons llegan en inglés.
+- El tema de la imagen del día y del artículo destacado es `cultura` por defecto; la API no lo clasifica.
