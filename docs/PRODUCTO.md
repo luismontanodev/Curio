@@ -73,6 +73,20 @@ Consecuencias técnicas:
 | `text-fact` | "Este animal puede secarse por completo y volver a la vida con agua" | Wikipedia |
 | `sound` | Canto de un ave o un instrumento | Commons (audio) — pendiente |
 | `event` | Efeméride del día, reescrita como momento | Wikipedia featured |
+| `video` | Clip de 15 a 60 s: un eclipse, una erupción, una película de archivo. Con audio (un toque lo silencia), en bucle, póster mientras carga | NASA, Internet Archive, Commons |
+
+**Formato `video` (2026-11-18).** `media.videoUrl`, `media.imageUrl` (póster), `media.durationSec`,
+`media.mimeType`, licencia y autor (`credit`), y enlace al original en `sources`. Solo es momento
+principal si dura de 15 a 60 s; lo más largo queda para Profundizar o paquetes curados. El
+gancho y el payoff siguen la regla de los ganchos: el título de la fuente pasa por el scorer y
+el payoff es su descripción (la duda se cierra en la misma pantalla). En Momentos hay un
+selector **Posts | Videos**; en Destacados y Explorar los videos aparecen con su póster, como
+mucho uno cada cuatro publicaciones.
+
+**Filtros en Momentos (2026-11-19).** Imágenes y videos no dependen de los temas ni del nivel
+de filtro del usuario (lo dejaban casi vacío): entran todos los temas, en sus idiomas más inglés.
+Se mantienen siempre las palabras bloqueadas y un piso anti-clickbait (nivel suave): la regla de
+los ganchos no cambia. Los momentos de texto sí siguen los filtros del usuario.
 
 Regla de mezcla en un capítulo: no más de 2 momentos seguidos del mismo formato ni de la
 misma fuente.

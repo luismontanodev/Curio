@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, useColorScheme } from 'react-native';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { setVideoCacheSizeAsync } from 'expo-video';
 import { SQLiteProvider } from 'expo-sqlite';
 import { useFonts } from 'expo-font';
 import { SpaceGrotesk_500Medium } from '@expo-google-fonts/space-grotesk/500Medium';
@@ -21,6 +22,10 @@ import { IngestProvider } from '../src/platform/ingest-context.tsx';
 import { colors } from '../src/ui/theme.ts';
 
 void SplashScreen.preventAutoHideAsync();
+
+// Caché de videos en disco (expo-video): lo ya visto no se vuelve a descargar. Se acota a
+// 150 MB (por defecto puede llegar a 1 GB); al llenarse, se borra lo más viejo.
+void setVideoCacheSizeAsync(150 * 1024 * 1024).catch(() => {});
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({

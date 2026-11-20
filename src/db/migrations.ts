@@ -93,6 +93,17 @@ export const MIGRATIONS: Migration[] = [
       create index chapters_created_idx on chapters (created_at desc);
     `,
   },
+  {
+    version: 4,
+    name: 'video corto y crédito del autor',
+    sql: `
+      -- Video de la tarjeta (JSON: url de la variante ligera, mime, duración, tamaño).
+      -- El póster va en image_url. La columna credit es el autor, para la atribución.
+      alter table cards add column video_json text;
+      alter table cards add column credit text;
+      create index cards_type_idx on cards (type, ingested_at desc);
+    `,
+  },
 ];
 
 /**

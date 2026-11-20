@@ -164,13 +164,23 @@ async function dbWithCards() {
   return { db, cards };
 }
 
-test('momentCandidates: solo lo no visto y lo que no está en pantalla, con los filtros del usuario', async () => {
+test('momentCandidates: el texto sigue tus filtros; las imágenes no (salvo palabras bloqueadas y clickbait evidente)', async () => {
   const { db, cards } = await dbWithCards();
-  await insertCards(db, [makeCard({ type: 'article', lang: 'en', title: 'English only', summary: 'An English sentence here.' })]);
+  const englishText = makeCard({ type: 'article', lang: 'en', title: 'English only', summary: 'An English sentence here.' });
+  const englishImage = makeCard({ type: 'image', lang: 'en', topic: 'espacio', sourceId: 'nasa', title: 'Saturn rings', summary: 'Seen by Cassini.', imageUrl: 'https://x/s.jpg' });
+  const frenchImage = makeCard({ type: 'artwork', lang: 'fr', topic: 'arte', title: 'Oeuvre', summary: 'Une phrase.', imageUrl: 'https://x/f.jpg' });
+  const bait = makeCard({ type: 'image', topic: 'arte', sourceId: 'theconversation', title: '¡¡¡NO CREERÁS ESTA FOTO INCREÍBLE!!! 😱', summary: 'Una oración.', imageUrl: 'https://x/b.jpg' });
+  await insertCards(db, [englishText, englishImage, frenchImage, bait]);
 
-  const onlyArt = await momentCandidates(db, { ...prefs, topics: ['arte'], blockedWords: ['Obra 3'] }, { now: NOW });
-  assert.ok(onlyArt.length > 0 && onlyArt.every((m) => m.topic === 'arte' && m.lang === 'es'));
-  assert.ok(!onlyArt.some((m) => m.hook === 'Obra 3'));
+  // Solo Historia: los artículos de ciencia no entran, pero las obras de arte sí.
+  const got = await momentCandidates(db, { ...prefs, topics: ['historia'], blockedWords: ['Obra 3'] }, { now: NOW });
+  assert.ok(!got.some((m) => m.format === 'text-fact'), 'el texto respeta tus temas');
+  assert.ok(got.some((m) => m.format === 'image-fact' && m.topic === 'arte'), 'las imágenes no dependen de tus temas');
+  assert.ok(got.some((m) => m.cardId === englishImage.id), 'imágenes en inglés aunque solo leas español');
+  assert.ok(!got.some((m) => m.cardId === frenchImage.id), 'pero no en idiomas que no lees');
+  assert.ok(!got.some((m) => m.cardId === englishText.id));
+  assert.ok(!got.some((m) => m.hook === 'Obra 3'), 'las palabras bloqueadas valen siempre');
+  assert.ok(!got.some((m) => m.cardId === bait.id), 'el clickbait evidente queda fuera siempre');
 
   await markSeen(db, [cards[0].id]);
   const onScreen = [cards[1].id];

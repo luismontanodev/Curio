@@ -1,5 +1,5 @@
-// Mosaico de Explorar (cuadrícula de 2 columnas, como Instagram): imagen y título corto.
-// Sin foto, el mosaico toma el color de su tema. Tocarlo abre el lector; guardar y compartir
+// Mosaico de Explorar (cuadrícula de 2 columnas, como Instagram): foto a sangre con el tema y
+// el título encima. Sin foto, el mosaico se rellena con el color sólido de su tema. Tocarlo abre el lector; guardar y compartir
 // están ahí, para no llenar la cuadrícula de botones.
 
 import { memo } from 'react';
@@ -8,7 +8,10 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { Card } from '../core/types.ts';
 import { useTheme } from '../platform/app-state.tsx';
 import { RemoteImage } from '../platform/remote-image.tsx';
+import { VideoBadge } from './video-badge.tsx';
 import { cardSource, cardTopicLabel } from '../ui/format.ts';
+import { Scrim } from './gradient.tsx';
+import { TopicPill } from './primitives.tsx';
 
 interface Props {
   card: Card;
@@ -21,8 +24,8 @@ interface Props {
 function ExploreTileBase({ card, width, onOpen, note }: Props) {
   const t = useTheme();
   const c = t.colors;
-  const tone = t.topics[card.topic] ?? { fg: c.primaryText, bg: c.soft };
-  const visualHeight = Math.round(width * 1.2);
+  const tone = t.topics[card.topic] ?? { fg: c.primaryText, bg: c.soft, solid: c.primary };
+  const visualHeight = Math.round(width * 1.3);
 
   return (
     <Pressable
@@ -30,35 +33,35 @@ function ExploreTileBase({ card, width, onOpen, note }: Props) {
       accessibilityRole="button"
       accessibilityLabel={`${card.title}. ${cardSource(card)}`}
       accessibilityHint="Abre la lectura dentro de Curio"
-      style={({ pressed }) => [{ width, opacity: pressed ? 0.8 : 1 }]}
+      style={({ pressed }) => [{ width, opacity: pressed ? 0.8 : 1, transform: [{ scale: pressed ? 0.98 : 1 }] }]}
     >
-      <View style={[styles.visual, { height: visualHeight, backgroundColor: tone.bg, borderRadius: t.radius.group }]}>
+      {/* Con foto: a sangre, con el tema y el título encima. Sin foto: el color sólido del tema. */}
+      <View style={[styles.visual, { height: visualHeight, backgroundColor: card.imageUrl ? tone.bg : tone.solid, borderRadius: t.radius.group }]}>
         {card.imageUrl ? (
-          <RemoteImage uri={card.imageUrl} recyclingKey={card.id} />
-        ) : (
-          // Sin imagen: el título grande sobre el color del tema.
-          <View style={styles.textOnly}>
-            <Text style={[t.type.topicLabel, { color: tone.fg }]} numberOfLines={1}>
+          <>
+            <RemoteImage uri={card.imageUrl} recyclingKey={card.id} width={500} />
+            <Scrim height="70%" />
+            <VideoBadge card={card} size="small" />
+          </>
+        ) : null}
+        <View style={styles.overlay} pointerEvents="none">
+          {card.imageUrl ? (
+            <TopicPill label={cardTopicLabel(card)} color={tone.solid} small />
+          ) : (
+            <Text style={[t.type.topicLabel, { color: '#FFFFFF', opacity: 0.9 }]} numberOfLines={1}>
               {cardTopicLabel(card)}
             </Text>
-            <Text style={[t.type.cardTitle, { color: c.text, marginTop: 6 }]} numberOfLines={5}>
-              {card.title}
-            </Text>
-          </View>
-        )}
-      </View>
-      {card.imageUrl ? (
-        <>
-          <Text style={[t.type.topicLabel, { color: tone.fg, marginTop: 8 }]} numberOfLines={1}>
-            {cardTopicLabel(card)}
-          </Text>
-          <Text style={[t.type.chipActive, { color: c.text, marginTop: 2, lineHeight: 19 }]} numberOfLines={2}>
+          )}
+          <Text
+            style={[card.imageUrl ? t.type.chipActive : t.type.cardTitle, styles.title, card.imageUrl && { lineHeight: 19 }]}
+            numberOfLines={card.imageUrl ? 3 : 6}
+          >
             {card.title}
           </Text>
-        </>
-      ) : null}
+        </View>
+      </View>
       {note ? (
-        <Text style={[t.type.meta, { color: c.muted, marginTop: 4 }]} numberOfLines={1}>
+        <Text style={[t.type.meta, { color: c.muted, marginTop: 6 }]} numberOfLines={1}>
           {note}
         </Text>
       ) : null}
@@ -70,5 +73,6 @@ export const ExploreTile = memo(ExploreTileBase);
 
 const styles = StyleSheet.create({
   visual: { overflow: 'hidden' },
-  textOnly: { flex: 1, padding: 14, justifyContent: 'flex-end' },
+  overlay: { position: 'absolute', left: 10, right: 10, bottom: 10 },
+  title: { color: '#FFFFFF', marginTop: 6, textShadowColor: 'rgba(0,0,0,0.35)', textShadowRadius: 4 },
 });

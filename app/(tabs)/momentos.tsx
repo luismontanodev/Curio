@@ -1,18 +1,23 @@
 // Momentos: uno a la vez, a pantalla completa, con swipe vertical e infinito.
 // Cada N momentos (Pausa sugerida, en Filtros) aparece una página para parar.
+// Arriba a la derecha: Posts | Videos. Los videos llevan audio; un toque los silencia.
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View, type LayoutChangeEvent, type ListViewToken } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View, type LayoutChangeEvent, type ListViewToken } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
-import { Coffee } from 'lucide-react-native';
+import { Coffee, Volume2, VolumeX } from 'lucide-react-native';
 
 import type { Moment } from '../../src/core/types.ts';
+import { formatDuration } from '../../src/core/video.ts';
 import { getCard } from '../../src/db/cards.ts';
-import { MomentPage } from '../../src/components/moment-page.tsx';
+import type { MomentMode } from '../../src/db/moments.ts';
+import { MomentAction, MomentPage } from '../../src/components/moment-page.tsx';
+import { VideoVisual } from '../../src/platform/video-visual.tsx';
 import { MoreFooter } from '../../src/components/more-footer.tsx';
 import { Button, Notice } from '../../src/components/primitives.tsx';
+import { Gradient } from '../../src/components/gradient.tsx';
 import { useAppState, useTheme } from '../../src/platform/app-state.tsx';
 import { openReader, shareMoment } from '../../src/platform/card-actions.ts';
 import { useMomentStream, type ReelItem } from '../../src/platform/use-moment-stream.ts';
@@ -20,15 +25,24 @@ import { useTabReselect } from '../../src/platform/use-tab-reselect.ts';
 
 /** Cuando faltan estos momentos para el final, se pide el siguiente lote. */
 const PREFETCH = 4;
+/** Videos que se preparan por delante del visible (sin "Ahorro de datos"): solo el inicio de cada uno. */
+const PRELOAD_AHEAD = 2;
+/** Constante: FlatList no admite cambiarlo entre renders. */
+const VIEWABILITY = { itemVisiblePercentThreshold: 60 };
 
 export default function MomentsScreen() {
   const db = useSQLiteContext();
   const t = useTheme();
   const c = t.colors;
   const insets = useSafeAreaInsets();
-  const { savedIds, toggleSaved, prefs } = useAppState();
-  const { items, loaded, more, loadMore, retry, reached, restart } = useMomentStream();
+  const { savedIds, toggleSaved, prefs, saveData } = useAppState();
+  const [mode, setMode] = useState<MomentMode>('posts');
+  const { items, loaded, more, loadMore, retry, reached, restart } = useMomentStream(mode);
   const [height, setHeight] = useState(0);
+  // Índice visible: el video visible se reproduce y el siguiente se precarga.
+  const [activeIndex, setActiveIndex] = useState(0);
+  // Sonido: activado por defecto; un toque lo silencia en todos los videos.
+  const [muted, setMuted] = useState(false);
   const [resting, setResting] = useState(false);
   const list = useRef<FlatList<ReelItem>>(null);
 
@@ -40,16 +54,23 @@ export default function MomentsScreen() {
   });
 
   // Al mostrar un momento: cuenta como visto y, si quedan pocos, se pide el siguiente lote.
+  // `onViewable` debe ser estable (FlatList no acepta cambiarlo), así que lee lo vigente de
+  // refs: si guardara el `loadMore` del primer render, en Videos pediría lotes de posts.
   const itemsRef = useRef(items);
+  const loadMoreRef = useRef(loadMore);
+  const reachedRef = useRef(reached);
   useEffect(() => {
     itemsRef.current = items;
-  }, [items]);
+    loadMoreRef.current = loadMore;
+    reachedRef.current = reached;
+  }, [items, loadMore, reached]);
   const onViewable = useRef(({ viewableItems }: { viewableItems: ListViewToken[] }) => {
     const v = viewableItems[0];
     if (v?.index == null) return;
+    setActiveIndex(v.index);
     const item = itemsRef.current[v.index];
-    if (item?.kind === 'moment') reached(item.moment);
-    if (itemsRef.current.length - v.index <= PREFETCH) void loadMore();
+    if (item?.kind === 'moment') reachedRef.current(item.moment);
+    if (itemsRef.current.length - v.index <= PREFETCH) void loadMoreRef.current();
   }).current;
 
   const onSave = useCallback(
@@ -67,6 +88,36 @@ export default function MomentsScreen() {
     ({ item, index }: { item: ReelItem; index: number }) =>
       item.kind === 'moment' ? (
         <MomentPage
+          {...(item.moment.format === 'video'
+            ? {
+                visual: (
+                  <VideoVisual
+                    moment={item.moment}
+                    active={index === activeIndex}
+                    preload={index > activeIndex && index <= activeIndex + PRELOAD_AHEAD}
+                    muted={muted}
+                    dataSaver={saveData}
+                  />
+                ),
+                onSingleTap: () => setMuted((m) => !m),
+                badge: item.moment.media?.durationSec ? formatDuration(item.moment.media.durationSec) : undefined,
+                extraActions: (
+                  <MomentAction
+                    label={muted ? 'Sin sonido' : 'Sonido'}
+                    a11y={muted ? 'Activar el sonido' : 'Silenciar'}
+                    color="#FFFFFF"
+                    onImage
+                    onPress={() => setMuted((m) => !m)}
+                  >
+                    {muted ? (
+                      <VolumeX size={26} color="#FFFFFF" strokeWidth={1.8} />
+                    ) : (
+                      <Volume2 size={26} color="#FFFFFF" strokeWidth={1.8} />
+                    )}
+                  </MomentAction>
+                ),
+              }
+            : {})}
           moment={item.moment}
           height={height}
           topInset={insets.top}
@@ -85,7 +136,7 @@ export default function MomentsScreen() {
           onStop={() => setResting(true)}
         />
       ),
-    [height, insets.top, savedIds, onSave, onShare, onDeepen, prefs.pauseEvery],
+    [height, insets.top, savedIds, onSave, onShare, onDeepen, prefs.pauseEvery, saveData, activeIndex, muted],
   );
 
   if (resting) {
@@ -106,15 +157,20 @@ export default function MomentsScreen() {
           data={items}
           keyExtractor={(i) => i.key}
           renderItem={renderItem}
-          pagingEnabled
+          // Un pase corto basta: se ajusta por intervalo según la velocidad del dedo (no hace
+          // falta arrastrar media pantalla, como con pagingEnabled) y nunca salta más de uno.
+          snapToInterval={height}
+          snapToAlignment="start"
+          disableIntervalMomentum
           showsVerticalScrollIndicator={false}
           decelerationRate="fast"
           getItemLayout={(_, i) => ({ length: height, offset: height * i, index: i })}
           onViewableItemsChanged={onViewable}
-          viewabilityConfig={{ itemVisiblePercentThreshold: 60 }}
+          viewabilityConfig={VIEWABILITY}
           initialNumToRender={2}
           maxToRenderPerBatch={2}
-          windowSize={3}
+          // 5 pantallas montadas (2 por delante): los videos precargados necesitan existir.
+          windowSize={5}
           ListFooterComponent={
             more === 'offline' || more === 'exhausted' ? (
               <View style={[styles.footer, { height, backgroundColor: c.bg }]}>
@@ -137,8 +193,40 @@ export default function MomentsScreen() {
       )}
 
       {/* Título discreto arriba a la izquierda, como orientación. */}
-      <View pointerEvents="none" style={[styles.badge, { top: insets.top + 10, backgroundColor: c.card }]}>
-        <Text style={[t.type.chipActive, { fontSize: 13, color: c.text }]}>Momentos</Text>
+      <View pointerEvents="none" style={[styles.badge, styles.glass, { top: insets.top + 10 }]}>
+        <Text style={[t.type.chipActive, { fontSize: 13, color: '#FFFFFF' }]}>Momentos</Text>
+      </View>
+
+      {/* Arriba a la derecha: Posts | Videos. */}
+      <View style={[styles.switch, styles.glass, { top: insets.top + 8 }]} accessibilityRole="radiogroup">
+        {(
+          [
+            ['posts', 'Posts'],
+            ['videos', 'Videos'],
+          ] as const
+        ).map(([value, label]) => {
+          const on = mode === value;
+          return (
+            <Pressable
+              key={value}
+              onPress={() => {
+                if (on) return;
+                list.current?.scrollToOffset({ offset: 0, animated: false });
+                setMode(value);
+                setActiveIndex(0);
+                setResting(false);
+              }}
+              accessibilityRole="radio"
+              accessibilityState={{ checked: on }}
+              accessibilityLabel={value === 'videos' ? 'Ver videos' : 'Ver posts'}
+              hitSlop={{ top: 6, bottom: 6 }}
+              style={styles.switchItem}
+            >
+              {on ? <Gradient colors={c.accent} /> : null}
+              <Text style={[t.type.chipActive, { fontSize: 13, color: on ? c.onPrimary : '#FFFFFF' }]}>{label}</Text>
+            </Pressable>
+          );
+        })}
       </View>
     </View>
   );
@@ -197,6 +285,10 @@ const styles = StyleSheet.create({
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   footer: { justifyContent: 'center' },
   badge: { position: 'absolute', left: 16, paddingHorizontal: 14, height: 32, borderRadius: 16, justifyContent: 'center' },
+  switch: { position: 'absolute', right: 16, flexDirection: 'row', padding: 3, borderRadius: 19, gap: 2 },
+  switchItem: { paddingHorizontal: 14, height: 32, borderRadius: 16, justifyContent: 'center', overflow: 'hidden' },
+  // Translúcido: se lee sobre cualquier foto sin tapar el momento.
+  glass: { backgroundColor: 'rgba(12,11,18,0.55)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.14)' },
   pause: { alignItems: 'center', justifyContent: 'center', paddingHorizontal: 32 },
   pauseIcon: { width: 56, height: 56, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
 });

@@ -98,6 +98,12 @@ export const INAT_GROUPS = [
   'Aves', 'Plantae', 'Insecta', 'Fungi', 'Mammalia', 'Amphibia', 'Reptilia', 'Mollusca', 'Arachnida', 'Actinopterygii',
 ];
 
+export const INAT_FIELDS = [
+  'id', 'observed_on', 'place_guess', 'license_code', 'user.login', 'user.name',
+  'taxon.id', 'taxon.name', 'taxon.rank', 'taxon.preferred_common_name', 'taxon.iconic_taxon_name',
+  'photos.url', 'photos.license_code', 'photos.attribution',
+].join(',');
+
 export function inaturalistUrl(lang: Lang, group: string, page: number): string {
   const params = new URLSearchParams({
     quality_grade: 'research',
@@ -108,8 +114,10 @@ export function inaturalistUrl(lang: Lang, group: string, page: number): string 
     per_page: '30',
     page: String(page),
     locale: lang,
+    // Solo los campos que usa el normalizador: ~5 KB con gzip en vez de ~1.3 MB (v1 sin filtro).
+    fields: INAT_FIELDS,
   });
-  return `https://api.inaturalist.org/v1/observations?${params}`;
+  return `https://api.inaturalist.org/v2/observations?${params}`;
 }
 
 export async function fetchInaturalistCards(fetch: FetchLike, opts: Opts & { lang: Lang }): Promise<RawCard[]> {

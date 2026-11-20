@@ -11,11 +11,15 @@ import { AIC_SOURCE, CLEVELAND_SOURCE, VAM_SOURCE } from './normalizers/museums.
 import { INATURALIST_SOURCE } from './normalizers/inaturalist.ts';
 import { EPIC_SOURCE } from './normalizers/epic.ts';
 import { EUROPEPMC_SOURCE } from './normalizers/europepmc.ts';
+import { NASA_VIDEO_SOURCE } from './normalizers/nasa-video.ts';
+import { ARCHIVE_SOURCE } from './normalizers/archive.ts';
+import { COMMONS_VIDEO_SOURCE } from './normalizers/commons-video.ts';
 
 export const SOURCES: Record<string, Source> = Object.fromEntries(
   [
     MET_SOURCE, ...WIKIPEDIA_SOURCES, COMMONS_SOURCE, CONVERSATION_SOURCE, WIKIDATA_ART_SOURCE, NASA_SOURCE,
     SINC_SOURCE, AIC_SOURCE, CLEVELAND_SOURCE, VAM_SOURCE, INATURALIST_SOURCE, EPIC_SOURCE, EUROPEPMC_SOURCE,
+    NASA_VIDEO_SOURCE, ARCHIVE_SOURCE, COMMONS_VIDEO_SOURCE,
   ].map((s) => [s.id, s]),
 );
 

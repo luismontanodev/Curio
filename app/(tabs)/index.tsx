@@ -13,11 +13,14 @@ import type { Card } from '../../src/core/types.ts';
 import { FeedCard } from '../../src/components/feed-card.tsx';
 import { MoreFooter } from '../../src/components/more-footer.tsx';
 import { ICON, IconButton } from '../../src/components/primitives.tsx';
+import { Gradient } from '../../src/components/gradient.tsx';
 import { useIngest } from '../../src/platform/ingest-context.tsx';
 import { useTabReselect } from '../../src/platform/use-tab-reselect.ts';
 import { useAppState, useTheme } from '../../src/platform/app-state.tsx';
 import { useCardHandlers } from '../../src/platform/card-actions.ts';
 import { useInfiniteFeed } from '../../src/platform/use-infinite-feed.ts';
+import { useVideoShelf } from '../../src/platform/use-video-shelf.ts';
+import { interleaveVideos } from '../../src/core/video.ts';
 
 export default function FeaturedScreen() {
   const t = useTheme();
@@ -46,15 +49,19 @@ export default function FeaturedScreen() {
     [savedIds, handlers],
   );
 
+  // Más posts que videos: un video después de cada 4 artículos (sin reproducir: póster).
+  const { videos, reload: reloadVideos } = useVideoShelf(prefs);
+  const withVideos = useMemo(() => interleaveVideos(cards, videos, 4), [cards, videos]);
+
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     try {
       await refresh();
-      await loadFirst();
+      await Promise.all([loadFirst(), reloadVideos()]);
     } finally {
       setRefreshing(false);
     }
-  }, [refresh, loadFirst]);
+  }, [refresh, loadFirst, reloadVideos]);
 
   // Tocar "Destacados" estando aquí: sube al inicio y actualiza.
   const list = useRef<FlatList<Card>>(null);
@@ -67,13 +74,14 @@ export default function FeaturedScreen() {
     <SafeAreaView edges={['top']} style={[styles.screen, { backgroundColor: c.bg }]}>
       <FlatList
         ref={list}
-        data={cards}
+        data={withVideos}
         keyExtractor={(card) => card.id}
         renderItem={renderItem}
         ListHeaderComponent={
           <View>
             <View style={styles.topBar}>
               <View style={[styles.logo, { backgroundColor: c.primary, borderRadius: t.radius.logo }]}>
+                <Gradient colors={c.accent} />
                 <LocateFixed size={18} color={c.onPrimary} strokeWidth={2} />
               </View>
               <Text style={[t.type.logo, { color: c.text, flex: 1, marginLeft: 10 }]}>Curio</Text>
@@ -92,7 +100,7 @@ export default function FeaturedScreen() {
                 <SlidersHorizontal size={ICON.size} color={c.primaryText} strokeWidth={ICON.stroke} />
               </IconButton>
             </View>
-            <Text accessibilityRole="header" style={[t.type.screenTitle, { color: c.text, paddingHorizontal: 20 }]}>
+            <Text accessibilityRole="header" style={[t.type.screenTitle, { color: c.text, fontSize: 28, paddingHorizontal: 20 }]}>
               Destacados
             </Text>
             <Text style={[t.type.body, { color: c.muted, paddingHorizontal: 20, marginTop: 4, marginBottom: 16 }]}>
@@ -132,5 +140,5 @@ const styles = StyleSheet.create({
   screen: { flex: 1 },
   loading: { alignItems: 'center', paddingVertical: 64 },
   topBar: { flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 16, paddingTop: 12, paddingBottom: 12 },
-  logo: { width: 32, height: 32, alignItems: 'center', justifyContent: 'center' },
+  logo: { width: 32, height: 32, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
 });

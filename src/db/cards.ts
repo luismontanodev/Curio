@@ -4,6 +4,8 @@ import { LANGS, type Card, type CardType, type ContentBlock, type FilterPrefs, t
 import { SCORER_VERSION, THRESHOLDS, findBlockedWord, normalize, scoreCard } from '../core/scorer.ts';
 import { sourceKindOf } from '../core/sources.ts';
 import { parseBlocks } from '../core/blocks.ts';
+import { parseVideo } from '../core/video.ts';
+import type { VideoInfo } from '../core/types.ts';
 import { bool, type SqlDb, type SqlValue } from './sql.ts';
 
 interface CardRow {
@@ -27,13 +29,15 @@ interface CardRow {
   score_signals: string;
   scorer_version: number;
   body?: string | null; // solo se lee al abrir una tarjeta, no en el feed
+  video_json: string | null;
+  credit: string | null;
 }
 
 /** Columnas del feed: todo menos `body`, que puede pesar decenas de KB por tarjeta. */
 const LIST_COLUMNS = [
   'id', 'source_id', 'source_kind', 'external_id', 'type', 'topic', 'lang', 'title', 'summary',
   'image_url', 'url', 'license', 'read_minutes', 'published_at', 'ingested_at',
-  'score_sensational', 'score_clickbait', 'score_signals', 'scorer_version',
+  'score_sensational', 'score_clickbait', 'score_signals', 'scorer_version', 'video_json', 'credit',
 ] as const;
 const COLUMNS = [...LIST_COLUMNS, 'body'] as const;
 const LIST_SELECT = LIST_COLUMNS.map((c) => `c.${c}`).join(', ');
@@ -44,6 +48,7 @@ function cardToParams(c: Card): SqlValue[] {
     c.summary ?? null, c.imageUrl ?? null, c.url, c.license ?? null, c.readMinutes ?? null,
     c.publishedAt ?? null, c.ingestedAt, c.quality.sensationalism, c.quality.clickbait,
     JSON.stringify(c.quality.signals), c.quality.scorerVersion,
+    c.video ? JSON.stringify(c.video) : null, c.credit ?? null,
     c.body?.length ? JSON.stringify(c.body) : null,
   ];
 }
@@ -65,6 +70,14 @@ function rowToCard(r: CardRow): Card {
       /* columna dañada: sin texto completo */
     }
   }
+  let video: VideoInfo | null = null;
+  if (r.video_json) {
+    try {
+      video = parseVideo(JSON.parse(r.video_json));
+    } catch {
+      /* columna dañada: sin video */
+    }
+  }
   return {
     id: r.id,
     sourceId: r.source_id,
@@ -73,6 +86,8 @@ function rowToCard(r: CardRow): Card {
     topic: r.topic as Topic,
     lang: toLang(r.lang),
     ...(body?.length ? { body } : {}),
+    ...(video ? { video } : {}),
+    ...(r.credit ? { credit: r.credit } : {}),
     title: r.title,
     summary: r.summary ?? undefined,
     imageUrl: r.image_url ?? undefined,

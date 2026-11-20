@@ -5,6 +5,7 @@ import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } fro
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 import { useTheme } from '../platform/app-state.tsx';
+import { Gradient } from './gradient.tsx';
 
 /** Tamaño y trazo de los íconos (estilo Lucide, trazo 1.8). */
 export const ICON = { size: 22, stroke: 1.8 } as const;
@@ -57,16 +58,31 @@ export function Chip({ label, active, onPress }: { label: string; active: boolea
         {
           height: t.size.chipHeight,
           borderRadius: t.size.chipHeight / 2,
-          backgroundColor: active ? t.colors.primary : 'transparent',
-          borderColor: active ? t.colors.primary : t.colors.border,
+          backgroundColor: active ? t.colors.primary : t.colors.soft,
+          borderColor: active ? 'transparent' : t.colors.border,
         },
         pressedOpacity(s),
       ]}
     >
+      {active ? <Gradient colors={t.colors.accent} /> : null}
       <Text style={[active ? t.type.chipActive : t.type.chip, { color: active ? t.colors.onPrimary : t.colors.text }]}>
         {label}
       </Text>
     </Pressable>
+  );
+}
+
+// --- Etiqueta de tema ----------------------------------------------------------------
+
+/** Etiqueta del tema con su color sólido y texto blanco: se lee sobre fotos y sobre el fondo. */
+export function TopicPill({ label, color, small = false }: { label: string; color: string; small?: boolean }) {
+  const t = useTheme();
+  return (
+    <View style={[styles.topicPill, small && styles.topicPillSmall, { backgroundColor: color }]}>
+      <Text style={[t.type.topicLabel, { color: '#FFFFFF', fontSize: small ? 10 : 11 }]} numberOfLines={1}>
+        {label}
+      </Text>
+    </View>
   );
 }
 
@@ -101,12 +117,13 @@ export function Button({
           height: height ?? t.size.buttonHeight,
           borderRadius: t.radius.button,
           backgroundColor: primary ? t.colors.primary : t.colors.card,
-          borderColor: primary ? t.colors.primary : t.colors.border,
+          borderColor: primary ? 'transparent' : t.colors.border,
           opacity: disabled ? 0.5 : s.pressed ? 0.75 : 1,
         },
         style,
       ]}
     >
+      {primary ? <Gradient colors={t.colors.accent} /> : null}
       <Text style={[t.type.button, { color: primary ? t.colors.onPrimary : t.colors.text }]}>{label}</Text>
     </Pressable>
   );
@@ -249,8 +266,11 @@ export function ScreenTitle({ children, right }: { children: string; right?: Rea
 
 const styles = StyleSheet.create({
   iconButton: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
-  chip: { paddingHorizontal: 16, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
-  button: { alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16, borderWidth: 1 },
+  // overflow hidden: el degradado respeta el radio.
+  chip: { paddingHorizontal: 16, borderWidth: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  button: { alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16, borderWidth: 1, overflow: 'hidden' },
+  topicPill: { alignSelf: 'flex-start', paddingHorizontal: 9, paddingVertical: 4, borderRadius: 6 },
+  topicPillSmall: { paddingHorizontal: 7, paddingVertical: 3, borderRadius: 5 },
   switchRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 14, minHeight: 60 },
   segmented: { flexDirection: 'row', padding: 4 },
   segment: { flex: 1, height: 44, alignItems: 'center', justifyContent: 'center' },

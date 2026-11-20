@@ -6,13 +6,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ChevronLeft, X } from 'lucide-react-native';
 
-import { FILTER_LEVELS, LANGS, TOPICS, type AppPrefs, type Lang, type Topic } from '../src/core/types.ts';
+import { FILTER_LEVELS, LANGS, TOPICS, type AppPrefs, type DataSaverMode, type Lang, type Topic } from '../src/core/types.ts';
 import { DEFAULT_PAUSE_EVERY, MAX_BLOCKED_WORD_LENGTH, dedupeWords } from '../src/db/prefs.ts';
 import { Button, Chip, ICON, IconButton, Segmented, SectionLabel, SwitchRow } from '../src/components/primitives.tsx';
 import { useAppState, useTheme } from '../src/platform/app-state.tsx';
 import { LANG_LABELS, LEVEL_LABELS, TOPIC_LABELS } from '../src/ui/format.ts';
 
 const LEVEL_OPTIONS = FILTER_LEVELS.map((l) => ({ value: l, label: LEVEL_LABELS[l] }));
+const DATA_SAVER_OPTIONS: { value: DataSaverMode; label: string }[] = [
+  { value: 'off', label: 'Nunca' },
+  { value: 'cellular', label: 'Datos móviles' },
+  { value: 'always', label: 'Siempre' },
+];
 
 export default function FiltersScreen() {
   const t = useTheme();
@@ -119,6 +124,14 @@ export default function FiltersScreen() {
             onChange={(on) => set({ pauseEvery: on ? DEFAULT_PAUSE_EVERY : null })}
           />
         </View>
+
+        <SectionLabel style={styles.section}>Ahorro de datos</SectionLabel>
+        <View style={{ marginTop: 12 }}>
+          <Segmented options={DATA_SAVER_OPTIONS} value={draft.dataSaver} onChange={(dataSaver) => set({ dataSaver })} />
+        </View>
+        <Text style={[t.type.body, { fontSize: 13, color: c.muted, marginTop: 10 }]}>
+          Los videos solo se reproducen al tocarlos, sin precargar el siguiente, y las imágenes se piden más pequeñas.
+        </Text>
 
         <SectionLabel style={styles.section}>Palabras bloqueadas</SectionLabel>
         {draft.blockedWords.length > 0 ? (

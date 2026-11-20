@@ -1,0 +1,78 @@
+{
+  "_nota": "metadata real recortado (files: video + 2 miniaturas)",
+  "server": "dn600304.us.archive.org",
+  "dir": "/0/items/PowellStreetScenesC1920s",
+  "metadata": {
+    "mediatype": "movies",
+    "collection": [
+      "shaping_sf",
+      "ephemera"
+    ],
+    "title": "Powell Street scenes c 1920s",
+    "description": "edited from silent footage from the Prelinger Archive to collect the images of Powell Street cable car turnaround and some shots going up and down Powell too.",
+    "subject": "Powell Street; cable cars; 1920s",
+    "creator": "Shaping San Francisco",
+    "runtime": "0:52",
+    "sound": "sound",
+    "licenseurl": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "identifier": "PowellStreetScenesC1920s",
+    "addeddate": "2011-01-11 05:47:26",
+    "publicdate": "2011-01-11 05:51:22",
+    "backup_location": "ia903608_12",
+    "ia_orig__runtime": "52 seconds"
+  },
+  "files": [
+    {
+      "name": "PowellStreetScenesC1920s.ogv",
+      "source": "derivative",
+      "title": "Powell Street scenes c 1920s",
+      "format": "Ogg Video",
+      "original": "PowellStreetScenesC1920s.avi",
+      "mtime": "1294725073",
+      "size": "3909725",
+      "md5": "81b9cf3e669fdd34b710bd57460b95b7",
+      "crc32": "5efdbef1",
+      "sha1": "d90b8797172fda14d65187e3db0cdc464bcdacc7",
+      "length": "51.65",
+      "height": "300",
+      "width": "450"
+    },
+    {
+      "name": "PowellStreetScenesC1920s_512kb.mp4",
+      "source": "derivative",
+      "title": "Powell Street scenes c 1920s",
+      "format": "512Kb MPEG4",
+      "original": "PowellStreetScenesC1920s.avi",
+      "mtime": "1294725026",
+      "size": "3737923",
+      "md5": "46477f395228411f4158311fc8ef3fee",
+      "crc32": "d27c8b51",
+      "sha1": "b53815ba48eeab1afe3d544aca61e1969d9490d2",
+      "length": "51.65",
+      "height": "240",
+      "width": "360"
+    },
+    {
+      "name": "PowellStreetScenesC1920s.thumbs/PowellStreetScenesC1920s_000001.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "PowellStreetScenesC1920s.avi",
+      "mtime": "1294724899",
+      "size": "5532",
+      "md5": "eb06c712547e93a9c8247ffe028985ff",
+      "crc32": "71b07a89",
+      "sha1": "0f008d9eef2397ceda0c0b96cd3b2d7362db1ed4"
+    },
+    {
+      "name": "PowellStreetScenesC1920s.thumbs/PowellStreetScenesC1920s_000005.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "PowellStreetScenesC1920s.avi",
+      "mtime": "1294724900",
+      "size": "6789",
+      "md5": "7c98b71ada569567ef5d388df4853a09",
+      "crc32": "c04b8de8",
+      "sha1": "17363a3678ef159935db1229e58615d341455920"
+    }
+  ]
+}

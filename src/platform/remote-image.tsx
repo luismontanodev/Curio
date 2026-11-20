@@ -4,12 +4,13 @@
 //   desenfocada de sí misma que llena el espacio (como Instagram).
 // - Si nada carga, deja ver el placeholder del contenedor en lugar de un hueco.
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { StyleSheet, View, type ImageStyle, type StyleProp } from 'react-native';
 import { Image } from 'expo-image';
 
-import { sharperImageUrl } from '../core/images.ts';
+import { IMAGE_WIDTH, IMAGE_WIDTH_SMALL, sizedImageUrl } from '../core/images.ts';
 import { CLIENT_HEADERS } from '../ingest/http.ts';
+import { useAppState } from './app-state.tsx';
 
 type Stage = 'sharp' | 'original' | 'failed';
 
@@ -19,6 +20,7 @@ export function RemoteImage({
   fit = 'cover',
   recyclingKey,
   accessibilityLabel,
+  width = IMAGE_WIDTH,
 }: {
   uri: string;
   style?: StyleProp<ImageStyle>;
@@ -27,14 +29,18 @@ export function RemoteImage({
   /** En listas: evita que una celda reciclada muestre por un instante la imagen anterior. */
   recyclingKey?: string;
   accessibilityLabel?: string;
+  /** Ancho que se necesita en pantalla: mosaicos 500, a todo el ancho 960. Con "Ahorro de datos", máximo 500. */
+  width?: number;
 }) {
-  const sharp = sharperImageUrl(uri);
+  const { saveData } = useAppState();
+  const sharp = sizedImageUrl(uri, saveData ? Math.min(width, IMAGE_WIDTH_SMALL) : width);
   const [state, setState] = useState<{ uri: string; stage: Stage }>({ uri, stage: sharp === uri ? 'original' : 'sharp' });
   // Si cambia la imagen (celda reciclada), se empieza de nuevo.
   const current = state.uri === uri ? state.stage : sharp === uri ? 'original' : 'sharp';
+  // Mismo objeto mientras no cambie la URL: expo-image no vuelve a evaluar la fuente en cada render.
+  const src = useMemo(() => ({ uri: current === 'sharp' ? sharp : uri, headers: CLIENT_HEADERS }), [current, sharp, uri]);
   if (current === 'failed') return null;
 
-  const src = { uri: current === 'sharp' ? sharp : uri, headers: { ...CLIENT_HEADERS } };
   const onError = () => setState({ uri, stage: current === 'sharp' ? 'original' : 'failed' });
 
   if (fit === 'cover') {

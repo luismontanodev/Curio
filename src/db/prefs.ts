@@ -1,8 +1,8 @@
 // Preferencias del usuario, guardadas como JSON en la tabla kv.
 
 import {
-  FILTER_LEVELS, LANGS, THEME_PREFS, TOPICS,
-  type AppPrefs, type FilterLevel, type ThemePref, type Topic,
+  DATA_SAVER_MODES, FILTER_LEVELS, LANGS, THEME_PREFS, TOPICS,
+  type AppPrefs, type DataSaverMode, type FilterLevel, type ThemePref, type Topic,
 } from '../core/types.ts';
 import type { SqlDb } from './sql.ts';
 
@@ -15,7 +15,9 @@ export const DEFAULT_PREFS: AppPrefs = {
   blockedWords: [],
   languages: ['es'],
   pauseEvery: 20,
-  theme: 'system',
+  // Oscuro vibrante por defecto (2026-11-19): las fotos resaltan más. Se cambia en Destacados o Mis datos.
+  theme: 'dark',
+  dataSaver: 'cellular',
 };
 
 /** Valor de "Pausa sugerida" cuando el usuario la enciende. */
@@ -66,7 +68,15 @@ export function sanitizePrefs(input: unknown): AppPrefs {
     languages: languages.length > 0 ? languages : d.languages, // al menos un idioma
     pauseEvery,
     theme: THEME_PREFS.includes(o.theme as ThemePref) ? (o.theme as ThemePref) : d.theme,
+    dataSaver: dataSaverMode(o.dataSaver, d.dataSaver),
   };
+}
+
+/** Modo de "Ahorro de datos". Acepta el booleano de la primera versión (true = siempre). */
+function dataSaverMode(v: unknown, fallback: DataSaverMode): DataSaverMode {
+  if (v === true) return 'always';
+  if (v === false) return 'off';
+  return DATA_SAVER_MODES.includes(v as DataSaverMode) ? (v as DataSaverMode) : fallback;
 }
 
 /** Recorta, quita vacías y repetidas (sin importar mayúsculas), y aplica límites. */

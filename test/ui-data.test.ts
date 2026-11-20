@@ -11,11 +11,11 @@ import { makeCard } from './helpers/fixtures.ts';
 
 const prefs = { ...DEFAULT_PREFS, onlyVerified: false };
 
-test('la preferencia de tema se sanea y por defecto sigue al sistema', async () => {
-  assert.equal(DEFAULT_PREFS.theme, 'system');
-  assert.equal(sanitizePrefs({ theme: 'dark' }).theme, 'dark');
-  assert.equal(sanitizePrefs({ theme: 'neón' }).theme, 'system');
-  assert.equal(sanitizePrefs({}).theme, 'system');
+test('la preferencia de tema se sanea y por defecto es oscura (quien eligió "sistema" lo conserva)', async () => {
+  assert.equal(DEFAULT_PREFS.theme, 'dark');
+  assert.equal(sanitizePrefs({ theme: 'system' }).theme, 'system');
+  assert.equal(sanitizePrefs({ theme: 'neón' }).theme, 'dark');
+  assert.equal(sanitizePrefs({}).theme, 'dark');
 
   const db = await freshDb();
   await setPrefs(db, { ...DEFAULT_PREFS, theme: 'light' });

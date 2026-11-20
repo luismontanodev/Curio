@@ -1,0 +1,46 @@
+{
+  "_nota": "Respuesta real de advancedsearch (collection:ephemera, licencia abierta) recortada; el último doc es sintético para probar el descarte sin licencia",
+  "responseHeader": {
+    "params": {
+      "query": "collection:ephemera AND mediatype:movies AND licenseurl:(&quot;http\\:\\/\\/creativecommons.org/licenses/publicdomain/&quot; OR &quot;http\\:\\/\\/creativecommons.org/publicdomain/zero/1.0/&quot; OR &quot;http\\:\\/\\/creativecommons.org/publicdomain/mark/1.0/&quot; OR &quot;http\\:\\/\\/creativecommons.org/licenses/by/4.0/&quot;)",
+      "qin": "collection:ephemera AND mediatype:movies AND licenseurl:(&quot;http://creativecommons.org/licenses/publicdomain/&quot; OR &quot;http://creativecommons.org/publicdomain/zero/1.0/&quot; OR &quot;http://creativecommons.org/publicdomain/mark/1.0/&quot; OR &quot;http://creativecommons.org/licenses/by/4.0/&quot;)",
+      "fields": "identifier,title,description,licenseurl,runtime,year,creator",
+      "wt": "json",
+      "rows": 300,
+      "start": 0
+    }
+  },
+  "response": {
+    "numFound": 922,
+    "docs": [
+      {
+        "creator": "Shaping San Francisco",
+        "description": "edited from silent footage from the Prelinger Archive to collect the images of Powell Street cable car turnaround and some shots going up and down Powell too.",
+        "identifier": "PowellStreetScenesC1920s",
+        "licenseurl": "http://creativecommons.org/publicdomain/zero/1.0/",
+        "runtime": "0:52",
+        "title": "Powell Street scenes c 1920s"
+      },
+      {
+        "description": "A brief clip promoting seeing movies in theaters vs staying home watching tv. Suggestion: insert this clip at the begining of any double-feature dvd you'd make.",
+        "identifier": "WalkIn-LetsFaceFacts",
+        "licenseurl": "http://creativecommons.org/licenses/publicdomain/",
+        "runtime": "0:35",
+        "title": "Walk In - Let's Face Facts"
+      },
+      {
+        "identifier": "meet_your_federal_government",
+        "title": "Meet Your Federal Government",
+        "licenseurl": "http://creativecommons.org/licenses/publicdomain/",
+        "runtime": "15:00",
+        "year": "1946",
+        "_nota": "doc real de collection:prelinger (15 min)"
+      },
+      {
+        "identifier": "ejemplo_sin_licencia",
+        "title": "Elemento sin licencia (sintético para probar el descarte)",
+        "runtime": "0:00:40"
+      }
+    ]
+  }
+}

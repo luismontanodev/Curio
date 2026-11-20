@@ -15,6 +15,10 @@ import { CLEVELAND_SOURCE, VAM_SOURCE } from '../core/normalizers/museums.ts';
 import { INATURALIST_SOURCE } from '../core/normalizers/inaturalist.ts';
 import { EPIC_SOURCE } from '../core/normalizers/epic.ts';
 import { EUROPEPMC_SOURCE } from '../core/normalizers/europepmc.ts';
+import { NASA_VIDEO_SOURCE } from '../core/normalizers/nasa-video.ts';
+import { ARCHIVE_SOURCE } from '../core/normalizers/archive.ts';
+import { COMMONS_VIDEO_SOURCE } from '../core/normalizers/commons-video.ts';
+import { fetchArchiveVideoCards, fetchCommonsVideoCards, fetchNasaVideoCards } from './videos.ts';
 import { existingExternalIds, insertCards, pruneCards, rescoreOutdated } from '../db/cards.ts';
 import { getKv, getPrefs, setKv } from '../db/prefs.ts';
 import type { SqlDb } from '../db/sql.ts';
@@ -36,7 +40,8 @@ const DAY = 24 * HOUR;
 /** Clases de trabajo. Cada una corre una vez por idioma que la soporte. */
 export type JobKind =
   | 'featured' | 'articles' | 'conversation' | 'art' | 'met' | 'nasa'
-  | 'sinc' | 'cleveland' | 'vam' | 'inaturalist' | 'epic' | 'pmc';
+  | 'sinc' | 'cleveland' | 'vam' | 'inaturalist' | 'epic' | 'pmc'
+  | 'nasa-video' | 'archive-video' | 'commons-video';
 
 export interface IngestOptions {
   now?: Date;
@@ -135,26 +140,6 @@ export async function runIngest(db: SqlDb, fetch: FetchLike, opts: IngestOptions
         return fetchArtCards(fetch, { lang, existing: ids, count: opts.artCount ?? 6, rng });
       };
     }
-    // Fuentes que solo publican en inglés: entran si el usuario lee inglés.
-    if (lang === 'en' && wants('met')) {
-      jobs['met:en'] = async () =>
-        fetchMetCards(fetch, { existing: await existing(MET_SOURCE.id), count: opts.metCount ?? 10, rng });
-    }
-    if (lang === 'en' && wants('nasa')) {
-      jobs['nasa:en'] = async () =>
-        fetchNasaCards(fetch, { existing: await existing(NASA_SOURCE.id), count: opts.nasaCount ?? 4, rng });
-    }
-    // Museos con API abierta (inglés).
-    // Art Institute of Chicago: APAGADO. Su API responde, pero su servidor de imágenes (IIIF)
-    // da 403 a clientes que no son navegador (verificado el 2026-11-18): sus obras saldrían
-    // sin imagen. No se disfraza el User-Agent. Para activarlo: `fetchAicCards` (ya probado)
-    // con `AIC_SOURCE`, cuando el AIC permita la descarga de imágenes desde apps.
-    if (lang === 'en' && wants('cleveland')) {
-      jobs['cleveland:en'] = async () => fetchClevelandCards(fetch, { existing: await existing(CLEVELAND_SOURCE.id), rng });
-    }
-    if (lang === 'en' && wants('vam')) {
-      jobs['vam:en'] = async () => fetchVamCards(fetch, { existing: await existing(VAM_SOURCE.id), rng });
-    }
     if (lang === 'en' && wants('pmc')) {
       jobs['pmc:en'] = async () => fetchPmcCards(fetch, { existing: await existing(EUROPEPMC_SOURCE.id), rng });
     }
@@ -171,6 +156,42 @@ export async function runIngest(db: SqlDb, fetch: FetchLike, opts: IngestOptions
     if ((lang === 'es' || lang === 'en') && wants('epic')) {
       jobs[`epic:${lang}`] = async () => fetchEpicCards(fetch, { lang, existing: await existing(EPIC_SOURCE.id) });
     }
+  }
+
+  // Imágenes en inglés (museos y NASA): se piden siempre, una vez por ingesta, porque Momentos
+  // muestra imágenes en los idiomas del usuario más inglés (`visualMomentPrefs`). El resto de la
+  // app las muestra solo si el usuario lee inglés.
+  if (wants('met')) {
+    jobs['met:en'] = async () =>
+      fetchMetCards(fetch, { existing: await existing(MET_SOURCE.id), count: opts.metCount ?? 10, rng });
+  }
+  if (wants('nasa')) {
+    jobs['nasa:en'] = async () =>
+      fetchNasaCards(fetch, { existing: await existing(NASA_SOURCE.id), count: opts.nasaCount ?? 4, rng });
+  }
+  // Art Institute of Chicago: APAGADO. Su API responde, pero su servidor de imágenes (IIIF)
+  // da 403 a clientes que no son navegador (verificado el 2026-11-18): sus obras saldrían
+  // sin imagen. No se disfraza el User-Agent. Para activarlo: `fetchAicCards` (ya probado)
+  // con `AIC_SOURCE`, cuando el AIC permita la descarga de imágenes desde apps.
+  if (wants('cleveland')) {
+    jobs['cleveland:en'] = async () => fetchClevelandCards(fetch, { existing: await existing(CLEVELAND_SOURCE.id), rng });
+  }
+  if (wants('vam')) {
+    jobs['vam:en'] = async () => fetchVamCards(fetch, { existing: await existing(VAM_SOURCE.id), rng });
+  }
+
+  // Video corto: en inglés, pero se pide siempre (el video es sobre todo visual y Momentos ›
+  // Videos acepta inglés además de los idiomas del usuario). Una vez por ingesta, no por idioma.
+  if (wants('nasa-video')) {
+    jobs['nasa-video'] = async () => fetchNasaVideoCards(fetch, { existing: await existing(NASA_VIDEO_SOURCE.id), rng });
+  }
+  if (wants('archive-video')) {
+    jobs['archive-video'] = async () => fetchArchiveVideoCards(fetch, { existing: await existing(ARCHIVE_SOURCE.id), rng });
+  }
+  // Commons: WebM no se reproduce en iOS; se usa su transcodificación 360p.mpeg4.mov.
+  // Pendiente de verificar en un iPhone real (ver docs/APIS.md).
+  if (wants('commons-video')) {
+    jobs['commons-video'] = async () => fetchCommonsVideoCards(fetch, { existing: await existing(COMMONS_VIDEO_SOURCE.id), rng });
   }
 
   const names = Object.keys(jobs);

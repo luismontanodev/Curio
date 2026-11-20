@@ -77,19 +77,25 @@ function routes() {
   };
 }
 
-test('con solo español no se piden fuentes en inglés (Met, NASA)', async () => {
+test('con solo español, de inglés solo se piden imágenes y videos (para Momentos), no texto', async () => {
   const db = await freshDb(); // preferencias por defecto: languages ['es']
   const fetch = fakeFetch(routes());
   const r = await runIngest(db, fetch, { now: NOW, rng: seededRng() });
 
-  assert.deepEqual(Object.keys(r.sources).sort(), ['art:es', 'articles:es', 'conversation:es', 'epic:es', 'featured:es', 'inaturalist:es', 'sinc:es']);
-  assert.ok(!fetch.calls.some((u) => u.startsWith(MET_SEARCH) || u.startsWith(NASA_SEARCH)));
+  assert.deepEqual(Object.keys(r.sources).sort(), [
+    'archive-video', 'art:es', 'articles:es', 'cleveland:en', 'commons-video', 'conversation:es', 'epic:es',
+    'featured:es', 'inaturalist:es', 'met:en', 'nasa-video', 'nasa:en', 'sinc:es', 'vam:en',
+  ]);
+  // Sin artículos científicos en inglés (Europe PMC): eso es texto para leer.
+  assert.ok(!Object.keys(r.sources).includes('pmc:en'));
+  assert.ok(fetch.calls.some((u) => u.startsWith(MET_SEARCH)), 'las obras del Met sí se piden (Momentos)');
   assert.deepEqual(r.sources['featured:es'], { fetched: 3 }); // tfa + imagen + 1 efeméride válida
   assert.deepEqual(r.sources['articles:es'], { fetched: 2 });
   assert.deepEqual(r.sources['conversation:es'], { fetched: 2 });
   assert.ok(r.sources['art:es'].fetched > 0);
 
-  const langs = await db.getAllAsync<{ lang: string }>('select distinct lang from cards', []);
+  // Lo que es para leer (artículos, efemérides) llega solo en español.
+  const langs = await db.getAllAsync<{ lang: string }>("select distinct lang from cards where type in ('article', 'event', 'paper')", []);
   assert.deepEqual(langs.map((l) => l.lang), ['es']);
   assert.ok(!(await db.getAllAsync<{ title: string }>('select title from cards', [])).some((c) => c.title.includes('viral')));
 });

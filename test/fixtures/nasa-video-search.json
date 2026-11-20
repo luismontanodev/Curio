@@ -1,0 +1,138 @@
+{
+  "_nota": "Respuesta real (q=hubble, media_type=video) recortada a 2 items: uno de 27.7 s y uno de 3:02",
+  "collection": {
+    "metadata": {
+      "total_hits": 166
+    },
+    "items": [
+      {
+        "href": "https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/collection.json",
+        "data": [
+          {
+            "album": [
+              "HST"
+            ],
+            "center": "GSFC",
+            "date_created": "2019-04-24T00:00:00Z",
+            "description": "On April 24, 2019, the Hubble Space Telescope celebrated its 29th year in orbit by premiering a never-before-seen view of the Southern Crab Nebula. Even after all these years, Hubble continues to uncover the mysteries of the universe. These are a few science achievements from Hubble’s latest year in orbit.",
+            "description_508": "On April 24, 2019, the Hubble Space Telescope celebrated its 29th year in orbit by premiering a never-before-seen view of the Southern Crab Nebula. Even after all these years, Hubble continues to uncover the mysteries of the universe. These are a few science achievements from Hubble’s latest year in orbit.",
+            "keywords": [
+              "Galaxy",
+              "Black Hole",
+              "Hubble Space Telescope",
+              "Astrophysics",
+              "Universe",
+              "Space",
+              "Supernova",
+              "Star",
+              "Planets and Moons"
+            ],
+            "location": "Goddard Space Flight Center",
+            "media_type": "video",
+            "nasa_id": "GSFC_20190424_HST_m13189_Hubble29",
+            "secondary_creator": "Timothy Childers, Katrina Jackson",
+            "title": "Hubble's 29th Anniversary"
+          }
+        ],
+        "links": [
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large.jpg",
+            "rel": "alternate",
+            "render": "image",
+            "width": 800,
+            "size": 20000,
+            "height": 450
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium.jpg",
+            "rel": "alternate",
+            "render": "image",
+            "width": 400,
+            "size": 7800,
+            "height": 225
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small.jpg",
+            "rel": "alternate",
+            "render": "image",
+            "width": 200,
+            "size": 3100,
+            "height": 112
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb.jpg",
+            "rel": "preview",
+            "render": "image",
+            "width": 300,
+            "size": 6700,
+            "height": 168
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29.vtt",
+            "rel": "captions"
+          }
+        ]
+      },
+      {
+        "href": "https://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/collection.json",
+        "data": [
+          {
+            "center": "GSFC",
+            "date_created": "2016-07-21T00:00:00Z",
+            "description": "Since its launch in 1990, the Hubble Space Telescope has sent back mind-blowing images that not only changed our understanding of our universe, but also changed where we see glimpses of our universe in everyday life.  Hubble is more than a science spacecraft; it’s a cultural phenomenon! Take a moment to think about where you’ve seen the Hubble Space Telescope or Hubble images in your daily life. Maybe you own a textbook with a picture of the telescope on the cover, or you walk by a mural inspired by Hubble images every day on your way to work. Perhaps you’ve even created art based on Hubble images. We want to see the Hubble impact in your life! Share your photos with us on Instagram, Twitter, Flickr and Facebook.",
+            "description_508": "#SpotHubble Promo Video II - 30-second version",
+            "keywords": [
+              "HST",
+              "Hubble Space Telescope",
+              "Universe"
+            ],
+            "location": "Goddard Space Flight Center",
+            "media_type": "video",
+            "nasa_id": "GSFC_20160721_HST_m12323_Spot_Short",
+            "photographer": "John Caldwell",
+            "secondary_creator": "Joy Ng, Clare Skelly, Kathryn Mersmann, Katrina Jackson",
+            "title": "Can You Spot Hubble: Short"
+          }
+        ],
+        "links": [
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large.jpg",
+            "rel": "alternate",
+            "render": "image",
+            "width": 800,
+            "size": 33000,
+            "height": 450
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium.jpg",
+            "rel": "alternate",
+            "render": "image",
+            "width": 400,
+            "size": 9600,
+            "height": 225
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small.jpg",
+            "rel": "alternate",
+            "render": "image",
+            "width": 200,
+            "size": 3200,
+            "height": 112
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb.jpg",
+            "rel": "preview",
+            "render": "image",
+            "width": 300,
+            "size": 7300,
+            "height": 168
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short.vtt",
+            "rel": "captions"
+          }
+        ]
+      }
+    ]
+  }
+}

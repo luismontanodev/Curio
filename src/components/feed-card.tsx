@@ -1,5 +1,5 @@
-// Tarjeta del feed, compacta y visual: imagen primero cuando la hay, título corto y una línea
-// con fuente y licencia. El resumen y los detalles aparecen con "Más" (si el usuario quiere).
+// Tarjeta del feed, compacta y visual: con foto, la imagen va a sangre y el tema y el título
+// encima, sobre un velo oscuro; debajo, una línea con fuente y licencia. El resumen y los detalles aparecen con "Más" (si el usuario quiere).
 // Tocarla abre el lector dentro de la app.
 
 import { memo, useState } from 'react';
@@ -9,8 +9,10 @@ import { Bookmark, ImageIcon, Share } from 'lucide-react-native';
 import type { Card } from '../core/types.ts';
 import { useAppState, useTheme } from '../platform/app-state.tsx';
 import { RemoteImage } from '../platform/remote-image.tsx';
+import { VideoBadge } from './video-badge.tsx';
 import { cardMeta, cardSource, cardTopicLabel, cardVariant } from '../ui/format.ts';
-import { ICON, IconButton } from './primitives.tsx';
+import { ICON, IconButton, TopicPill } from './primitives.tsx';
+import { Scrim } from './gradient.tsx';
 
 interface Props {
   card: Card;
@@ -33,7 +35,7 @@ function FeedCardBase({ card, saved, onOpen, onToggleSave, onShare, onLongPress,
   const variant = cardVariant(card);
   const isEvent = variant === 'event';
   const withImage = variant === 'image' && !!card.imageUrl;
-  const tone = t.topics[card.topic] ?? { fg: c.primaryText, bg: c.soft };
+  const tone = t.topics[card.topic] ?? { fg: c.primaryText, bg: c.soft, solid: c.primary };
 
   // Sin imagen, dos líneas de resumen dan contexto; con imagen, la imagen ya lo da.
   const summaryLines = expanded ? undefined : withImage ? teaserLines : 2;
@@ -60,6 +62,14 @@ function FeedCardBase({ card, saved, onOpen, onToggleSave, onShare, onLongPress,
         <View style={[styles.image, { height: t.size.cardImageHeight, backgroundColor: tone.bg }]}>
           <ImageIcon size={28} color={tone.fg} strokeWidth={ICON.stroke} />
           <RemoteImage uri={card.imageUrl!} fit="contain" recyclingKey={card.id} />
+          <Scrim />
+          <VideoBadge card={card} />
+          <View style={styles.overlay} pointerEvents="none">
+            <TopicPill label={cardTopicLabel(card)} color={tone.solid} />
+            <Text style={[t.type.cardTitleLarge, styles.overlayTitle]} numberOfLines={expanded ? 4 : 3}>
+              {card.title}
+            </Text>
+          </View>
         </View>
       ) : null}
 
@@ -69,14 +79,16 @@ function FeedCardBase({ card, saved, onOpen, onToggleSave, onShare, onLongPress,
             {note}
           </Text>
         ) : null}
-        <Text style={[t.type.topicLabel, { color: tone.fg }]} numberOfLines={1}>
-          {cardTopicLabel(card)}
-        </Text>
-        <Text style={[withImage ? t.type.cardTitleLarge : t.type.cardTitle, { color: c.text, marginTop: 4 }]} numberOfLines={expanded ? undefined : withImage ? 2 : 3}>
-          {card.title}
-        </Text>
+        {withImage ? null : (
+          <>
+            <TopicPill label={cardTopicLabel(card)} color={tone.solid} />
+            <Text style={[t.type.cardTitle, { color: c.text, marginTop: 8 }]} numberOfLines={expanded ? undefined : 3}>
+              {card.title}
+            </Text>
+          </>
+        )}
         {card.summary && summaryLines !== 0 ? (
-          <Text style={[t.type.body, { color: c.muted, marginTop: 6 }]} numberOfLines={summaryLines}>
+          <Text style={[t.type.body, { color: c.muted, marginTop: withImage ? 0 : 6 }]} numberOfLines={summaryLines}>
             {card.summary}
           </Text>
         ) : null}
@@ -121,7 +133,9 @@ export const FeedCard = memo(FeedCardBase);
 const styles = StyleSheet.create({
   card: { marginHorizontal: 16, borderWidth: 1, overflow: 'hidden' },
   image: { alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-  body: { paddingHorizontal: 16, paddingTop: 14, paddingBottom: 6 },
+  overlay: { position: 'absolute', left: 16, right: 16, bottom: 14 },
+  overlayTitle: { color: '#FFFFFF', marginTop: 8, textShadowColor: 'rgba(0,0,0,0.35)', textShadowRadius: 6 },
+  body: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 6 },
   footer: { flexDirection: 'row', alignItems: 'center', marginTop: 2, marginRight: -8 },
   more: { height: 44, paddingHorizontal: 10, justifyContent: 'center' },
 });

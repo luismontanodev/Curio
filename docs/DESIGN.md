@@ -1,68 +1,67 @@
 # Diseño — Curio
 
-Simple, intuitiva y calmada. Lila / morado claro con blanco en tema claro; morado noche en
-tema oscuro (no negro puro: cansa menos en lecturas largas). Los tokens están en
-`src/ui/theme.ts`; este documento explica cómo usarlos.
+**Oscuro vibrante** (decisión del 2026-11-19, reemplaza al lila calmado): fondo casi negro por
+defecto, un acento en degradado morado (tema claro, texto blanco) o lila (tema oscuro, texto oscuro), cada tema con su color sólido y los títulos
+sobre la foto. Las fotos y los videos son los protagonistas. El tema claro existe con el mismo
+acento. Los tokens están en `src/ui/theme.ts`; este documento explica cómo usarlos.
 
 ## Principios
 
-- **Calma sobre estímulo:** sin degradados llamativos, sin contadores, sin badges rojos.
-- **Contenido primero:** la tarjeta es protagonista; el chrome es mínimo.
+- **Llamativa, no ansiosa:** color y degradados para dar vida, nunca contadores ni badges rojos
+  de "nuevo" (filosofía 4).
+- **Contenido primero:** foto a sangre con el título encima, sobre un velo oscuro (`Scrim`).
 - **Honestidad visible:** fuente y licencia siempre a la vista.
-- **Un acento:** el lila primario marca selección y acción principal; nada más compite.
+- **Un acento:** el degradado morado/lila (`accent`) marca selección y acción principal
+  (botón principal, chip activo, selector Posts | Videos, logo). El color de cada tema solo
+  etiqueta (`TopicPill`).
+- **Degradados con `react-native-svg`** (`src/components/gradient.tsx`: `Gradient`, `Scrim`), sin
+  dependencias nuevas.
 
 ## Paleta
+
+### Tema oscuro (por defecto)
+
+| Token | Hex | Uso |
+|---|---|---|
+| `bg` | `#0C0B12` | Fondo |
+| `card` | `#17151F` | Tarjetas, barra de pestañas |
+| `soft` | `#221C30` | Chips inactivos, píldora de la pestaña activa, botón de filtros |
+| `border` | `#2D2740` | Bordes |
+| `text` | `#F5F4FA` | Texto principal |
+| `muted` | `#A6A3B8` | Secundario |
+| `primary` | `#C3AEF6` | Relleno de respaldo del acento (lila); switch encendido |
+| `primaryText` | `#C9B6F8` | Texto/íconos en acento (pestaña activa, "Más") |
+| `onPrimary` | `#1A1426` | Texto sobre el acento (oscuro, no blanco) |
+| `accent` | `#C3AEF6 → #E2A9F3` | Degradado lila de acción y selección |
+| `image` | `#17151F` | Fondo mientras carga una imagen |
 
 ### Tema claro
 
 | Token | Hex | Uso |
 |---|---|---|
-| `bg` | `#FFFFFF` | Fondo de pantalla |
-| `card` | `#FFFFFF` | Tarjetas (con borde) |
-| `soft` | `#F3EDFC` | Superficie lila: placeholders de imagen, chips inactivos de palabra, efemérides, botón de filtros |
-| `border` | `#E6DCF7` | Bordes de tarjetas, chips inactivos, separadores |
-| `text` | `#1F1633` | Texto principal |
-| `muted` | `#5F5675` | Texto secundario, metadatos |
-| `primary` | `#7B5CC6` | Botón principal, chip activo, switch encendido |
-| `primaryText` | `#6B4FB8` | Texto/íconos en acento (etiquetas de tema, ícono activo) |
-| `onPrimary` | `#FFFFFF` | Texto sobre `primary` |
-| `trackOff` | `#D9CFEA` | Riel del switch apagado; segmentos pendientes de la barra de capítulo |
-| `image` | `#E9E0FA` | Fondo mientras carga una imagen a pantalla completa (v2) |
+| `bg` / `card` | `#FFFFFF` | Fondo y tarjetas (con borde) |
+| `soft` | `#F3EDFC` | Chips inactivos, botón de filtros |
+| `border` | `#E6DCF7` | Bordes |
+| `text` | `#15131D` | Texto principal |
+| `muted` | `#5C5869` | Secundario |
+| `primary` | `#6D3FD0` | Switch encendido, respaldo del acento |
+| `primaryText` | `#6B4FB8` | Texto/íconos en acento |
+| `onPrimary` | `#FFFFFF` | Texto sobre el acento |
+| `accent` | `#6D3FD0 → #9D3BC9` | Degradado morado de acción y selección |
 
-### Tema oscuro
+### Color de tema (`topicColors[*].solid`)
 
-| Token | Hex | Uso |
-|---|---|---|
-| `bg` | `#14101E` | Fondo |
-| `card` | `#1E182D` | Tarjetas |
-| `soft` | `#2A2140` | Superficie lila |
-| `border` | `#352B4F` | Bordes |
-| `text` | `#F3EEFC` | Texto principal |
-| `muted` | `#B5AACB` | Secundario |
-| `primary` | `#C3AEF6` | Acción principal (lila claro) |
-| `primaryText` | `#C9B6F8` | Texto/íconos en acento |
-| `onPrimary` | `#1F1633` | Texto sobre `primary` (oscuro, no blanco) |
-| `trackOff` | `#463B60` | Switch apagado; segmentos pendientes de la barra de capítulo |
-| `image` | `#2A2140` | Fondo mientras carga una imagen (v2) |
+Relleno de `TopicPill` (sobre fotos) y de los mosaicos sin foto, con texto blanco: ciencia
+`#0F766E`, tecnología `#1D4ED8`, arte `#C2410C`, cultura `#A15C07`, historia `#8B5A34`, naturaleza
+`#15803D`, espacio `#4F46E5`, música `#BE185D`. `fg`/`bg` siguen para texto y tintes suaves.
 
 ### Contraste verificado (WCAG)
 
-Claro:
-- `text`/`bg`: 17.2
-- `muted`/`bg`: 6.8
-- `muted`/`soft`: 6.0
-- `primaryText`/`bg`: 6.1
-- `primaryText`/`soft`: 5.3
-- `onPrimary`/`primary`: 5.0
-
-Oscuro:
-- `text`/`bg`: 16.4
-- `muted`/`bg`: 8.5
-- `muted`/`card`: 7.8
-- `muted`/`soft`: 6.9
-- `primaryText`/`bg`: 10.3
-- `primaryText`/`soft`: 8.3
-- `onPrimary`/`primary`: 8.8
+- Oscuro: `text`/`bg` 17.9 · `muted`/`bg` 8.0 · `muted`/`soft` 6.7 · `primaryText`/`bg` 10.8 ·
+  `primaryText`/`soft` 9.0 · `onPrimary` sobre el acento 9.1–9.6.
+- Claro: `text`/`bg` 18.4 · `muted`/`soft` 6.0 · `primaryText`/`bg` 6.1 · `primaryText`/`soft` 5.3 ·
+  blanco sobre el acento 6.4–5.4.
+- Blanco sobre cada `solid` de tema: 5.0–6.7.
 
 Todos ≥ 4.5:1. Si agregas un color, verifica que siga cumpliéndolo.
 
@@ -138,8 +137,20 @@ Guardados (`app/guardados.tsx`), Filtros y el Lector se abren encima, con flecha
   etiqueta). **Doble toque** sobre la imagen guarda (nunca quita) con un marcador grande que
   aparece y se desvanece (~650 ms). Sin imagen: fondo del color del tema y texto en `text`.
 - **Destacados:** 2 líneas de resumen bajo el título (`teaserLines`), aunque haya imagen.
+- **Momentos › Posts | Videos:** selector arriba a la derecha (píldora `card`, segmento activo
+  en `primary`). En Videos: el video a pantalla completa (sobre su póster mientras carga), con
+  audio y en bucle; un toque silencia o activa el sonido y el botón "Sonido" va arriba de la
+  columna de acciones. La duración va junto al tema ("Espacio · 0:42"). Con "Ahorro de datos":
+  póster con ▶ y "toca para reproducir".
+- **Filtros › Ahorro de datos:** selector de tres (Nunca / Datos móviles / Siempre) con una línea
+  que explica qué cambia.
+- **Explorar:** el título y la barra de búsqueda quedan fijos arriba; los chips de tema y la
+  línea del filtro se desplazan con la lista.
+- **Videos en listas:** póster con ▶ (círculo negro al 55 %) y la duración abajo a la derecha;
+  nunca se reproducen solos. Como mucho uno cada cuatro publicaciones.
 - **Temas como chips en Explorar:** todos (Ciencia, Tecnología, Arte, Cultura, Historia,
-  Naturaleza, Espacio, Música), estén o no encendidos en Filtros.
+  Naturaleza, Espacio, Música), estén o no encendidos en Filtros. Selección múltiple: se pueden
+  marcar varios; sin ninguno, "Para ti".
 - **Barra inferior:** fondo `card`, altura 64 + área segura (queda por encima de los botones
   de Android, nunca detrás).
 - **Explorar en cuadrícula** de 2 columnas (margen 16, separación 12): mosaico con imagen
@@ -151,7 +162,7 @@ Guardados (`app/guardados.tsx`), Filtros y el Lector se abren encima, con flecha
 
 ### Colores por tema
 
-Dan identidad sin competir con el lila, que sigue marcando selección y acción. `fg` para
+Dan identidad sin competir con el acento (degradado morado/lila), que marca selección y acción. `fg` para
 etiquetas y texto (≥ 4.79:1 sobre `card`, `bg` y su propio tinte); `bg` para fondos
 (placeholder de imagen, efemérides, mosaicos sin foto). Tokens en `topicColors` (`src/ui/theme.ts`).
 

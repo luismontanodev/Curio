@@ -38,6 +38,7 @@ const TYPE_LABELS: Record<CardType, string> = {
   article: 'Artículo',
   paper: 'Artículo científico',
   event: 'Efeméride',
+  video: 'Video',
 };
 
 /** Tipo según la fuente: un artículo de Wikipedia es "destacado"; uno de The Conversation, divulgación. */

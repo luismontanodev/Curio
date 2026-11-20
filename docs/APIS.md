@@ -117,6 +117,34 @@ destacados (calidad, no popularidad).
 clientes que no son navegador), Openverse (504), Gutendex (sin respuesta). Siguen fuera por
 pedir key: Smithsonian, Europeana, Harvard Art Museums y la API clásica del Rijksmuseum.
 
+## Video corto (2026-11-18) — `src/ingest/videos.ts`, fixtures reales en `test/fixtures/`
+
+Reglas comunes: momento principal solo si dura **15–60 s** (sin duración conocida → no entra);
+video en MP4 (H.264) o MPEG-4 en QuickTime (`VIDEO_MIMES`), los dos que reproducen iOS y
+Android; póster en `imageUrl`; autor en `credit`. Títulos externos pasan por el scorer. Las tres
+fuentes publican en inglés: Momentos › Videos acepta los idiomas del usuario **más inglés**
+(`videoLanguages`) y todos los temas; las listas (Destacados, Explorar) muestran como mucho
+**1 video cada 4 publicaciones** (`capVideos`, `interleaveVideos`) y nunca reproducen solas.
+
+| Fuente | Endpoints verificados | Campos usados | Licencia | Estado |
+|---|---|---|---|---|
+| **NASA Image and Video Library** (`nasa-video`) | `images-api.nasa.gov/search?q=&media_type=video` → `images-assets.nasa.gov/video/{id}/metadata.json` → `images-api.nasa.gov/asset/{id}` | `nasa_id`, `title`, `description`, `center`, `date_created`; duración en `QuickTime:Duration` ("0:01:35" o "27.73 s"); variantes `~mobile.mp4` (elegida: ≈ 2.5 MB/min) › `~small` › `~preview` › `~medium`; póster `~medium.jpg` | Dominio público | ✅ Activa. Se descarta lo que tenga señales de terceros (©, "copyright", "courtesy of" que no sea NASA). El lector aclara que la NASA no respalda la app. Rendimiento por tema medido el 2026-11-20 (ver `NASA_VIDEO_QUERIES`): solo se usan los que dan ≥ 4 clips de 15–60 s de 40; dos temas por ingesta, hasta 30 candidatos y 8 clips. Con eso, NASA + Internet Archive dan ~6 videos por ronda en ~2.5 s |
+| **Internet Archive** (`internet-archive`) | `archive.org/advancedsearch.php` (collection:prelinger/ephemera, `mediatype:movies`, `licenseurl:("…")` con **valores exactos**: con comodines su búsqueda responde `BACKEND_ERROR`) → `archive.org/metadata/{id}` | `licenseurl` (verificada en los metadatos del elemento), `runtime` (filtro barato), archivo `512Kb MPEG4` y su `length`, `__ia_thumb.jpg`, `creator` | Solo dominio público, CC0, PDM, CC BY, CC BY-SA; sin licencia clara → fuera | ✅ Activa, para curaduría: solo ~3 % de estas colecciones son clips de 15–60 s con licencia abierta. Se revisan 6 candidatos por ingesta (hasta 4 clips). Lo largo queda para Profundizar o paquetes curados |
+| **Wikimedia Commons** (`commons-video`) | `commons.wikimedia.org/w/api.php?generator=search&gsrsearch=filetype:video …&prop=imageinfo,videoinfo&viprop=derivatives` | `imageinfo.duration`, `descriptionurl`, `extmetadata` (`LicenseShortName`, `Artist`, `ImageDescription`); derivado **`360p.mpeg4.mov`** | CC0, CC BY, CC BY-SA, dominio público | ⚠️ **Activa en iOS y Android, pendiente de verificar en un iPhone real.** Commons guarda WebM/Ogg (iOS no los reproduce), pero ofrece la transcodificación `360p.mpeg4.mov` (MPEG-4 Part 2 en QuickTime, ≈ 0.9 Mbps), que iOS y Android reproducen. Volumen bajo (una búsqueda por ingesta) por el límite de peticiones de Wikimedia. Póster: fotograma `…/thumb/…/{N}px--Archivo.webm.jpg` |
+
+### Datos y tiempos de carga
+
+- **Variante más ligera de cada fuente** (ver tabla) y póster mientras carga.
+- **Solo dos reproductores a la vez:** el video visible y el siguiente (precarga); el resto, solo póster.
+- **Caché en disco** (`useCaching`) acotada a 150 MB (`setVideoCacheSizeAsync`): un video ya visto no se vuelve a descargar.
+- **Búfer corto:** ~6 s por delante y tope de ~6 MB (`bufferOptions`), en vez de bajar el archivo completo.
+- **Imágenes del tamaño justo** (`sizedImageUrl`): 500 px en mosaicos, 960 a todo el ancho; con "Ahorro de datos", 500 siempre.
+- **gzip:** Android (OkHttp) e iOS lo piden solos (no fijar `Accept-Encoding` a mano): SINC baja de 2.9 MB a 433 KB.
+- **iNaturalist v2 con `fields`:** de ~1.3 MB a ~5 KB por búsqueda.
+- **NASA SVS (Scientific Visualization Studio)** — `svs.gsfc.nasa.gov/api/search/` y `/api/{id}` (sin key, verificado 2026-11-20): **descartada por ahora**. Sus archivos son enormes (4K, ProRes) sin variante ligera, la API no da duración y hay piezas con música de terceros.
+- **"Ahorro de datos"** (preferencia en Filtros y en el respaldo: **Nunca / Datos móviles / Siempre**, por defecto *Datos móviles*): videos solo al tocar, imágenes de 500 px, sin precarga. La red se lee con `expo-network` (`useNetworkState`, una sola suscripción en `AppStateProvider`) y `savingData` decide; si la red aún no se conoce o va por VPN, ahorra.
+- **Búsqueda:** se pide a Wikipedia cuando el usuario deja de escribir 500 ms, no en cada letra.
+
 ## Candidatas sin key (siguiente en agregar)
 
 | Fuente | Por qué | Nota |

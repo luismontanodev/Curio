@@ -1,0 +1,104 @@
+{
+  "collection": {
+    "version": "1.1",
+    "href": "http://images-api.nasa.gov/asset/GSFC_20160721_HST_m12323_Spot_Short",
+    "items": [
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~orig.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short.vtt"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~mobile.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~preview.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/metadata.json"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~small_5.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~large_5.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~medium_5.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20160721_HST_m12323_Spot_Short/GSFC_20160721_HST_m12323_Spot_Short~thumb_5.jpg"
+      }
+    ]
+  }
+}

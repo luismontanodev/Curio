@@ -22,7 +22,19 @@ export type ContentBlock =
   | { kind: 'p' | 'h' | 'quote'; text: string }
   | { kind: 'img'; src: string; caption?: string };
 
-export type CardType = 'artwork' | 'article' | 'event' | 'image' | 'paper';
+export type CardType = 'artwork' | 'article' | 'event' | 'image' | 'paper' | 'video';
+
+/** Formatos de video que la app reproduce en iOS y Android (MP4 H.264 y MPEG-4 en QuickTime). */
+export type VideoMime = 'video/mp4' | 'video/quicktime';
+
+/** Video corto de una tarjeta. `url` es la variante más ligera que da la fuente; el póster va en `imageUrl`. */
+export interface VideoInfo {
+  url: string;
+  mime: VideoMime;
+  durationSec: number;
+  width?: number;
+  height?: number;
+}
 
 /** Qué tan confiable es el tipo de fuente. Determina el multiplicador del score. */
 export type SourceKind = 'museum' | 'encyclopedia' | 'journal' | 'magazine' | 'news';
@@ -65,6 +77,10 @@ export interface Card {
   url: string; // original: se muestra como atribución; la lectura ocurre dentro de la app
   /** Texto completo cuando la fuente lo entrega y su licencia permite mostrarlo (p. ej. The Conversation). */
   body?: ContentBlock[];
+  /** Video (tarjetas `type: 'video'`): el póster es `imageUrl`. */
+  video?: VideoInfo;
+  /** Autor o crédito de la obra/video, para la atribución. */
+  credit?: string;
   license?: string;
   readMinutes?: number;
   publishedAt?: string; // ISO 8601
@@ -92,7 +108,15 @@ export interface FilterPrefs {
 export interface AppPrefs extends FilterPrefs {
   pauseEvery: number | null; // "Pausa sugerida": cada N tarjetas, null = apagado
   theme: ThemePref; // tema de la interfaz; 'system' sigue al teléfono
+  /**
+   * "Ahorro de datos": videos solo al tocar, imágenes más pequeñas y sin precarga.
+   * 'cellular' (por defecto) lo activa solo con datos móviles; 'always' y 'off' no miran la red.
+   */
+  dataSaver: DataSaverMode;
 }
+
+export type DataSaverMode = 'off' | 'cellular' | 'always';
+export const DATA_SAVER_MODES: readonly DataSaverMode[] = ['off', 'cellular', 'always'];
 
 export type ThemePref = 'system' | 'light' | 'dark';
 
@@ -100,15 +124,15 @@ export const TOPICS: readonly Topic[] = [
   'ciencia', 'tecnologia', 'arte', 'cultura', 'historia', 'naturaleza', 'espacio', 'musica',
 ];
 export const LANGS: readonly Lang[] = ['es', 'en', 'fr', 'pt'];
-export const CARD_TYPES: readonly CardType[] = ['artwork', 'article', 'event', 'image', 'paper'];
+export const CARD_TYPES: readonly CardType[] = ['artwork', 'article', 'event', 'image', 'paper', 'video'];
 export const FILTER_LEVELS: readonly FilterLevel[] = ['suave', 'moderado', 'estricto'];
 export const THEME_PREFS: readonly ThemePref[] = ['system', 'light', 'dark'];
 
 // --- v2: momentos (docs/PRODUCTO.md) -------------------------------------------
 
-export type MomentFormat = 'image-fact' | 'detail-zoom' | 'which-first' | 'timeline' | 'text-fact' | 'sound' | 'event';
+export type MomentFormat = 'image-fact' | 'detail-zoom' | 'which-first' | 'timeline' | 'text-fact' | 'sound' | 'event' | 'video';
 export const MOMENT_FORMATS: readonly MomentFormat[] = [
-  'image-fact', 'detail-zoom', 'which-first', 'timeline', 'text-fact', 'sound', 'event',
+  'image-fact', 'detail-zoom', 'which-first', 'timeline', 'text-fact', 'sound', 'event', 'video',
 ];
 
 /** De dónde sale el gancho: calculado de los datos, curado a mano o el título de la fuente. */
@@ -136,7 +160,15 @@ export interface Moment {
   /** Etiqueta corta sobre el gancho ("La gran ola de Kanagawa"). */
   label?: string;
   depth?: { short?: string };
-  media?: { imageUrl?: string; focus?: { x: number; y: number; r: number } };
+  media?: {
+    imageUrl?: string; // en videos, el póster
+    focus?: { x: number; y: number; r: number };
+    videoUrl?: string;
+    durationSec?: number;
+    mimeType?: VideoMime;
+  };
+  /** Autor o crédito (atribución). */
+  credit?: string;
   choices?: { label: string; detail: string; correct: boolean }[]; // which-first
   timeline?: { label: string; year: number; note?: string }[]; // años negativos = a. C.
   sources: MomentSource[]; // al menos una

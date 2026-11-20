@@ -4,8 +4,10 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
+import { NetworkStateType, useNetworkState } from 'expo-network';
 
 import type { AppPrefs, Card } from '../core/types.ts';
+import { savingData, type Connection } from '../core/video.ts';
 import { listSavedIds, saveCard, unsaveCard } from '../db/cards.ts';
 import { DEFAULT_PREFS, getPrefs, setPrefs } from '../db/prefs.ts';
 import { theme as buildTheme, type Theme } from '../ui/theme.ts';
@@ -21,6 +23,16 @@ interface AppStateValue {
   reload: () => Promise<void>;
   /** Cambia cada vez que cambian los guardados: sirve como dependencia para recargar listas. */
   savedVersion: number;
+  /** "Ahorro de datos" efectivo ahora: la preferencia aplicada a la conexión actual. */
+  saveData: boolean;
+}
+
+/** Tipo de red de expo-network → lo que importa para gastar datos. Una VPN no dice qué hay debajo. */
+function connectionOf(type: NetworkStateType | undefined, connected: boolean | undefined): Connection {
+  if (connected === false || type === NetworkStateType.NONE) return 'offline';
+  if (type === NetworkStateType.CELLULAR) return 'cellular';
+  if (type === NetworkStateType.WIFI || type === NetworkStateType.ETHERNET) return 'wifi';
+  return 'unknown';
 }
 
 const AppStateContext = createContext<AppStateValue | null>(null);
@@ -30,6 +42,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [prefs, setPrefsState] = useState<AppPrefs | null>(null);
   const [savedIds, setSavedIds] = useState<ReadonlySet<string>>(new Set());
   const [savedVersion, setSavedVersion] = useState(0);
+  // Una sola suscripción a la red para toda la app (no una por imagen).
+  const network = useNetworkState();
+  const connection = connectionOf(network.type, network.isConnected);
 
   const reload = useCallback(async () => {
     const [p, ids] = await Promise.all([getPrefs(db), listSavedIds(db)]);
@@ -82,9 +97,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     [db, removeSaved],
   );
 
+  const saveData = prefs ? savingData(prefs.dataSaver, connection) : true;
   const value = useMemo(
-    () => (prefs ? { prefs, updatePrefs, savedIds, toggleSaved, removeSaved, reload, savedVersion } : null),
-    [prefs, updatePrefs, savedIds, toggleSaved, removeSaved, reload, savedVersion],
+    () => (prefs ? { prefs, updatePrefs, savedIds, toggleSaved, removeSaved, reload, savedVersion, saveData } : null),
+    [prefs, updatePrefs, savedIds, toggleSaved, removeSaved, reload, savedVersion, saveData],
   );
 
   // Hasta leer las preferencias no se pinta nada: evita un destello con el tema equivocado.

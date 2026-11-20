@@ -4,7 +4,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
-import { TOPICS, type Card, type FilterPrefs } from '../core/types.ts';
+import { CARD_TYPES, TOPICS, type Card, type FilterPrefs, type Topic } from '../core/types.ts';
+import { capVideos, videoLanguages } from '../core/video.ts';
 import { evaluate, withQuality } from '../core/scorer.ts';
 import { sourceKindOf } from '../core/sources.ts';
 import { recommend, type Recommendation } from '../core/recommend.ts';
@@ -14,9 +15,14 @@ import { queueIngest } from './ingest-queue.ts';
 import type { MoreState } from './use-infinite-feed.ts';
 
 const PAGE = 20;
+const POST_TYPES = CARD_TYPES.filter((t) => t !== 'video');
 const NETWORK_ATTEMPTS = 2;
 
-export function useRecommendations(prefs: FilterPrefs) {
+/**
+ * `videoTopics`: temas de los videos que entran (con "Para ti", todos; con chips, los elegidos).
+ * Los videos se limitan a 1 cada 4 publicaciones (`capVideos`): más posts que videos.
+ */
+export function useRecommendations(prefs: FilterPrefs, videoTopics: readonly Topic[] = TOPICS) {
   const db = useSQLiteContext();
   const [recs, setRecs] = useState<Recommendation[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -30,12 +36,21 @@ export function useRecommendations(prefs: FilterPrefs) {
 
   const page = useCallback(async () => {
     const shown = recsRef.current.map((r) => r.card);
-    const [pool, saved] = await Promise.all([
-      getFeedPage(db, prefs, { limit: 100, hideSeen: true, excludeIds: shown.map((c) => c.id) }),
+    const exclude = shown.map((c) => c.id);
+    const [pool, vids, saved] = await Promise.all([
+      getFeedPage(db, prefs, { limit: 100, hideSeen: true, excludeIds: exclude, types: POST_TYPES }),
+      getFeedPage(
+        db,
+        { ...prefs, topics: [...videoTopics], languages: videoLanguages(prefs.languages) },
+        { limit: 20, hideSeen: true, excludeIds: exclude, types: ['video'] },
+      ),
       listSaved(db),
     ]);
-    return recommend(pool.cards, saved.map((s) => s.card), { limit: PAGE, after: shown });
-  }, [db, prefs]);
+    const ranked = recommend([...pool.cards, ...vids.cards], saved.map((s) => s.card), { limit: PAGE * 2, after: shown });
+    // Más posts que videos: se respeta la proporción contando lo que ya está en pantalla.
+    const kept = new Set(capVideos([...shown, ...ranked.map((r) => r.card)]).map((c) => c.id));
+    return ranked.filter((r) => kept.has(r.card.id)).slice(0, PAGE);
+  }, [db, prefs, videoTopics]);
 
   const loadMore = useCallback(async () => {
     if (working.current) return;
@@ -89,6 +104,9 @@ export function useRecommendations(prefs: FilterPrefs) {
 
 export type SearchStatus = 'idle' | 'searching' | 'done' | 'offline';
 
+/** Se busca cuando el usuario deja de escribir este tiempo (no en cada letra). */
+const SEARCH_DELAY_MS = 500;
+
 /**
  * Búsqueda: primero lo del teléfono (al instante), luego Wikipedia en cada idioma del
  * usuario. Los temas no limitan (es una búsqueda explícita); idiomas y calidad sí.
@@ -132,7 +150,7 @@ export function useSearch(prefs: FilterPrefs, query: string) {
         console.warn('Búsqueda fallida', e);
         if (!cancelled) setStatus('offline');
       }
-    }, 350);
+    }, SEARCH_DELAY_MS);
     return () => {
       cancelled = true;
       clearTimeout(timer);

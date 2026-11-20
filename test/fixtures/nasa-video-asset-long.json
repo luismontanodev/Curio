@@ -1,0 +1,104 @@
+{
+  "collection": {
+    "version": "1.1",
+    "href": "http://images-api.nasa.gov/asset/GSFC_20190424_HST_m13189_Hubble29",
+    "items": [
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~orig.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29.vtt"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~mobile.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~preview.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small.mp4"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/metadata.json"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~medium_5.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~small_5.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~large_5.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb_1.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb_2.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb_3.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb_4.jpg"
+      },
+      {
+        "href": "http://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb_5.jpg"
+      }
+    ]
+  }
+}

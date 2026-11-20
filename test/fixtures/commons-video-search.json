@@ -1,0 +1,427 @@
+{
+  "_nota": "Respuesta real de la API de Commons (generator=search, filetype:video aurora, prop=imageinfo|videoinfo con derivatives) del 2026-11-18",
+  "query": {
+    "pages": [
+      {
+        "pageid": 141252058,
+        "ns": 6,
+        "title": "File:002 Northern lights in the night sky over Mývatn in Iceland Video by Giles Laurent.webm",
+        "index": 2,
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "size": 99692793,
+            "width": 3840,
+            "height": 2160,
+            "duration": 5.32,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/141252058",
+            "extmetadata": {
+              "ImageDescription": {
+                "value": "Timelapse of the Northern lights in the night sky over Mývatn in Iceland. Polar aurorae are caused by the collision of charged particles in the solar wind with gases in the upper atmosphere. These collisions generate tiny flashes of light that fill the sky with veils of colour. Video captured by Giles Laurent",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "video/webm",
+            "mediatype": "VIDEO"
+          }
+        ],
+        "videoinfo": [
+          {
+            "size": 99692793,
+            "width": 3840,
+            "height": 2160,
+            "duration": 5.32,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/141252058",
+            "mime": "video/webm",
+            "derivatives": [
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f4/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm.240p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "240p.vp9.webm",
+                "width": 426,
+                "height": 240,
+                "bandwidth": 231968
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f4/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm.360p.mpeg4.mov",
+                "type": "video/quicktime; codecs=\"mp4v\"",
+                "transcodekey": "360p.mpeg4.mov",
+                "width": 640,
+                "height": 360,
+                "bandwidth": 1272936
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f4/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm.480p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "480p.vp9.webm",
+                "width": 854,
+                "height": 480,
+                "bandwidth": 934296
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f4/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm/002_Northern_lights_in_the_night_sky_over_M%C3%BDvatn_in_Iceland_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "1080p.vp9.webm",
+                "width": 1920,
+                "height": 1080,
+                "bandwidth": 3941088
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pageid": 148465799,
+        "ns": 6,
+        "title": "File:Aurora Borealis over Spruce Woods, Manitoba.webm",
+        "index": 4,
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "size": 300738623,
+            "width": 4928,
+            "height": 3264,
+            "duration": 19.8,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_over_Spruce_Woods,_Manitoba.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/148465799",
+            "extmetadata": {
+              "ImageDescription": {
+                "value": "Timeː from May 10, 3:50 UTC to May 10, 4:50 UTC.",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:HachiBoy&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:HachiBoy (page does not exist)\">HachiBoy</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "video/webm",
+            "mediatype": "VIDEO"
+          }
+        ],
+        "videoinfo": [
+          {
+            "size": 300738623,
+            "width": 4928,
+            "height": 3264,
+            "duration": 19.8,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_over_Spruce_Woods,_Manitoba.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/148465799",
+            "mime": "video/webm",
+            "derivatives": [
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/28/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm.240p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "240p.vp9.webm",
+                "width": 362,
+                "height": 240,
+                "bandwidth": 213528
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/28/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm.360p.mpeg4.mov",
+                "type": "video/quicktime; codecs=\"mp4v\"",
+                "transcodekey": "360p.mpeg4.mov",
+                "width": 544,
+                "height": 360,
+                "bandwidth": 878736
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/28/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm.480p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "480p.vp9.webm",
+                "width": 724,
+                "height": 480,
+                "bandwidth": 710480
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/28/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm/Aurora_Borealis_over_Spruce_Woods%2C_Manitoba.webm.1080p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "1080p.vp9.webm",
+                "width": 1630,
+                "height": 1080,
+                "bandwidth": 2669856
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pageid": 182271401,
+        "ns": 6,
+        "title": "File:Aurora Borealis in the steppes of Kazakhstan. October 10, 2024.webm",
+        "index": 3,
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "size": 1919481130,
+            "width": 4096,
+            "height": 2304,
+            "duration": 47.648,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10,_2024.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/182271401",
+            "extmetadata": {
+              "ImageDescription": {
+                "value": "<br>\n<div class=\"mw-heading mw-heading2\"><h2 id=\"Scientific_Analysis:_Mid-Latitude_Auroral_Dynamics_during_the_G4_Geomagnetic_Event\">Scientific Analysis: Mid-Latitude Auroral Dynamics during the G4 Geomagnetic Event</h2></div>\n<p><b>Location:</b> Oshagandy Canyon, Central Kazakhstan (50°N Latitude)<br>\n<b>Date:</b> October 10–11, 2024. \n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"1._Geographic_and_Geophysical_Context\">1. Geographic and Geophysical Context</h3></div>\n<p><br>\nThis time-lapse sequence captures a high-intensity Aurora Borealis (Northern Lights) display at a geographic latitude of 50°North. Under typical solar conditions, the auroral oval is confined to polar regions (65–70°N). The presence of visible auroral activity at this mid-latitude location is an extraordinary event, directly correlating with a severe G4-class geomagnetic storm.The footage provides a rare empirical record of the magnetosphere’s compression, showing how high-energy solar particles penetrated deeper into the Earth’s atmosphere than usual, shifting the auroral boundaries thousands of kilometers toward the equator.<br>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"2._Technical_Acquisition_and_Methodology\">2. Technical Acquisition and Methodology</h3></div>\n<p><br>\nThe recording was achieved through a rigorous all-night session, resulting in approximately 1,500 individual RAW exposures. The technical parameters were optimized for low-light astrophotography:\n</p>\n<ul><li><b>Camera:</b> Canon EOS 6D (Full-frame sensor known for high signal-to-noise ratio in deep-sky imaging).<br></li>\n<li><b>Optics:</b> Samyang 12mm f/2.8 (Ultra-wide angle lens utilized to capture the full scale of the atmospheric disturbance).<br></li>\n<li><b>Exposure:</b> 10 seconds per frame.<br></li>\n<li><b>Sensitivity:</b> ISO 5000.<br></li></ul>\n<p><i>Note on Image Artifacts:</i> The visible grain (digital noise) in the terrestrial portion of the frame is a characteristic result of the extremely high ISO 5000 setting. This was a necessary trade-off to maintain a short enough shutter speed (10 seconds) to resolve the fast-moving \"curtains\" of the aurora without causing significant motion blur or star trailing.<br>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"3._Chronological_Observation_and_Visual_Phenomena\">3. Chronological Observation and Visual Phenomena</h3></div>\n<p><br>\nThe video documents the complete morphological evolution of a substorm:\n</p>\n<ul><li><b>The Initial Phase:</b> The sequence begins with a subtle green luminescence on the northern horizon. This represents the excitation of atomic oxygen at altitudes of approximately 100–150 km.<br></li>\n<li><b>The Explosive Phase (Substorm Onset):</b> At the midpoint of the film, the magnetic disturbance reaches its peak. The sky erupts in an intense red glow. This rare red aurora occurs at much higher altitudes (200–400 km) where lower concentrations of oxygen are struck by lower-energy electrons. This crimson light is so powerful that it pierces through dense rain clouds and reflects off the Oshagandy River and canyon walls.<br></li>\n<li><b>Celestial Rotation:</b> Behind the shifting auroral curtains, the constellation Ursa Major (the Big Dipper) is seen rotating around the celestial pole, providing a steady reference for the passage of time and the scale of the sky.<br></li>\n<li><b>Atmospheric Interaction:</b> The interaction between the celestial light and the terrestrial weather is highly prominent. As rain clouds drift across the frame, they are illuminated from above by the auroral energy, creating a multi-layered visual effect of light and shadow.<br></li></ul>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"4._Scientific_and_Unique_Value\">4. Scientific and Unique Value</h3></div>\n<p><br>\nThe scientific value of this footage lies in its documentation of a rare event from a rare location. While auroras are frequently filmed in Scandinavia or Canada, high-quality time-lapses from the Kazakh steppe are extremely scarce.<br>\nKey points of interest for researchers include:<br>\n</p>\n<ul><li><b>Latitudinal Benchmarking:</b> Proving the visual intensity of the G4 storm at 50°N.<br></li>\n<li><b>Color Transition:</b> The distinct shift from green to red provides data on the energy levels of the incoming solar wind particles.<br></li>\n<li><b>Environmental Contrast:</b> The inclusion of the solitary birch tree and the Oshagandy Canyon provides a terrestrial scale that helps in calculating the angular height of the auroral arc.<br></li></ul>\n<div class=\"mw-heading mw-heading4\"><h4 id=\"Important_Elements_to_Observe:\">Important Elements to Observe:</h4></div>\n<ul><li><b>The Red \"Explosion\":</b> Pay close attention to the middle of the video where the green light is overtaken by deep red; this marks the moment of maximum geomagnetic disturbance.</li>\n<li><b>Cloud Transparency:</b> Note how the aurora remains visible through thinner layers of the rain clouds, demonstrating the sheer luminosity of the event.<br></li>\n<li><b>Landscape Illumination:</b> Despite the lack of moonlight, the peak of the aurora provides enough ambient light to reveal the complex topography of the canyon.</li></ul>",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Astrobond&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Astrobond (page does not exist)\">Astrobond</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "video/webm",
+            "mediatype": "VIDEO"
+          }
+        ],
+        "videoinfo": [
+          {
+            "size": 1919481130,
+            "width": 4096,
+            "height": 2304,
+            "duration": 47.648,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10,_2024.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/182271401",
+            "mime": "video/webm",
+            "derivatives": [
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm.3x1080p.vp9.mpd",
+                "type": "application/dash+xml",
+                "transcodekey": "3x1080p.vp9.mpd",
+                "width": 1920,
+                "height": 1080,
+                "bandwidth": -1
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm.240p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "240p.vp9.webm",
+                "width": 426,
+                "height": 240,
+                "bandwidth": 152008
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm.360p.mpeg4.mov",
+                "type": "video/quicktime; codecs=\"mp4v\"",
+                "transcodekey": "360p.mpeg4.mov",
+                "width": 640,
+                "height": 360,
+                "bandwidth": 1008400
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm.480p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "480p.vp9.webm",
+                "width": 854,
+                "height": 480,
+                "bandwidth": 906184
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f3/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm/Aurora_Borealis_in_the_steppes_of_Kazakhstan._October_10%2C_2024.webm.1080p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "1080p.vp9.webm",
+                "width": 1920,
+                "height": 1080,
+                "bandwidth": 3963104
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pageid": 184521400,
+        "ns": 6,
+        "title": "File:Aurora-Iceland Northern Lights timelapse 2026-02-06.hd.webm",
+        "index": 1,
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "size": 83077861,
+            "width": 1920,
+            "height": 1080,
+            "duration": 8.433,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/184521400",
+            "extmetadata": {
+              "ImageDescription": {
+                "value": "I was in Iceland looking for the Aurora Borealis and took a big tour out to go find it.  The space weather wasn't cooperative, but with the help of a 5 second exposure my camera captured some green dancing across the night sky. The green is caused by charged particles in the solar wind interacting with monatomic oxygen. The stars are out of focus which is why they appear as large white blobs. Time lapse of 253 photos taken 5 seconds apart.  1265 seconds elapsed time (21 minutes).",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Lorax\" title=\"User:Lorax\">G. Edward Johnson</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "video/webm",
+            "mediatype": "VIDEO"
+          }
+        ],
+        "videoinfo": [
+          {
+            "size": 83077861,
+            "width": 1920,
+            "height": 1080,
+            "duration": 8.433,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm",
+            "descriptionshorturl": "https://commons.wikimedia.org/wiki/Special:Redirect/page/184521400",
+            "mime": "video/webm",
+            "derivatives": [
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/ff/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm.240p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "240p.vp9.webm",
+                "width": 426,
+                "height": 240,
+                "bandwidth": 72600
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/ff/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm.360p.mpeg4.mov",
+                "type": "video/quicktime; codecs=\"mp4v\"",
+                "transcodekey": "360p.mpeg4.mov",
+                "width": 640,
+                "height": 360,
+                "bandwidth": 1075408
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/ff/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm.480p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "480p.vp9.webm",
+                "width": 854,
+                "height": 480,
+                "bandwidth": 665672
+              },
+              {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/ff/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm/Aurora-Iceland_Northern_Lights_timelapse_2026-02-06.hd.webm.1080p.vp9.webm",
+                "type": "video/webm; codecs=\"vp9, opus\"",
+                "transcodekey": "1080p.vp9.webm",
+                "width": 1920,
+                "height": 1080,
+                "bandwidth": 3692144
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

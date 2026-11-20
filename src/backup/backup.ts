@@ -4,6 +4,7 @@
 
 import { CARD_TYPES, LANGS, TOPICS, type AppPrefs, type Card, type CardType, type Lang, type Topic } from '../core/types.ts';
 import { parseBlocks } from '../core/blocks.ts';
+import { parseVideo } from '../core/video.ts';
 import { SCORER_VERSION, scoreCard } from '../core/scorer.ts';
 import { sourceKindOf } from '../core/sources.ts';
 import { listSaved, type SavedCard } from '../db/cards.ts';
@@ -134,6 +135,8 @@ function parseSaved(item: unknown): SavedCard | null {
     ingestedAt: isoDate(c.ingestedAt) ?? savedAt,
     // Texto completo: bloques simples validados uno por uno (solo imágenes https).
     ...(parseBlocks(c.body).length ? { body: parseBlocks(c.body) } : {}),
+    ...(parseVideo(c.video) ? { video: parseVideo(c.video)! } : {}),
+    ...(str(c.credit, 300) ? { credit: str(c.credit, 300)! } : {}),
     // Nunca se confía en el puntaje del archivo: se recalcula con el scorer de esta app.
     quality: scoreCard({ title }, sourceKindOf(sourceId)),
   };

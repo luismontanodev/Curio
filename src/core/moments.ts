@@ -6,6 +6,7 @@
 import type { Card, Moment, MomentFormat, MomentSource } from './types.ts';
 import { scoreHook } from './scorer.ts';
 import { sourceKindOf } from './sources.ts';
+import { isMomentLength } from './video.ts';
 
 /** Ganchos calculados o curados: una línea corta (~90). */
 export const HOOK_MAX = 90;
@@ -16,6 +17,8 @@ export const PAYOFF_MAX = 220;
 export const BATCH_SIZE = 12;
 /** Formatos que la app ya sabe pintar. El resto se calcula y prueba, pero no entra a Momentos. */
 export const RENDERED_FORMATS: readonly MomentFormat[] = ['image-fact', 'text-fact', 'event'];
+/** Momentos › Videos: solo clips de 15 a 60 s. */
+export const VIDEO_FORMATS: readonly MomentFormat[] = ['video'];
 
 const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
@@ -113,6 +116,25 @@ export function momentFromCard(card: Card, now = new Date()): Moment | null {
     ...(card.summary ? { depth: { short: card.summary } } : {}),
     ...(card.imageUrl ? { media: { imageUrl: card.imageUrl } } : {}),
   };
+
+  if (card.type === 'video') {
+    // Solo clips de 15 a 60 s con duración conocida; lo demás no es momento principal.
+    if (!card.video || !isMomentLength(card.video.durationSec)) return null;
+    return finish({
+      ...base,
+      format: 'video',
+      hook: clipWords(card.title, SOURCE_HOOK_MAX),
+      payoff: payoffFrom(card.summary),
+      hookOrigin: 'source',
+      media: {
+        ...(card.imageUrl ? { imageUrl: card.imageUrl } : {}),
+        videoUrl: card.video.url,
+        durationSec: card.video.durationSec,
+        mimeType: card.video.mime,
+      },
+      ...(card.credit ? { credit: card.credit } : {}),
+    });
+  }
 
   if (card.type === 'event') {
     const year = eventYear(card);
@@ -222,11 +244,14 @@ export function timelineMoment(a: Card, b: Card, now = new Date()): Moment | nul
 
 const sourceKey = (m: Moment) => (m.hookOrigin === 'computed' ? 'computed' : m.sources[0]?.sourceId ?? '');
 
-/** ¿Agregar `next` haría 3 seguidos del mismo formato o de la misma fuente? */
-function breaksMix(seq: Moment[], next: Moment): boolean {
+/**
+ * ¿Agregar `next` haría 3 seguidos del mismo formato o de la misma fuente? El formato solo
+ * cuenta si hay más de uno posible: en Momentos › Videos todos son `video`.
+ */
+function breaksMix(seq: Moment[], next: Moment, checkFormat: boolean): boolean {
   if (seq.length < 2) return false;
   const [p, q] = seq.slice(-2);
-  const sameFormat = p.format === next.format && q.format === next.format;
+  const sameFormat = checkFormat && p.format === next.format && q.format === next.format;
   const sameSource = sourceKey(p) === sourceKey(next) && sourceKey(q) === sourceKey(next);
   return sameFormat || sameSource;
 }
@@ -238,6 +263,11 @@ export interface MixOptions {
   formats?: readonly MomentFormat[];
   /** Últimos momentos ya mostrados: la regla de variedad sigue a través de los lotes. */
   after?: Moment[];
+  /**
+   * `true` (por defecto): si nada respeta la variedad, el lote queda más corto. `false`
+   * (Videos, donde casi todo viene de NASA): la variedad se prefiere, pero no deja la pantalla vacía.
+   */
+  strict?: boolean;
 }
 
 /**
@@ -257,8 +287,11 @@ export function mixMoments(pool: Moment[], opts: MixOptions = {}): Moment[] {
   const tail = (opts.after ?? []).slice(-2);
   const out: Moment[] = [];
   const used = new Set<string>();
+  const checkFormat = formats.length > 1;
+  const strict = opts.strict ?? true;
   while (out.length < size) {
-    const k = rest.findIndex((m) => !used.has(m.id) && !breaksMix([...tail, ...out], m));
+    let k = rest.findIndex((m) => !used.has(m.id) && !breaksMix([...tail, ...out], m, checkFormat));
+    if (k < 0 && !strict) k = rest.findIndex((m) => !used.has(m.id));
     if (k < 0) break;
     used.add(rest[k].id);
     out.push(rest[k]);

@@ -47,13 +47,19 @@ export default function ExploreScreen() {
   const { width } = useWindowDimensions();
   const tileWidth = Math.floor((width - GUTTER * 2 - GAP) / 2);
   const [query, setQuery] = useState('');
-  const [topic, setTopic] = useState<Topic | null>(null);
+  // Varios temas a la vez; ninguno = "Para ti" (los temas de Filtros).
+  const [selected, setSelected] = useState<Topic[]>([]);
+  const toggleTopic = useCallback(
+    (tp: Topic) => setSelected((cur) => (cur.includes(tp) ? cur.filter((x) => x !== tp) : TOPICS.filter((x) => x === tp || cur.includes(x)))),
+    [],
+  );
 
   // Todos los temas son chips (Naturaleza, Arte, Espacio…), estén o no encendidos en Filtros:
   // elegir uno es una decisión explícita de ver ese tema.
-  const activeTopic = topic;
-  const explorePrefs = useMemo(() => (activeTopic ? { ...prefs, topics: [activeTopic] } : prefs), [prefs, activeTopic]);
-  const { recs, loaded, more, loadMore, reload, retry } = useRecommendations(explorePrefs);
+  const explorePrefs = useMemo(() => (selected.length > 0 ? { ...prefs, topics: selected } : prefs), [prefs, selected]);
+  // Videos: con "Para ti", de todos los temas; con chips, solo de los temas elegidos.
+  const videoTopics = useMemo(() => (selected.length > 0 ? selected : [...TOPICS]), [selected]);
+  const { recs, loaded, more, loadMore, reload, retry } = useRecommendations(explorePrefs, videoTopics);
   const search = useSearch(prefs, query);
   const searching = query.trim().length >= 2;
   const [refreshing, setRefreshing] = useState(false);
@@ -111,7 +117,9 @@ export default function ExploreScreen() {
 
   const filterOn = prefs.hideSensational || prefs.hideClickbait;
 
-  const header = (
+  // Título y búsqueda van fuera de la lista (fijos arriba): si estuvieran en su cabecera,
+  // cualquier cambio de la lista podría remontar el campo y cerrar el teclado a media palabra.
+  const top = (
     <View>
       <View style={styles.titleRow}>
         <Text accessibilityRole="header" style={[t.type.screenTitle, { color: c.text, flex: 1 }]}>
@@ -140,13 +148,17 @@ export default function ExploreScreen() {
           </Pressable>
         ) : null}
       </View>
+    </View>
+  );
 
+  const header = (
+    <View>
       {!searching ? (
         <>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-            <Chip label="Para ti" active={activeTopic === null} onPress={() => setTopic(null)} />
+            <Chip label="Para ti" active={selected.length === 0} onPress={() => setSelected([])} />
             {TOPICS.map((tp) => (
-              <Chip key={tp} label={TOPIC_LABELS[tp]} active={activeTopic === tp} onPress={() => setTopic(tp)} />
+              <Chip key={tp} label={TOPIC_LABELS[tp]} active={selected.includes(tp)} onPress={() => toggleTopic(tp)} />
             ))}
           </ScrollView>
           <Pressable onPress={() => router.push('/filtros')} accessibilityRole="button" accessibilityHint="Abre los filtros" style={styles.status}>
@@ -182,6 +194,7 @@ export default function ExploreScreen() {
 
   return (
     <SafeAreaView edges={['top']} style={[styles.screen, { backgroundColor: c.bg }]}>
+      {top}
       <FlatList
         ref={list}
         data={rows}
@@ -207,10 +220,15 @@ export default function ExploreScreen() {
         maxToRenderPerBatch={4}
         windowSize={9}
         removeClippedSubviews={Platform.OS === 'android'}
+        // Siempre montado: quitarlo en Android remonta el ScrollView de la lista.
         refreshControl={
-          searching ? undefined : (
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={c.primaryText} colors={[c.primary]} />
-          )
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={searching ? () => undefined : onRefresh}
+            enabled={!searching}
+            tintColor={c.primaryText}
+            colors={[c.primary]}
+          />
         }
         contentContainerStyle={{ paddingBottom: 24 }}
       />

@@ -12,6 +12,7 @@ import { Button, ICON, IconButton, Notice } from '../../src/components/primitive
 import { useAppState, useTheme } from '../../src/platform/app-state.tsx';
 import { useCardHandlers } from '../../src/platform/card-actions.ts';
 import { RemoteImage } from '../../src/platform/remote-image.tsx';
+import { ReaderVideo } from '../../src/platform/video-visual.tsx';
 import { useReader } from '../../src/platform/use-reader.ts';
 import { cardKicker, cardMeta, cardVariant, formatDateTime } from '../../src/ui/format.ts';
 
@@ -58,7 +59,7 @@ export default function ReaderScreen() {
         <Notice title="Esta tarjeta ya no está" body="Se borró del teléfono. Si la habías guardado, búscala en Guardados." />
       ) : (
         <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
-          {card.imageUrl ? <Hero card={card} /> : null}
+          {card.imageUrl || card.video ? <Hero card={card} /> : null}
 
           <View style={styles.content}>
             <Text style={[t.type.topicLabel, { color: c.primaryText }]}>{cardKicker(card)}</Text>
@@ -108,6 +109,14 @@ export default function ReaderScreen() {
 function Hero({ card }: { card: Card }) {
   const t = useTheme();
   const whole = cardVariant(card) === 'image';
+  if (card.video) {
+    // Video: póster con botón de reproducir; carga solo al tocar (audio y controles nativos).
+    return (
+      <View style={[styles.hero, { height: 320, backgroundColor: '#000' }]}>
+        <ReaderVideo card={card} />
+      </View>
+    );
+  }
   return (
     <View style={[styles.hero, { height: whole ? 320 : 220, backgroundColor: t.colors.soft }]}>
       <ImageIcon size={32} color={t.colors.primaryText} strokeWidth={ICON.stroke} />
@@ -160,8 +169,17 @@ function Attribution({ card }: { card: Card }) {
   return (
     <View style={[styles.box, { backgroundColor: c.soft, borderRadius: t.radius.group, marginTop: 32 }]}>
       <Text style={[t.type.rowTitle, { color: c.text }]}>Fuente: {sourceNameOf(card.sourceId)}</Text>
+      {card.credit ? (
+        <Text style={[t.type.meta, { color: c.muted, marginTop: 4 }]}>Autor: {card.credit}</Text>
+      ) : null}
       {card.license ? (
         <Text style={[t.type.meta, { color: c.muted, marginTop: 4 }]}>Licencia: {card.license}</Text>
+      ) : null}
+      {card.sourceId === 'nasa' || card.sourceId === 'nasa-video' || card.sourceId === 'nasa-epic' ? (
+        // Reglas de uso de la NASA: no sugerir que respalda la app.
+        <Text style={[t.type.meta, { color: c.muted, marginTop: 4 }]}>
+          Material de la NASA. La NASA no respalda ni patrocina esta app.
+        </Text>
       ) : null}
       {card.publishedAt ? (
         <Text style={[t.type.meta, { color: c.muted, marginTop: 2 }]}>Publicado: {formatDateTime(card.publishedAt)}</Text>

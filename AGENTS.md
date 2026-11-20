@@ -76,8 +76,10 @@ TikTok/Reels, pero en versión sana:
 | Modelo `Moment`, `scoreHook`, mezcla con variedad (`src/core/moments.ts`, `src/db/moments.ts`) | ✅ Hecho y probado |
 | Recomendación de Explorar (`src/core/recommend.ts`) y búsqueda (teléfono + Wikipedia, `src/ingest/search.ts`) | ✅ Hecho y probado |
 | Pantallas v2: Profundizar (hoja), Bienvenida, Microjuego, Línea de tiempo | ❌ Pendiente |
+| **Video corto** (`src/core/video.ts`, `src/ingest/videos.ts`, migración 4): NASA ✅, Internet Archive ✅, Commons ⚠️ (activa, pendiente de verificar en iPhone) | ✅ Lógica probada; reproductor (`expo-video`) y selector Posts / Videos ⚠️ sin probar en dispositivo |
+| "Ahorro de datos" (`AppPrefs.dataSaver`: `off` / `cellular` / `always`, en Filtros y en el respaldo; `expo-network` + `savingData`) | ✅ Hecho y probado; ⚠️ cambio de red sin probar en dispositivo |
 
-`npm test` → 102/102 pasan. `npm run typecheck` → limpio (app con `tsconfig.json`; lógica pura y
+`npm test` → 123/123 pasan. `npm run typecheck` → limpio (app con `tsconfig.json`; lógica pura y
 tests con `tsconfig.test.json`, que agrega los tipos de Node).
 
 ## Siguientes pasos (en orden)
@@ -138,6 +140,36 @@ reales, `src/platform` compilado y empaquetado.
   (`cardSource`/`shortLicense` mantienen fuente y licencia a la vista en una línea; "Más"
   despliega el resto). `useTabReselect` hace que tocar la pestaña activa suba y actualice.
   Guardados filtra con `savedIds`, así que quitar un guardado se ve al instante.
+- **Video corto:** ver "Video corto" en `docs/APIS.md`. Momentos tiene un selector Posts | Videos
+  arriba a la derecha (`useMomentStream(mode)`); los videos llevan audio con un botón para
+  silenciar (un toque en el video también), en bucle, y solo hay reproductor para el visible y el
+  siguiente (`VideoVisual`). En listas (Destacados, Explorar, Guardados) solo póster con ▶ y
+  duración; el lector los reproduce al tocar (`ReaderVideo`). Videos: idiomas del usuario más
+  inglés y todos los temas (`videoLanguages`). Las páginas de Momentos llevan una *generación*:
+  al cambiar de modo o de filtros, un lote que llega tarde se descarta. `onViewable` es estable
+  (FlatList no deja cambiarlo), así que lee `loadMore` de un ref.
+- **Explorar › temas:** los chips son de selección múltiple (tocar uno marcado lo quita); sin
+  ninguno marcado es "Para ti" (los temas de Filtros).
+- **Explorar:** título y búsqueda van fijos fuera de la lista; el `RefreshControl` siempre está
+  montado (quitarlo en Android remonta el ScrollView y cierra el teclado).
+- **Filtros en Momentos (2026-11-19):** los momentos de **imagen y video** no usan los temas, el
+  nivel ni "Solo fuentes verificadas" del usuario (`visualMomentPrefs`): todos los temas, idiomas
+  del usuario más inglés, un piso fijo anti-clickbait (nivel suave) y las palabras bloqueadas. Los
+  de texto siguen los filtros del usuario. Por eso Met, NASA (imágenes), Cleveland y V&A se piden
+  en cada ingesta aunque el usuario no lea inglés; fuera de Momentos solo aparecen si lo lee.
+- **Velocidad de video:** los MP4 de NASA e Internet Archive ya traen el índice (`moov`) al inicio
+  (verificado); la espera es la latencia del servidor. Se preparan 2 videos por delante (sin ahorro
+  de datos) y, con menos de 12 sin ver, se piden más en segundo plano (`VIDEO_RESERVE`).
+- **Estilo visual:** "oscuro vibrante" (ver `docs/DESIGN.md`): tema oscuro por defecto, acento en
+  degradado morado (claro) o lila (oscuro) (`Gradient`), `TopicPill` de color sólido y títulos
+  sobre la foto (`Scrim`).
+- **Swipe de Momentos:** `snapToInterval` + `disableIntervalMomentum` (no `pagingEnabled`): un pase
+  corto basta y nunca salta más de uno.
+- **Mezcla en Videos:** `mixMoments` solo aplica la regla de formato si hay más de uno, y en Videos
+  va con `strict: false` (la variedad de fuente se prefiere, pero no vacía la pantalla). Antes salían
+  2 videos por lote y el flujo se cortaba.
+- **Ahorro de datos efectivo:** `useAppState().saveData` (preferencia + red actual); úsalo en vez
+  de leer `prefs.dataSaver`.
 - **Imágenes y Wikimedia:** `sharperImageUrl` pide 960 px (tamaño estándar) con vuelta a la
   original si falla. **Usa solo tamaños estándar de Wikimedia** (120, 250, 330, 500, 960, 1280…):
   el 2026-11-18 respondió 429 (*Too many requests*) a toda la IP tras muchas pruebas; los
