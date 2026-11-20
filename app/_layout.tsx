@@ -2,7 +2,7 @@
 // migraciones antes de mostrar nada.
 
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { Platform, StyleSheet, Text, View, useColorScheme } from 'react-native';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -23,11 +23,23 @@ import { colors } from '../src/ui/theme.ts';
 
 void SplashScreen.preventAutoHideAsync();
 
-// Caché de videos en disco (expo-video): lo ya visto no se vuelve a descargar. Se acota a
-// 150 MB (por defecto puede llegar a 1 GB); al llenarse, se borra lo más viejo.
-void setVideoCacheSizeAsync(150 * 1024 * 1024).catch(() => {});
+/**
+ * Caché de videos en disco (expo-video): lo ya visto no se vuelve a descargar. Se acota a
+ * 150 MB (por defecto puede llegar a 1 GB); al llenarse, se borra lo más viejo.
+ * Va en un efecto y no al cargar el módulo: el build (`expo export:embed`) evalúa este archivo
+ * en Node, donde expo-video no tiene la función y lanzaría un error que rompe el APK.
+ */
+function limitVideoCache() {
+  if (Platform.OS === 'web') return;
+  try {
+    void setVideoCacheSizeAsync(150 * 1024 * 1024).catch(() => {});
+  } catch {
+    // Sin el módulo nativo (p. ej. al generar el build) no hay caché que acotar.
+  }
+}
 
 export default function RootLayout() {
+  useEffect(limitVideoCache, []);
   const [fontsLoaded, fontError] = useFonts({
     SpaceGrotesk_500Medium,
     SpaceGrotesk_600SemiBold,
